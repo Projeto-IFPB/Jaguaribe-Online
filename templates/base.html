@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title%} Document {% endblock %}</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="https://kit.fontawesome.com/a3baa5070b.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <h1>Feira de Jaguaribe</h1>
+        <div>
+            <h1>Feira de Jaguaribe</h1>
+        </div>
         <nav>
-            <a href="Url da pagina inicial">inicio</a>
-            <a href="url da pagina de produtos">Produtos</a>
-            <a href="url da pagina de login">login</a>
+            <ul>
+                <li><a href="Url da pagina inicial"><i class="fa-solid fa-house" style="color: #000000;"></i>inicio</a></li>
+                <li><a href="url da pagina de produtos"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i>Produtos</a></li>
+                <li><a href="url da pagina de login"><i class="fa-solid fa-user" style="color: #000000;"></i>login</a></li>
+            </ul>          
         </nav>
     </header>
     <main>
