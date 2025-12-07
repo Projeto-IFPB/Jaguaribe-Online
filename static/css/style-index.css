@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    font-size: 62.5%;
+}
+
+/* Header ---------------------------------------------------------- */
+header{
+    background-color: #2a9134;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    font-family: "Inter", sans-serif;
+    padding: 0.9rem;
+
+}
+
+header ul{
+    display: flex;
+    gap: 1.3rem;
+    font-size: 0.7rem;
+}
+header ul li {
+    list-style: none;
+}
+header ul li a{
+    text-decoration: none;
+    color: white;
+}
+
+@media (min-width:770px) {
+    header ul {
+        gap: 2.5rem;
+    }
+}
+
+/* Carrossel de Imagens ------------------------------------------*/
+
+.content {
+    width: 90%;
+    max-width: 935px;
+    height: auto;
+    aspect-ratio: 935 / 520; /* Proporção para manter a altura em relação à largura (935px/520px) */
+    
+    border-radius: 20px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.content .slide img {
+    height: 100%;
+    width: 100%;
+    /* A imagem é redimensionada para cobrir completamente o container, preenchendo-o em ambas as dimensões (largura e altura). */
+    object-fit: cover; 
+}
+
+.navigation {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    bottom: 10px; /* Ajustar a distância da borda inferior do carrossel */
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.bar {
+    width: 15px;
+    height: 15px;
+    border: 2px solid white;
+    margin: 6px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.bar:hover {
+    background-color: white;
+}
+
+.input {
+    display: none;
+}
+
+.slides {
+    display: flex;
+    width: 500%;
+    height: 100%;
+}
+
+.slide {
+    width: 20%;
+    transition: .6s;
+}
+
+/* Lógica de Transição (movimento do carrossel) */
+#slide1:checked ~ .s1 {
+    margin-left: 0;
+}
+
+#slide2:checked ~ .s1 {
+    margin-left: -20%;
+}
+
+#slide3:checked ~ .s1 {
+    margin-left: -40%;
+}
+
+#slide4:checked ~ .s1 {
+    margin-left: -60%;
+}
+
+#slide5:checked ~ .s1 {
+    margin-left: -80%;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    
+    .content {
+        width: 95%; 
+        max-width: 600px;
+    }
+
+    .bar {
+        width: 10px;
+        height: 10px;
+        margin: 4px;
+    }
+
+    .navigation {
+        bottom: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    
+    .content {
+        box-shadow: none;
+        border-radius: 0;
+        width: 100%;
+        /* Reduzir um pouco a proporção para telas muito estreitas, se necessário */
+        aspect-ratio: 16 / 9;
+    }
+
+    .navigation {
+        bottom: 2px;
+        padding: 2px; 
+    }
+
+    .bar {
+        width: 10px;
+        height: 10px;
+        margin: 3px;
+    }
+}
