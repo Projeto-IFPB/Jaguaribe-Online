@@ -132,6 +132,7 @@ header ul li a{
     .content {
         width: 95%; 
         max-width: 600px;
+        top: 40%;
     }
 
     .bar {
@@ -153,6 +154,7 @@ header ul li a{
         width: 100%;
         /* Reduzir um pouco a proporção para telas muito estreitas, se necessário */
         aspect-ratio: 16 / 9;
+        top: 30%
     }
 
     .navigation {
