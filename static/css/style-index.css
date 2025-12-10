@@ -1,3 +1,4 @@
+/* Configurações Iniciais */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 * {
@@ -7,6 +8,10 @@
 }
 :root{
     font-size: 62.5%;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Header ---------------------------------------------------------- */
@@ -168,3 +173,24 @@ header ul li a{
         margin: 3px;
     }
 }
+
+/* Estilizando o Main  */
+.main_feira{
+    margin-top: 550px;
+    margin-bottom: 50px;
+    padding: 2.0rem;
+
+
+    font-size: 1.6rem;
+    background-color: #2a9134;
+    border-radius: 2.0rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* Fim da Estilização da Main */
