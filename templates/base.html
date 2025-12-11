@@ -5,18 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title%} Document {% endblock %}</title>
     <link rel="stylesheet" href="/static/css/style-index.css">
-    <script src="https://kit.fontawesome.com/a3baa5070b.js" crossorigin="anonymous"></script>
+    <script src="/static/css/script-index.js" defer></script>
 </head>
 <body>
     <header>
-            <h1>Feira de Jaguaribe</h1>
-        <nav>
-            <ul>
-                <li><a href="Url da pagina inicial"><i class="fa-solid fa-house" style="color: #252774;"></i>INÍCIO</a></li>
-                <li><a href="url da pagina de produtos"><i class="fa-solid fa-cart-shopping" style="color: #252774;"></i>PRODUTOS</a></li>
-                <li><a href="url da pagina de login"><i class="fa-solid fa-user" style="color: #252774;"></i>LOGIN</a></li>
-            </ul>          
+        <nav class="navbar">
+            <p class="brand">Feira de Jaguaribe</p>
+
+            <button class="botao">
+                <span class="barra"></span>
+                <span class="barra"></span>
+                <span class="barra"></span>
+            </button>
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="{{ url_for('pagina_inicial') }} ">Inicio</a></li>
+                    <li><a href="{{ url_for('pagina_produtos') }}">Produtos</a></li>
+                    <li><a href="{{ url_for('pagina_login') }}">Login</a></li>
+                </ul>
+            </div>          
         </nav>
+
     </header>
     <main>
         {% block content %}
