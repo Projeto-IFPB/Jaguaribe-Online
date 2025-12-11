@@ -15,34 +15,89 @@ body{
 }
 
 /* Header ---------------------------------------------------------- */
-header{
-    background-color: #2a9134;
+.navbar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 0.8rem;
-    font-family: "Inter", sans-serif;
-    padding: 0.9rem;
-
+    align-items: center;
+    background-color: #1a7a40;
+    color: white;
+    padding: 0.5rem 1rem;
+    flex-wrap: wrap; 
 }
 
-header ul{
+.brand {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.navbar-links ul {
     display: flex;
-    gap: 1.3rem;
-    font-size: 0.7rem;
-}
-header ul li {
+    margin: 0;
+    padding: 0;
     list-style: none;
 }
-header ul li a{
-    text-decoration: none;
+
+.navbar-links li a {
     color: white;
+    text-decoration: none;
+    padding: 1rem;
+    display: block;
+    text-align: center;
 }
 
-@media (min-width:770px) {
-    header ul {
-        gap: 2.5rem;
-    }
+.navbar-links li a:hover {
+    background-color: #166534;
+}
+
+/* Oculta o botão em tela grande */
+.botao {
+    display: none; 
+    flex-direction: column;
+    justify-content: space-around;
+    height: 24px;
+    width: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.barra {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+@media (max-width: 770px) {
+            
+
+.botao {
+    display: flex;
+}
+
+
+.navbar-links {
+    display: none; 
+    width: 100%; 
+}
+
+
+.navbar {
+    flex-direction: row;
+    align-items: center;
+}
+
+.navbar-links ul {
+    flex-direction: column;
+    width: 100%;
+}
+            
+
+.navbar-links.active {
+    display: flex;
+    flex-basis: 100%; 
+}
 }
 
 /* Carrossel de Imagens ------------------------------------------*/
