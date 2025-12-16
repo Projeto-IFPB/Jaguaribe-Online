@@ -19,10 +19,11 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1a7a40;
+    background-color: #166534;
     color: white;
     padding: 0.5rem 1rem;
     flex-wrap: wrap; 
+    font-size: 1.4rem;
 }
 
 .brand {
@@ -102,12 +103,19 @@ body{
 
 /* Carrossel de Imagens ------------------------------------------*/
 
+.first_section {
+    background-color: #047857;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding: 3rem 0;
+}
+
 .carrossel {
-    background-color: aqua;
-    min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .content {
@@ -125,7 +133,6 @@ body{
 .content .slide img {
     height: 100%;
     width: 100%;
-    /* A imagem é redimensionada para cobrir completamente o container, preenchendo-o em ambas as dimensões (largura e altura). */
     object-fit: cover; 
 }
 
@@ -133,8 +140,7 @@ body{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    
-    bottom: 10px; /* Ajustar a distância da borda inferior do carrossel */
+    bottom: 10px;
     display: flex;
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
@@ -192,8 +198,63 @@ body{
 
 
 
+
+
+/* Estilização do botão Ver Produtos */
+
+.button_ver_produtos {
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    display: flex;
+    border: 2px solid white;
+    width: 150px;
+    justify-content: center;
+    margin-top: 2rem;
+    text-decoration: none;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.button_ver_produtos:hover {
+    background-color: #FFFFFF;
+    color:#047857;
+}
+
+/* Estilizando o Main  */
+.historia_feira {
+    background-color: #F3F4F6 ;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.main_feira{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 2.0rem;
+
+
+    font-size: 1.6rem;
+    background-color: #FFFFFF;
+    border-radius: 2.0rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 900px;
+    width: 100%;
+
+}
+
+/* Fim da Estilização da Main */
+
+
 @media screen and (max-width: 768px) {
-    
+    /* Carrosel */
     .carrossel {
         min-height: 50vh;
     }
@@ -212,12 +273,24 @@ body{
     .navigation {
         bottom: 5px;
     }
+
+    /* Botão Ver Produtos */
+    .button_ver_produtos {
+        padding: 0.8rem 0.8rem;
+        width: 120px;
+        justify-content: center;
+        margin-top: -35px;
+        text-decoration: none;
+        color: white;
+        font-size: 1.2rem;
+
+    }
 }
 
 @media screen and (max-width: 480px) {
-    
+    /* Carrossel */
     .carrossel {
-        min-height: 35vh;
+        min-height: 20vh;
     }
 
     .content {
@@ -238,35 +311,15 @@ body{
         height: 10px;
         margin: 3px;
     }
+
+    /* Botão Ver Produtos */
+    .button_ver_produtos {
+        padding: 0.8rem;
+        width: 120px;
+        justify-content: center;
+        margin-top: 1.7rem;
+        text-decoration: none;
+        color: white;
+        font-size: 1.2rem;
+    }
 }
-
-/* Estilizando o Main  */
-.historia_feira {
-    background-color: rgb(11, 134, 241);
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-
-.main_feira{
-    margin-top: 50px;
-    margin-bottom: 50px;
-    padding: 2.0rem;
-
-
-    font-size: 1.6rem;
-    background-color: #2a9134;
-    border-radius: 2.0rem;
-
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    justify-content: center;
-    align-items: center;
-
-    max-width: 900px;
-    width: 100%;
-
-}
-
-/* Fim da Estilização da Main */
