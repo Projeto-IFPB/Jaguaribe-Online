@@ -6,6 +6,7 @@
     <title>{% block title%} Document {% endblock %}</title>
     <link rel="stylesheet" href="/static/css/style-index.css">
     <script src="/static/css/script-index.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <header>
@@ -21,7 +22,11 @@
                 <ul>
                     <li><a href="{{ url_for('pagina_inicial') }} ">Inicio</a></li>
                     <li><a href="{{ url_for('pagina_produtos') }}">Produtos</a></li>
-                    <li><a href="{{ url_for('pagina_login') }}">Login</a></li>
+                    <li><a href="{{ url_for('pagina_login') }}" div class="button-login">
+                                <div class="icon-login">
+                                    <i class="fa-regular fa-circle-user"></i>
+                                </div>
+                        </a></li>
                 </ul>
             </div>          
         </nav>
