@@ -34,6 +34,8 @@ body{
 
 .navbar-links ul {
     display: flex;
+    align-items: center;
+    gap: 0.7rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -42,16 +44,76 @@ body{
 .navbar-links li a {
     color: white;
     text-decoration: none;
-    padding: 1rem;
-    display: block;
+    padding: 0.5rem 1rem;
+    display: flex;
     text-align: center;
+    height: 100%;
 }
 
 .navbar-links li a:hover {
     background-color: #166534;
 }
 
-/* Oculta o botão em tela grande */
+/* Container do Botão de Login */
+.button-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50px;
+    width: 3rem;
+    height: 3rem;
+    margin: 0; 
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    cursor: pointer;
+}
+
+/* Estilo do Ícone de Login */
+.icon-login {
+    font-size: 2.3rem;
+    color: white;
+    transition: all 0.5s ease;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Texto Login (Escondido por padrão) */
+.button-login::after {
+    content: "Login";
+    position: absolute;
+    opacity: 0;
+    right: 20px;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+    transition: all 0.4s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.button-login:hover {
+    width: 110px;
+    background-color: #047857;
+    justify-content: flex-start; 
+    padding-left: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+.button-login:hover .icon-login {
+    transform: scale(0.9);
+}
+
+.button-login:hover::after {
+    opacity: 1;
+    right: 25px;
+}
+
+
+/* Oculta o menu hamburguer em tela grande */
 .botao {
     display: none; 
     flex-direction: column;
@@ -97,8 +159,38 @@ body{
 
 .navbar-links.active {
     display: flex;
-    flex-basis: 100%; 
 }
+
+/* Remove o formato de "botão circular" no celular */
+.button-login {
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+    border-radius: 0;
+    background: none !important;
+    box-shadow: none !important;
+}
+
+/* Esconde o ícone de círculo no celular */
+.icon-login {
+    display: none;
+}
+
+/* Faz o texto "Login" aparecer normalmente na lista */
+.button-login::after {
+    content: "Login";
+    position: static;
+    opacity: 1;
+    color: white;
+    font-size: 1.5rem;
+    padding: 0 1rem;
+    font-weight: normal;
+}
+
+.button-login:hover {
+    width: 100%;
+}
+
 }
 
 /* Carrossel de Imagens ------------------------------------------*/
