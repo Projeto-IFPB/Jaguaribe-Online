@@ -203,6 +203,12 @@ body{
     padding: 3rem 0;
 }
 
+.first_section h1 {
+    font-size: 2.8rem;
+    padding-bottom: 1.5rem;
+    color: #F3F4F6;
+}
+
 .carrossel {
     display: flex;
     align-items: center;
@@ -346,9 +352,10 @@ body{
 
 
 @media screen and (max-width: 768px) {
+  
     /* Carrosel */
     .carrossel {
-        min-height: 50vh;
+        min-height: 35vh;
     }
 
     .content {
@@ -371,7 +378,7 @@ body{
         padding: 0.8rem 0.8rem;
         width: 120px;
         justify-content: center;
-        margin-top: -35px;
+        margin-top: 20px;
         text-decoration: none;
         color: white;
         font-size: 1.2rem;
@@ -380,6 +387,11 @@ body{
 }
 
 @media screen and (max-width: 480px) {
+    /* Title H1 */
+    .first_section h1 {
+        font-size: 1.8rem;
+    }
+
     /* Carrossel */
     .carrossel {
         min-height: 20vh;
