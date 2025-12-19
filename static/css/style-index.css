@@ -1,14 +1,21 @@
 /* Configurações Iniciais */
 
-
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Variáveis de cores do Projeto e Fonte-Size */
+
 :root{
     font-size: 62.5%;
+    --green-dark: #166534;
+    --green-mid-dark: #047857;
+    --green-mid: #1a7a40;
+    --gray-light: #F3F4F6;
+    --white: #ffffff;
+    --black: #0a0a0a;
 }
 
 body{
@@ -20,15 +27,15 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #166534;
-    color: white;
+    background-color: var(--green-dark);
+    color: var(--white);
     padding: 0.5rem 1rem;
     flex-wrap: wrap; 
     font-size: 1.4rem;
 }
 
 .brand {
-    color: white;
+    color: var(--white);
     text-decoration: none;
     font-size: 1.5rem;
 }
@@ -43,7 +50,7 @@ body{
 }
 
 .navbar-links li a {
-    color: white;
+    color: var(--white);
     text-decoration: none;
     padding: 0.5rem 1rem;
     display: flex;
@@ -52,7 +59,7 @@ body{
 }
 
 .navbar-links li a:hover {
-    background-color: #166534;
+    background-color: var(--green-dark);
 }
 
 /* Container do Botão de Login */
@@ -74,7 +81,7 @@ body{
 /* Estilo do Ícone de Login */
 .icon-login {
     font-size: 2.3rem;
-    color: white;
+    color: var(--white);
     transition: all 0.5s ease;
     z-index: 2;
     display: flex;
@@ -88,7 +95,7 @@ body{
     position: absolute;
     opacity: 0;
     right: 20px;
-    color: white;
+    color: var(--white);
     font-size: 1.4rem;
     font-weight: bold;
     transition: all 0.4s ease;
@@ -98,7 +105,7 @@ body{
 
 .button-login:hover {
     width: 110px;
-    background-color: #047857;
+    background-color: var(--green-mid-dark);
     justify-content: flex-start; 
     padding-left: 12px;
     box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
@@ -129,7 +136,7 @@ body{
 .barra {
     width: 100%;
     height: 3px;
-    background-color: white;
+    background-color: var(--white);
     border-radius: 10px;
 }
 
@@ -182,7 +189,7 @@ body{
     content: "Login";
     position: static;
     opacity: 1;
-    color: white;
+    color: var(--white);
     font-size: 1.5rem;
     padding: 0 1rem;
     font-weight: normal;
@@ -197,7 +204,7 @@ body{
 /* Carrossel de Imagens ------------------------------------------*/
 
 .first_section {
-    background-color: #047857;
+    background-color: var(--green-mid-dark);
     display: flex; 
     flex-direction: column; 
     align-items: center; 
@@ -242,7 +249,7 @@ body{
 .bar {
     width: 15px;
     height: 15px;
-    border: 2px solid white;
+    border: 2px solid var(--white);
     margin: 6px;
     border-radius: 15px;
     cursor: pointer;
@@ -250,7 +257,7 @@ body{
 }
 
 .bar:hover {
-    background-color: white;
+    background-color: var(--white);
 }
 
 .input {
@@ -299,24 +306,24 @@ body{
     padding: 1rem 2rem;
     border-radius: 20px;
     display: flex;
-    border: 2px solid white;
+    border: 2px solid var(--white);
     width: 150px;
     justify-content: center;
     margin-top: 2rem;
     text-decoration: none;
-    color: white;
+    color: var(--white);
     font-size: 1.4rem;
     font-weight: bold;
 }
 
 .button_ver_produtos:hover {
-    background-color: #FFFFFF;
+    background-color: var(--white);
     color:#047857;
 }
 
 /* Estilizando o Main  */
 .historia_feira {
-    background-color: #F3F4F6 ;
+    background-color: var(--gray-light) ;
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -329,7 +336,7 @@ body{
 
 
     font-size: 1.6rem;
-    background-color: #FFFFFF;
+    background-color: var(--white);
     border-radius: 2.0rem;
 
     display: flex;
@@ -374,7 +381,7 @@ body{
         justify-content: center;
         margin-top: -35px;
         text-decoration: none;
-        color: white;
+        color: var(--white);
         font-size: 1.2rem;
 
     }
@@ -412,7 +419,7 @@ body{
         justify-content: center;
         margin-top: 1.7rem;
         text-decoration: none;
-        color: white;
+        color: var(--white);
         font-size: 1.2rem;
     }
 }
