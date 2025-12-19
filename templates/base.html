@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title%} Document {% endblock %}</title>
+
+    <link rel="stylesheet" href="/static/css/style-index.css">
+    <script src="/static/css/script-index.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <p class="brand">Feira de Jaguaribe</p>
+
+        <button class="botao">
+            <span class="barra"></span>
+            <span class="barra"></span>
+            <span class="barra"></span>
+        </button>
+        <div class="navbar-links">
+            <ul>
+                <li><a href="{{ url_for('pagina_inicial') }} ">Inicio</a></li>
+                <li><a href="{{ url_for('pagina_produtos') }}">Produtos</a></li>
+                <li><a href="{{ url_for('pagina_login') }}" div class="button-login">
+                            <div class="icon-login">
+                                <i class="fa-regular fa-circle-user"></i>
+                            </div>
+                    </a></li>
+            </ul>
+        </div>          
+    </nav>
+
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <!-- Footer da Página -->
+    <div class="footer">    
+            <p class="descricao">Melhor plataforma para vendedores</p>
+
+            <div class="direitos">
+                <p>&copy; 2025 Feira de jaguaribe | Todos os direitos reservados.</p>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

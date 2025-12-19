@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %} pagina Inicial {% endblock %}
+
+{% block content %}
+
+<!--coloca tudo que colocaria na main, mas n usa a tag main se n buga tudo -->
+
+<!-- <section class="title_section">
+    <h1>Seja Bem Vindo à Feira de Jaguaribe! </h1>
+</section> -->
+
+ <!-- Carrossel de Imagens -->
+<section class="first_section">
+
+    <h1>Seja Bem Vindo à Feira de Jaguaribe! </h1>
+
+    <div class="carrossel">
+        <div class="content">
+
+            <div class="slides">
+
+                <input class="input" type="radio" name="slide" id="slide1" checked>
+                <input class="input" type="radio" name="slide" id="slide2">
+                <input class="input" type="radio" name="slide" id="slide3">
+                <input class="input" type="radio" name="slide" id="slide4">
+                <input class="input" type="radio" name="slide" id="slide5">
+
+                <div class="slide s1">
+                    <img src="/static/images/images-carrossel/img1.jpg" alt="Imagem 1">
+                </div>
+
+                <div class="slide">
+                    <img src="/static/images/images-carrossel/img2.jpg" alt="Imagem 2">
+                </div>
+
+                <div class="slide">
+                    <img src="/static/images/images-carrossel/img3.jpg" alt="Imagem 3">
+                </div>
+
+                <div class="slide">
+                    <img src="/static/images/images-carrossel/img4.jpg" alt="Imagem 4">
+                </div>
+
+                <div class="slide">
+                    <img src="/static/images/images-carrossel/img5.jpg" alt="Imagem 5">
+                </div>
+
+            </div>
+            <div class="navigation">
+                <label class="bar" for="slide1"></label>
+                <label class="bar" for="slide2"></label>
+                <label class="bar" for="slide3"></label>
+                <label class="bar" for="slide4"></label>
+                <label class="bar" for="slide5"></label>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ url_for('pagina_produtos') }}" class="button_ver_produtos">Ver Produtos</a>
+
+    <script src="/static/css/js/script-index.js"></script>
+</section>
+    <!-- Fim do Carrossel de Imagens -->
+
+    <!-- Começo do Main da página principal  -->
+<section class="historia_feira">
+    <div class="main_feira">
+        <h2>Sobre a Feira de Jaguaribe</h2>
+        <p>A feira de Jaguaribe é uma das feiras mais antigas de João Pessoa. Sendo também conhecida como a 'feira da quarta' (por conta da tradição da ocorrência em todas as quartas da semana), a feira traz consigo uma história cultural riquíssima do bairo e um ponto de encontro para vendedores locais, fortalecendo a economia da região e a conexão dos moradores com o ambiente. Preços acessíveis e alta variedade de alimentos chamam atenção e garantem uma alta quantidade de consumidores toda semana. Além da sua importância econômica e cultural, o fator social é indispensável na análise desse mercado público. Tendo uma praça ao lado da feira, muitas pessoas (principalmente idosos e crianças) se aproveitam do alto movimento de indivíduos para estar saindo de casa e assim podem aproveitar dum ambiente cheio de comidas típicas paraibanas e música regional.</p>
+        <p>A feira tem registros de sua existência desde 1940 e funcionava em um terreno baldio em frente à Igreja de Nossa Senhora do Rosário, mudando de localidade devido à construção do Centro Administrativo. Seus produtos variam de frutas, verduras, carnes, queijos, rapaduras, além de tapiocas e café e outras bebidas que tornam um lugar atrativo para quem visita. Esse ponto cultural da Paraíba é ainda conhecida pelas "gambiarras" de iluminação feitas pelos feirantes, pelos personagens, pela "xepa" (preços mais baixos no fim do dia) e pela atmosfera de autenticidade e comércio.</p>
+    </div>
+    <!-- Fim do Main da página principal -->
+</section>
+{% endblock %}
