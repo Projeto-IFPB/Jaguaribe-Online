@@ -5,7 +5,7 @@ Projeto Acadêmico - IFPB
 ## Sobre o projeto
 Este projeto consiste em uma aplicação web desenvolvida para representar a Feira Pública de Jaguaribe, em João Pessoa. O sistema tem como objetivo divulgar a feira e permitir que vendedores tenham acesso a uma área para cadastrar e exibir seus produtos. O projeto está sendo desenvolvido como trabalho final do primeiro período
 do curso de Engenharia de Software do IFPB, integrando as disciplinas de Programação Web I, Introdução a Programação e Introdução a Engenharia de Software.
-Os alunos responsáveis por esse projeto são: Antony Conceição, Diogo Silva, Lemuel Duarte e Ryan Enric.
+Os alunos responsáveis por esse projeto são: Antony Conceição, Diogo Silva, Lemuel Duarte e Ryan Enriq.
 
 ---
 
