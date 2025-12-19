@@ -327,6 +327,7 @@ body {
     color: var(--white);
     font-size: 1.4rem;
     font-weight: bold;
+    transition: 0.3s ease;
 }
 
 .button_ver_produtos:hover {
@@ -448,53 +449,15 @@ body {
 .footer{
     background-color: var(--green-dark);
     color: var(--white);
-
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1.5rem;
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.7rem;
 }
 
-.links a{
-    text-decoration: none;
-}
-
-.links ul{
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-}
-
-.links p{
-    margin-bottom: 2.0rem;
-}
-
-.links{
-    margin-bottom: 2.0rem;
-}
-
-.descrição{
-    margin-bottom: 1.5rem;
-    display: flex;
-    justify-content: center;
-}
-
-.links li a{
-    color: var(--black);
-}
-
-.links li{
-    background-color: var(--gray-light);
-    border-radius: 1.4rem;
-    padding: 1.2rem;
-}
-
-.links li a:hover{
-    color: var(--gray-light);
-    transition: 0.5s;
-}
-
-.links li:hover{
-    background-color: var(--green-mid);
-    transition: 0.5s;
+.direitos {
+    text-align: center;
+    line-height: 2rem;
 }
