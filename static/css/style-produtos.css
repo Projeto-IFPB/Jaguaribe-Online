@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Configurando estilizações padrão da página */
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    line-height: 1.6rem;
+    font-size: 1.6rem;
+}
+
+/* Configurações Iniciais */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variáveis de cores do Projeto e Fonte-Size */
+
+:root{
+    font-size: 62.5%;
+    --green-dark: #166534;
+    --green-mid-dark: #047857;
+    --green-mid: #1a7a40;
+    --gray-light: #F3F4F6;
+    --white: #ffffff;
+    --black: #0a0a0a;
+}
+
+
+/* Header ---------------------------------------------------------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--green-dark);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    flex-wrap: wrap; 
+    font-size: 1.4rem;
+}
+
+.brand {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.navbar-links ul {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navbar-links li a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: flex;
+    text-align: center;
+    height: 100%;
+}
+
+.navbar-links li a:hover {
+    background-color: var(--green-dark);
+}
+
+/* Container do Botão de Login */
+.button-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50px;
+    width: 3rem;
+    height: 3rem;
+    margin: 0; 
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    cursor: pointer;
+}
+
+/* Estilo do Ícone de Login */
+.icon-login {
+    font-size: 2.3rem;
+    color: var(--white);
+    transition: all 0.5s ease;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Texto Login (Escondido por padrão) */
+.button-login::after {
+    content: "Login";
+    position: absolute;
+    opacity: 0;
+    right: 20px;
+    color: var(--white);
+    font-size: 1.4rem;
+    font-weight: bold;
+    transition: all 0.4s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.button-login:hover {
+    width: 110px;
+    background-color: var(--green-mid-dark);
+    justify-content: flex-start; 
+    padding-left: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+.button-login:hover .icon-login {
+    transform: scale(0.9);
+}
+
+.button-login:hover::after {
+    opacity: 1;
+    right: 25px;
+}
+
+
+/* Oculta o menu hamburguer em tela grande */
+.botao {
+    display: none; 
+    flex-direction: column;
+    justify-content: space-around;
+    height: 24px;
+    width: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.barra {
+    width: 100%;
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 10px;
+}
+
+@media (max-width: 770px) {
+            
+
+    .botao {
+        display: flex;
+    }
+
+
+    .navbar-links {
+        display: none; 
+        width: 100%; 
+    }
+
+
+    .navbar {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .navbar-links ul {
+        flex-direction: column;
+        width: 100%;
+    }
+                
+
+    .navbar-links.active {
+        display: flex;
+    }
+
+    /* Remove o formato de "botão circular" no celular */
+    .button-login {
+        width: 100%;
+        height: auto;
+        justify-content: flex-start;
+        border-radius: 0;
+        background: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Esconde o ícone de círculo no celular */
+    .icon-login {
+        display: none;
+    }
+
+    /* Faz o texto "Login" aparecer normalmente na lista */
+    .button-login::after {
+        content: "Login";
+        position: static;
+        opacity: 1;
+        color: var(--white);
+        font-size: 1.5rem;
+        padding: 0 1rem;
+        font-weight: normal;
+    }
+
+    .button-login:hover {
+        width: 100%;
+    }
+
+}
+
+/* PÁGINA DE PRODUTOS --------------------------------------------------------- */
+
+.container-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); 
+    gap: 30px;
+    padding: 40px 5%;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center; 
+    justify-items: center; 
+}
+
+.card {
+    background-color: var(--white);
+    width: 100%; 
+    max-width: 250px; 
+    height: 320px; 
+    border-radius: 12px;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px); 
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover; /* Garante que a imagem preencha o topo sem distorcer */
+}
+
+.card div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+    flex-grow: 1; /* Ocupa o resto do card */
+}
+
+.card h1 {
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.card h2 {
+    font-size: 1.2rem;
+    color: #AAAA;
+}
+
+.card span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--green-mid);
+}
+
+.card button {
+    background-color: #2192FF;
+    border: none;
+    padding: 10px;
+    width: 90%;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+/* Estilizando footer da página inicial */
+
+.footer{
+    background-color: var(--green-dark);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.direitos {
+    text-align: center;
+    line-height: 2rem;
+}
