@@ -8,17 +8,17 @@
 
 {% block content %}
 <main class="produto-detalhe">
-  <h1>Nome do Produto</h1>
+    <h1>Nome do Produto</h1>
 
-  <p><strong>Preço:</strong> R$ 0,00</p>
-  <p><strong>Vendedor:</strong> Nome do vendedor</p>
-
-  <section class="descricao">
-    <h2>Descrição</h2>
-    <p>Descrição completa do produto.</p>
-  </section>
-
-  <a href="#">Voltar</a>
+    <section>
+      <div class="descricao">
+        <p><strong>Preço:</strong> R$ 0,00</p>
+        <p><strong>Vendedor:</strong> Nome do vendedor</p>
+        <h2>Descrição</h2>
+        <p>Descrição completa do produto.</p>
+        <a href="{{ url_for('pagina_produtos') }}">Voltar</a>
+      </div>
+    </section>
 </main>
 {% endblock %}
 

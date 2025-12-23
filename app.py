@@ -13,5 +13,9 @@ def pagina_produtos():
 def pagina_login():
     return render_template("login.html")
 
+@app.route("/produto")
+def produto_descricao():
+    return render_template("produto_descricao.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
