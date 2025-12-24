@@ -1,6 +1,13 @@
 from flask import Flask, render_template, request,redirect, url_for
 import os
+from werkzeug.utils import secure_filename
+
 app = Flask(__name__)
+
+#configuração para upload fotos produtos
+
+UPLOAD_FOLDER = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #cadastro produtos
 
@@ -12,7 +19,7 @@ def ler_produtos():
             return [linha.strip() for linha in f if linha.strip()]
     return[]
 
-def guardar_produtos(produto, imagem, preco, vendedor, descricao):
+def guardar_produtos(produto, nome_imagem, preco, vendedor, descricao):
     id = 1
     if os.path.exists(PRODUTOS) and os.path.getsize(PRODUTOS) > 0:
         with open(PRODUTOS, 'r', encoding='utf-8') as f:
@@ -21,7 +28,7 @@ def guardar_produtos(produto, imagem, preco, vendedor, descricao):
                 ultimo_id = ultima_linha.split('=', 1)[0]
                 id = int(ultimo_id) + 1
     with open(PRODUTOS, 'a', encoding='utf-8') as f:
-        f.write(f"{id} = {produto} = {imagem} = {preco} = {vendedor} = {descricao}\n")
+        f.write(f"{id} = {produto} = {nome_imagem} = {preco} = {vendedor} = {descricao}\n")
 
 
 
@@ -44,13 +51,20 @@ def produto_descricao():
 def cadastro_produtos():
     if request.method == "POST":
         produto = request.form.get("produto")
-        imagem = request.form.get("imagem")
         preco = request.form.get("preco")
         vendedor = request.form.get("vendedor")
         descricao = request.form.get("descricao")
 
+        file = request.files.get('imagem')
+        nome_imagem = "None"
+
+        if file and file.filename != '':
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            nome_imagem = filename
+
         if produto and preco and vendedor:
-            guardar_produtos(produto,imagem,preco,vendedor,descricao)
+            guardar_produtos(produto,nome_imagem,preco,vendedor,descricao)
 
         return redirect(url_for('cadastro_produtos'))
     

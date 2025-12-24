@@ -1,2 +1,3 @@
 id = produtos = imagem = preco = vendedor = descricao
-1 = software = None = 188.99 = petronio = feito com carinho no assert
+
+1 = software = software.jpg = 1350.50 = petronio = feito com muito carinho no Assert
