@@ -1,0 +1,2 @@
+id = produtos = imagem = preco = vendedor = descricao
+1 = software = None = 188.99 = petronio = feito com carinho no assert

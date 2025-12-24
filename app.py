@@ -1,24 +1,6 @@
-from flask import Flask, render_template,request,redirect, url_for
+from flask import Flask, render_template, request,redirect, url_for
 import os
 app = Flask(__name__)
-
-
-#rotas 
-@app.route("/")
-def pagina_inicial():
-    return render_template("index.html")
-
-@app.route("/produtos")
-def pagina_produtos():
-    return render_template("produtos.html")
-
-@app.route("/login")
-def pagina_login():
-    return render_template("login.html")
-
-@app.route("/produto")
-def produto_descricao():
-    return render_template("produto_descricao.html")
 
 #cadastro produtos
 
@@ -41,6 +23,23 @@ def guardar_produtos(produto, imagem, preco, vendedor, descricao):
     with open(PRODUTOS, 'a', encoding='utf-8') as f:
         f.write(f"{id} = {produto} = {imagem} = {preco} = {vendedor} = {descricao}\n")
 
+
+
+#rotas 
+@app.route("/")
+def pagina_inicial():
+    return render_template("index.html")
+
+@app.route("/produtos")
+def pagina_produtos():
+    return render_template("produtos.html")
+
+
+@app.route("/produto")
+def produto_descricao():
+    return render_template("produto_descricao.html")
+
+
 @app.route("/cadastro produtos", methods=["GET","POST"])
 def cadastro_produtos():
     if request.method == "POST":
@@ -57,6 +56,10 @@ def cadastro_produtos():
     
     produtos = ler_produtos()
     return render_template("cadastro_produtos.html")
+
+@app.route("/login")
+def pagina_login():
+    return render_template("login.html")
 
 
 if __name__ == "__main__":
