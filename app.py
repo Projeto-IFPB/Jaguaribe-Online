@@ -41,5 +41,23 @@ def guardar_produtos(produto, imagem, preco, vendedor, descricao):
     with open(PRODUTOS, 'a', encoding='utf-8') as f:
         f.write(f"{id} = {produto} = {imagem} = {preco} = {vendedor} = {descricao}\n")
 
+@app.route("/cadastro produtos", methods=["GET","POST"])
+def cadastro_produtos():
+    if request.method == "POST":
+        produto = request.form.get("produto")
+        imagem = request.form.get("imagem")
+        preco = request.form.get("preco")
+        vendedor = request.form.get("vendedor")
+        descricao = request.form.get("descricao")
+
+        if produto and preco and vendedor:
+            guardar_produtos(produto,imagem,preco,vendedor,descricao)
+
+        return redirect(url_for('cadastro_produtos'))
+    
+    produtos = ler_produtos()
+    return render_template("cadastro_produtos.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
