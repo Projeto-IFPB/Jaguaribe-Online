@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Produtos</title>
-    <link rel="stylesheet" href="formulario2.css">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %} pagina Inicial {% endblock %}
+
+{% block.css %} <link rel="stylesheet" href="formulario2.css"> {% endblock %}
+
+{% block content %}
+
 
     <div class="container">
         <h1>Cadastro de Produto</h1>
@@ -42,5 +41,4 @@
         </form>
     </div>
 
-</body>
-</html>
+{% endblock %}
