@@ -1,5 +1,5 @@
 
-        body {
+        main {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     margin: 0;
@@ -8,8 +8,8 @@
     align-items: center;
     height: 100vh; 
 }
-
 form {
+    margin-top: 1rem;
     background-color: white;
     padding: 20px;
     border: 1px solid green;
