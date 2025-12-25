@@ -30,7 +30,28 @@ def guardar_produtos(produto, nome_imagem, preco, vendedor, descricao):
     with open(PRODUTOS, 'a', encoding='utf-8') as f:
         f.write(f"{id} = {produto} = {nome_imagem} = {preco} = {vendedor} = {descricao}\n")
 
+# Ler arquivo com produtos
 
+def ler_produtos_card():
+    produtos = []
+    if not os.path.exists('produtos.txt'):
+        return []
+
+    with open('produtos.txt', 'r', encoding='utf-8') as arq:
+        linhas = arq.readlines()
+        if not linhas:
+            return []
+        
+        # .strip() remove o \n e [x.strip() for x in ...] remove espaços ao redor do '='
+        cabecalho = [x.strip() for x in linhas[0].strip().split('=')]
+        
+        for linha in linhas[1:]:
+            if not linha.strip(): # Pula linhas vazias para evitar o IndexError
+                continue
+                
+            valores = [x.strip() for x in linha.strip().split('=')]
+                
+    return produtos
 
 #rotas 
 @app.route("/")
@@ -39,7 +60,8 @@ def pagina_inicial():
 
 @app.route("/produtos")
 def pagina_produtos():
-    return render_template("produtos.html")
+    lista_de_produtos = ler_produtos_card()
+    return render_template("produtos.html", produtos=lista_de_produtos)
 
 
 @app.route("/produto")

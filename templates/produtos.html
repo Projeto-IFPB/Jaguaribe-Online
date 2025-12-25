@@ -5,124 +5,21 @@
 
 {% block content %}
 
-    <div class="container-cards">
-        <div class="card">
-            <img src="https://noticiasconcursos.com.br/wp-content/uploads/2022/03/noticiasconcursos.com.br-como-escolher-morangos-veja-beneficios-e-receitas-como-escolher-morangos-veja-beneficios-e-receitas-reproducao-canva.jpg" alt="">
-            <div>
-                <h1>Morango</h1>
-                <h2>Descrição</h2>
-                <span>R$ 5,50</span>
-                <button>Saiba mais</button>
-            </div>
-        </div>
+<div class="container-cards">
 
+    {% for produto in produtos %}
         <div class="card">
-            <img src="https://jpimg.com.br/uploads/2025/01/7-beneficios-da-maca-para-a-saude-e-formas-criativas-de-usa-la.jpg" alt="">
+            <img src="{{ url_for('static', filename='uploads/' + produto.imagem) }}" alt="{{ produto.nome }}">
             <div>
-                <h1>Maça</h1>
-                <h2>Descrição</h2>
-                <span>R$ 5,50</span>
+                <h1>{{ produto.nome }}</h1>
+                <h2>{{ produto.descricao }}</h2>
+                <span>R$ {{ produto.preco }}</span>
                 <button>Saiba mais</button>
             </div>
         </div>
+    {% endfor %}
 
-        <div class="card">
-            <img src="https://tse3.mm.bing.net/th/id/OIP.GQTaUw4fpI5xLTrbj8JzoAHaE3?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="">
-            <div>
-                <h1>Banana</h1>
-                <h2>Descrição</h2>
-                <span>R$ 5,50</span>
-                <button>Saiba mais</button>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://www.coisasdaroca.com/wp-content/uploads/2021/04/pera-2.jpg" alt="">
-            <div>
-                <h1>Pera</h1>
-                <h2>Descrição</h2>
-                <span>R$ 5,50</span>
-                <button>Saiba mais</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://th.bing.com/th/id/R.a714755a94fd4000d5266da4e4a255fe?rik=K2SLbqaMeLniKA&riu=http%3a%2f%2fwww.infoescola.com%2fwp-content%2fuploads%2f2010%2f04%2fuvas_665365768.jpg&ehk=e4Jb%2fzWyKF8GT7T5yX1JIhN2N6mxL9Gi0ENP789ZFqI%3d&risl=&pid=ImgRaw&r=0" alt="">
-            <div>
-                <h1>Uva</h1>
-                <h2>Descrição</h2>
-                <span>R$ 5,50</span>
-                <button>Saiba mais</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://files.agro20.com.br/uploads/2019/08/abacaxi-2.jpg" alt="">
-            <div>
-                <h1>Abacaxi</h1>
-                <h2>Descrição</h2>
-                <span>R$ 5,50</span>
-                <button>Saiba mais</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://tse1.mm.bing.net/th/id/OIP.Z4fnIttEzAkjAFZE1mgRZgHaE8?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="">
-            <div>
-                <h1>Mamão</h1>
-                <h2>Descrição</h2>
-                <span>R$ 5,50</span>
-                <button>Saiba mais</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://www.mundoboaforma.com.br/wp-content/uploads/2015/04/abobora.jpg" alt="">
-            <div>
-                <h1>Abóbora</h1>
-                <h2>Descrição</h2>
-                <span>R$ 5,50</span>
-                <button>Saiba mais</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://th.bing.com/th/id/R.5c602eb27b8f346d3375b983e375f0a6?rik=Hb%2bCW5qGNc%2bkzw&riu=http%3a%2f%2fsouagro.com.br%2fwp-content%2fuploads%2f2018%2f01%2freceita_com_cenoura_352889045.jpg&ehk=stSpmfxV6upm1LsH7xe5sxWSaN6B8vujVCMyt2ixkaM%3d&risl=&pid=ImgRaw&r=0" alt="">
-            <div>
-                <h1>Cenoura</h1>
-                <h2>Descrição</h2>
-                <span>R$ 5,50</span>
-                <button>Saiba mais</button>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://3.bp.blogspot.com/-4tbakKDlErk/XAxqNyvRKpI/AAAAAAAAr6M/McMPtb-hUG0OjbiVF4pgxQ9Ev2MLCr5VgCLcBGAs/s1600/cebola%2B%25281%2529.jpeg" alt="">
-            <div>
-                <h1>Cebola</h1>
-                <h2>Descrição</h2>
-                <span>R$ 5,50</span>
-                <button>Saiba mais</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://www.consejosparamihuerto.com/wp-content/uploads/2020/02/los-tomates.jpg" alt="">
-            <div>
-                <h1>Tomate</h1>
-                <h2>Descrição</h2>
-                <span>R$ 5,50</span>
-                <button>Saiba mais</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://feelgoodpal.com/cdn-cgi/image/f=auto,fit=cover,w=1200,h=630,q=100/blog/health-benefits-of-coriander/feature.jpg" alt="">
-            <div>
-                <h1>Coentro</h1>
-                <h2>Descrição</h2>
-                <span>R$ 5,50</span>
-                <button>Saiba mais</button>
-            </div>
-        </div>
-    </div>
-
+</div>
+    
 {% endblock %}
+
