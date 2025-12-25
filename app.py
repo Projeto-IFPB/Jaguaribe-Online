@@ -11,7 +11,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #cadastro produtos
 
-PRODUTOS = "produtos.txt"
+PRODUTOS = "data/produtos.csv"
 
 def ler_produtos():
     if os.path.exists(PRODUTOS):
@@ -34,10 +34,10 @@ def guardar_produtos(produto, nome_imagem, preco, vendedor, descricao):
 
 def ler_produtos_card():
     produtos = []
-    if not os.path.exists('produtos.txt'):
+    if not os.path.exists('data/produtos.csv'):
         return []
 
-    with open('produtos.txt', 'r', encoding='utf-8') as arq:
+    with open('data/produtos.csv', 'r', encoding='utf-8') as arq:
         linhas = arq.readlines()
         if not linhas:
             return []
@@ -50,6 +50,11 @@ def ler_produtos_card():
                 continue
                 
             valores = [x.strip() for x in linha.strip().split('=')]
+            
+            # Verifica se a linha tem o mesmo número de colunas que o cabeçalho
+            if len(valores) == len(cabecalho):
+                item = dict(zip(cabecalho, valores))
+                produtos.append(item)
                 
     return produtos
 
