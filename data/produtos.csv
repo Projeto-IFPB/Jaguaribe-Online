@@ -1,6 +1,4 @@
 id = nome = imagem = preco = vendedor = descricao
 1 = software = software.jpg = 1350.50 = petronio = feito com muito carinho no Assert
-2 = software = software.jpg = 1350.50 = petronio = feito com muito carinho no Assert
-3 = UVA = uva.png = 12.50 = Ryan = Fruta maravilhosa
-4 = Manga = manga.png = 10.50 = Ryan = Fruta natural
-
+2 = Pera = pera.jpg = 1.00 = Ryan = Pera fresquinha
+3 = Banana = banana.webp = 3.00 = João = Palma de banana
