@@ -11,7 +11,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #cadastro produtos
 
-PRODUTOS = "produtos.txt"
+PRODUTOS = "data/produtos.csv"
 
 def ler_produtos():
     if os.path.exists(PRODUTOS):
@@ -30,7 +30,33 @@ def guardar_produtos(produto, nome_imagem, preco, vendedor, descricao):
     with open(PRODUTOS, 'a', encoding='utf-8') as f:
         f.write(f"{id} = {produto} = {nome_imagem} = {preco} = {vendedor} = {descricao}\n")
 
+# Ler arquivo com produtos
 
+def ler_produtos_card():
+    produtos = []
+    if not os.path.exists('data/produtos.csv'):
+        return []
+
+    with open('data/produtos.csv', 'r', encoding='utf-8') as arq:
+        linhas = arq.readlines()
+        if not linhas:
+            return []
+        
+        # .strip() remove o \n e [x.strip() for x in ...] remove espaços ao redor do '='
+        cabecalho = [x.strip() for x in linhas[0].strip().split('=')]
+        
+        for linha in linhas[1:]:
+            if not linha.strip(): # Pula linhas vazias para evitar o IndexError
+                continue
+                
+            valores = [x.strip() for x in linha.strip().split('=')]
+            
+            # Verifica se a linha tem o mesmo número de colunas que o cabeçalho
+            if len(valores) == len(cabecalho):
+                item = dict(zip(cabecalho, valores))
+                produtos.append(item)
+                
+    return produtos
 
 #rotas 
 @app.route("/")
@@ -39,7 +65,8 @@ def pagina_inicial():
 
 @app.route("/produtos")
 def pagina_produtos():
-    return render_template("produtos.html")
+    lista_de_produtos = ler_produtos_card()
+    return render_template("produtos.html", produtos=lista_de_produtos)
 
 
 @app.route("/produto")
