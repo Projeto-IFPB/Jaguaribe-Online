@@ -5,6 +5,24 @@
 
 {% block content %}
 
+    <div class="pesquisa-container">
+    
+    <div class="caixa-pesquisa">
+        <input type="text" placeholder="O que você procura?">
+        <button>Buscar</button>
+    </div>
+
+    <div class="filtro">
+        <label for="filtro-categoria">Filtrar por:</label>
+        <select id="filtro-categoria">
+            <option value="az">A - Z</option>
+            <option value="maior-preço">Maior Preço</option>
+            <option value="menor-preço">Menor Preço</option>
+        </select>
+    </div>
+
+</div>
+
     <div class="container-cards">
         <div class="card">
             <img src="https://noticiasconcursos.com.br/wp-content/uploads/2022/03/noticiasconcursos.com.br-como-escolher-morangos-veja-beneficios-e-receitas-como-escolher-morangos-veja-beneficios-e-receitas-reproducao-canva.jpg" alt="">
