@@ -7,8 +7,8 @@
 {% block content %}
 
 
+    <h1>Cadastro de Produto</h1>
     <div class="container">
-        <h1>Cadastro de Produto</h1>
 
         <form action="{{url_for('cadastro_produtos')}}" method="post" enctype="multipart/form-data">
 
@@ -34,7 +34,7 @@
 
             <div class="campo">
                 <label for="descricao">Descrição</label>
-                <textarea id="descricao" name="descricao" rows="5" placeholder="Detalhes do produto..."></textarea>
+                <textarea maxlength="350"  id="descricao" name="descricao" rows="5" placeholder="Detalhes do produto..."></textarea>
             </div>
 
             <button type="submit">Cadastrar Produto</button>

@@ -4,6 +4,7 @@
     background-color: #f2f2f2;
     margin: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh; 
@@ -39,4 +40,23 @@ button {
     border: none;
     cursor: pointer;
 }
-   
+  
+#descricao{
+    max-width: 300px;
+    max-height: 170px;
+    resize: vertical;
+}
+
+.container{
+    margin: 10px 30px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 800px;
+        max-height: 600px;
+    }
+    #descricao{
+        max-width: 100%;
+    }
+}
