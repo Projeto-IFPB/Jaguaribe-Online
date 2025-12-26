@@ -346,3 +346,29 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+/* Estilização do botão de cadastro de produtos */
+.cadastrando{
+    display: inline-block;
+    text-decoration: none;
+    padding: 1.0rem;
+    color: var(--white);
+    font-weight: bolder;
+    background-color: #1a7a40;
+    border-radius: 2.0rem;
+}
+
+.div_cadastro{
+    margin-top: 3.0rem;
+    margin-bottom: 1.0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cadastrando:hover{
+    background-color: var(--green-dark);
+    color: var(--gray-light);
+    transition: 0.3s;
+}
