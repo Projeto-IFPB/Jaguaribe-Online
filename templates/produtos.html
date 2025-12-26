@@ -7,6 +7,24 @@
 
 <a href="{{ url_for('cadastro_produtos' ) }}">Cadastrar um produto</a>
 
+<div class="pesquisa-container">
+    
+    <div class="caixa-pesquisa">
+        <input type="text" placeholder="O que você procura?">
+        <button>Buscar</button>
+    </div>
+
+    <div class="filtro">
+        <label for="filtro-categoria">Filtrar por:</label>
+        <select id="filtro-categoria">
+            <option value="az">A - Z</option>
+            <option value="maior-preço">Maior Preço</option>
+            <option value="menor-preço">Menor Preço</option>
+        </select>
+    </div>
+
+</div>
+
 <div class="container-cards">
 
     {% for produto in produtos %}
@@ -24,4 +42,3 @@
 </div>
     
 {% endblock %}
-
