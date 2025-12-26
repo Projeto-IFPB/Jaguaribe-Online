@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title%} Document {% endblock %}</title>
-
     <link rel="stylesheet" href="/static/css/style-index.css">
-    <script src="/static/css/script-index.js" defer></script>
+    {% block css %}{% endblock %}
+    <script src="/static/js/script-index.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    {% block head %}{% endblock %}
 </head>
 <body>
 
@@ -35,9 +37,8 @@
 
 </header>
 
-<main>
-    {% block content %}
-    {% endblock %}
+<main class="content2">
+    {% block content %}{% endblock %}
 </main>
 
 <footer>
