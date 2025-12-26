@@ -48,7 +48,11 @@ button {
 }
 
 .container{
-    margin: 10px 30px;
+    margin: 10px 35px;
+}
+
+h1{
+    margin-top: 15px;
 }
 
 @media (min-width: 768px) {
