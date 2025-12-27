@@ -25,7 +25,7 @@
             <option value="maior-preco" {% if request.args.get('ordem') == 'maior-preco' %} selected {% endif %}>Maior Preço</option>
             <option value="menor-preco" {% if request.args.get('ordem') == 'menor-preco' %} selected {% endif %}>Menor Preço</option>
         </select>
-        <button type="submit">Filtrar</button>
+        <button type="submit" class="btn_filtrar">Filtrar</button>
     </form>
 
 </div>
