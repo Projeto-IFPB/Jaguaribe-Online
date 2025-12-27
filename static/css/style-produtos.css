@@ -304,6 +304,7 @@ body {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
+    margin-top: 1.2rem;
     margin-bottom: 20px;
     
     display: flex;
@@ -359,16 +360,18 @@ body {
 }
 
 .div_cadastro{
-    margin-top: 3.0rem;
     margin-bottom: 1.0rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    margin-right: 1.0rem;
 }
 
 .cadastrando:hover{
     background-color: var(--green-dark);
     color: var(--gray-light);
     transition: 0.3s;
+}
+
+.filtro_cadastro{
+    margin-top: 1.2rem;
+    display: flex;
+    justify-content: space-between;
 }

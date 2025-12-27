@@ -5,9 +5,6 @@
 
 {% block content %}
 
-<div class="div_cadastro"> 
-    <a class="cadastrando" href="{{ url_for('cadastro_produtos' ) }}">Cadastrar um produto</a>
-</div>
 
 <div class="pesquisa-container">
     
@@ -15,16 +12,19 @@
         <input type="text" name="busca" placeholder="O que você procura?" value="{{ request.args.get('busca', '') }}">
         <button type="submit">Buscar</button>
     </form>
-
-    <div class="filtro">
-        <label for="filtro-categoria">Filtrar por:</label>
-        <select id="filtro-categoria">
+    <div class="filtro_cadastro">
+        <div class="filtro">
+            <label for="filtro-categoria">Filtrar por:</label>
+            <select id="filtro-categoria">
             <option value="az">A - Z</option>
             <option value="maior-preço">Maior Preço</option>
             <option value="menor-preço">Menor Preço</option>
-        </select>
+            </select>
+        </div>
+        <div class="div_cadastro"> 
+            <a class="cadastrando" href="{{ url_for('cadastro_produtos' ) }}">Cadastrar um produto</a>
+        </div>
     </div>
-
 </div>
 
 <div class="container-cards">
