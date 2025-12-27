@@ -1,0 +1,5 @@
+id,username,nome,data,password_hash
+
+
+
+1,kaitingameplay,kaito,1500-01-01,pbkdf2:sha256:1000000$BjKCjKdedvNeQbYO$dc34c7b7850d088b3956294f2fc0a0d59180817d033c45759b939e490337bf3a
