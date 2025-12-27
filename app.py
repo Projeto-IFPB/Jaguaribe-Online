@@ -67,7 +67,7 @@ def pagina_inicial():
 def pagina_produtos():
 
     # Pega o objeto de busca(pela URL)
-    termo_busca = request.args.get('busca', '').lower()
+    termo_busca = request.args.get('busca', '').lower().strip()
 
     # Carrega todos os produtos
     lista_de_produtos = ler_produtos_card()
