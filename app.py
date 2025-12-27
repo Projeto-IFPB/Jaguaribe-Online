@@ -23,7 +23,7 @@ PRODUTOS = "data/produtos.csv"
 # login Manager
 
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'pagina_login'
 
 class Usuario(UserMixin):
     def __init__(self, id, username):
@@ -131,7 +131,9 @@ def produto_descricao():
 
 
 @app.route("/cadastro produtos", methods=["GET","POST"])
+@login_required
 def cadastro_produtos():
+
     if request.method == "POST":
         produto = request.form.get("produto")
         preco = request.form.get("preco")
@@ -157,7 +159,6 @@ def cadastro_produtos():
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':
-
         nome = request.form.get('nome')
         data = request.form.get('data')
         username = request.form.get('username')
@@ -186,10 +187,35 @@ def cadastro():
         
     return render_template('cadastro.html')
 
-@app.route("/login")
+@app.route("/login", methods=["GET","POST"])
 def pagina_login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        senha = request.form.get('senha')
+
+        with open(USUARIOS, mode='r') as file:
+            leitor = csv.DictReader(file)
+            for linha in leitor:
+                if linha['username'] == username:
+                    if check_password_hash(linha['password_hash'], senha):
+                        usuario = Usuario(linha['id'], linha['username'])
+                        login_user(usuario)
+                        return redirect(url_for('pagina_perfil'))
+        
+        flash('Usuário ou senha inválidos')
     return render_template("login.html")
 
+@app.route('/perfil')
+@login_required
+def pagina_perfil():
+    return render_template("perfil.html")
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Você foi desconectado com sucesso.')
+    return redirect(url_for('pagina_login'))
 
 if __name__ == "__main__":
     app.run(debug=True)
