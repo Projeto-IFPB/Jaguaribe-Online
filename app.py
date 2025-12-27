@@ -65,7 +65,19 @@ def pagina_inicial():
 
 @app.route("/produtos")
 def pagina_produtos():
+
+    # Pega o objeto de busca(pela URL)
+    termo_busca = request.args.get('busca', '').lower()
+
+    # Carrega todos os produtos
     lista_de_produtos = ler_produtos_card()
+
+    if termo_busca:
+        lista_de_produtos = [
+            p for p in lista_de_produtos
+            if termo_busca in p['nome'].lower()
+        ]
+        
     return render_template("produtos.html", produtos=lista_de_produtos)
 
 

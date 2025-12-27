@@ -11,10 +11,10 @@
 
 <div class="pesquisa-container">
     
-    <div class="caixa-pesquisa">
-        <input type="text" placeholder="O que você procura?">
-        <button>Buscar</button>
-    </div>
+    <form action="{{ url_for('pagina_produtos' ) }}" method="GET" class="caixa-pesquisa">
+        <input type="text" name="busca" placeholder="O que você procura?" value="{{ request.args.get('busca', '') }}">
+        <button type="submit">Buscar</button>
+    </form>
 
     <div class="filtro">
         <label for="filtro-categoria">Filtrar por:</label>
@@ -29,18 +29,21 @@
 
 <div class="container-cards">
 
-    {% for produto in produtos %}
-        <div class="card">
-            <img src="{{ url_for('static', filename='uploads/' + produto.imagem) }}" alt="{{ produto.nome }}">
-            <div>
-                <h1>{{ produto.nome }}</h1>
-                <h2>{{ produto.descricao }}</h2>
-                <span>R$ {{ produto.preco }}</span>
-                <button>Saiba mais</button>
+    {% if produtos %}
+        {% for produto in produtos %}
+            <div class="card">
+                <img src="{{ url_for('static', filename='uploads/' + produto.imagem) }}" alt="{{ produto.nome }}">
+                <div>
+                    <h1>{{ produto.nome }}</h1>
+                    <h2>{{ produto.descricao }}</h2>
+                    <span>R$ {{ produto.preco }}</span>
+                    <button>Saiba mais</button>
+                </div>
             </div>
-        </div>
-    {% endfor %}
-
+        {% endfor %}
+    {% else %}
+            <p>Nenhum produto encontrado para busca.</p>
+    {% endif %}
 </div>
     
 {% endblock %}
