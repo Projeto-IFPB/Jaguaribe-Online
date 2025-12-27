@@ -97,19 +97,34 @@ def pagina_produtos():
 
     # Pega o objeto de busca(pela URL)
     termo_busca = request.args.get('busca', '').lower().strip()
+    ordem = request.args.get('ordem', 'az')
 
     # Carrega todos os produtos
     lista_de_produtos = ler_produtos_card()
 
+    # Filtra pela busca
     if termo_busca:
         lista_de_produtos = [
             p for p in lista_de_produtos
             if termo_busca in p['nome'].lower()
         ]
+
+    # Depois, ordena a lista resultante
+    try:
+        if ordem == 'az':
+            lista_de_produtos.sort(key=lambda x: x['nome'].lower())
+        elif ordem == 'maior-preco':
+            # Ordena do maior para o menor (reverse=True)
+            lista_de_produtos.sort(key=lambda x: float(x['preco'].replace(',', '.')), reverse=True)
+        elif ordem == 'menor-preco':
+            # Ordena do menor para o maior
+            lista_de_produtos.sort(key=lambda x: float(x['preco'].replace(',', '.')))
+    except (ValueError, KeyError):
+        # Se um preço for inválido (ex: texto em vez de número), ignora a ordenação
+        pass
         
     return render_template("produtos.html", produtos=lista_de_produtos)
-
-
+        
 @app.route("/produto")
 def produto_descricao():
     return render_template("produto_descricao.html")

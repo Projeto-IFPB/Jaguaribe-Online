@@ -16,14 +16,17 @@
         <button type="submit">Buscar</button>
     </form>
 
-    <div class="filtro">
+    <form action="{{ url_for('pagina_produtos') }}" method="GET" class="filtro">
         <label for="filtro-categoria">Filtrar por:</label>
-        <select id="filtro-categoria">
-            <option value="az">A - Z</option>
-            <option value="maior-preço">Maior Preço</option>
-            <option value="menor-preço">Menor Preço</option>
+        <input type="hidden" name="busca" value="{{ request.args.get('busca', '') }}">
+        
+        <select name="ordem" id="ordem">
+            <option value="az" {% if request.args.get('ordem') == 'az' %}selected{% endif %}>A- Z</option>
+            <option value="maior-preco" {% if request.args.get('ordem') == 'maior-preco' %} selected {% endif %}>Maior Preço</option>
+            <option value="menor-preco" {% if request.args.get('ordem') == 'menor-preco' %} selected {% endif %}>Menor Preço</option>
         </select>
-    </div>
+        <button type="submit" class="btn_filtrar">Filtrar</button>
+    </form>
 
 </div>
 
