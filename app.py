@@ -23,7 +23,7 @@ PRODUTOS = "data/produtos.csv"
 # login Manager
 
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'pagina_login'
 
 class Usuario(UserMixin):
     def __init__(self, id, username):
@@ -131,7 +131,9 @@ def produto_descricao():
 
 
 @app.route("/cadastro produtos", methods=["GET","POST"])
+@login_required
 def cadastro_produtos():
+
     if request.method == "POST":
         produto = request.form.get("produto")
         preco = request.form.get("preco")
@@ -157,7 +159,6 @@ def cadastro_produtos():
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':
-
         nome = request.form.get('nome')
         data = request.form.get('data')
         username = request.form.get('username')
@@ -209,6 +210,12 @@ def pagina_login():
 def pagina_perfil():
     return render_template("perfil.html")
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Você foi desconectado com sucesso.')
+    return redirect(url_for('pagina_login'))
 
 if __name__ == "__main__":
     app.run(debug=True)
