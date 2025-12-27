@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %} cadastro {% endblock %}
+
+{% block content %}
+    <h2>Registro de Usuário</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: {{ 'green' if category == 'success' else 'red' }};">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <form method="post">
+        <label for="nome">Nome Completo:</label>
+        <input type="text" id="nome" name="nome" required> <br><br>
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username" required> <br><br>
+        <label for="data">Data de Nascimento:</label>
+        <input type="date" id="data" name="data" required> <br><br>
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="senha" required> <br><br>
+        <label for="password">Confirmar Senha:</label>
+        <input type="password" id="confirmar" name="confirmar" required> <br><br>
+        <button type="submit">Registrar</button>
+    </form>
+    <p>Já tem uma conta? <a href="{{ url_for('login') }}">Faça login aqui</a></p>
+{% endblock %}
