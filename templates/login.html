@@ -1,7 +1,24 @@
 {% extends "base.html" %}
 
-{% block title %} pagina Login/Cadastro {% endblock %}
+{% block title %} pagina login {% endblock %}
 
 {% block content %}
-<h1>Em breve</h1>
+    <h2>Login</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div style="color: {{ 'green' if category == 'success' else 'red' }};">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="post">
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="senha" required><br><br>
+        <button type="submit">Entrar</button>
+    </form>
+    <p>Não tem uma conta? <a href="{{ url_for('cadastro') }}">Cadastre-se aqui</a></p>
 {% endblock %}
