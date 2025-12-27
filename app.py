@@ -32,7 +32,7 @@ class Usuario(UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id):
-    with open('users.csv', mode='r') as file:
+    with open(USUARIOS, mode='r') as file:
         leitor = csv.DictReader(file)
         for linha in leitor:
             if linha['id'] == user_id:
@@ -167,7 +167,7 @@ def cadastro():
             escrever.writerow([proximo_id, username, nome, data, password_hash])
         
         flash('Cadastro realizado com sucesso! Faça login.', 'success')
-        return redirect(url_for('login'))
+        return redirect(url_for('pagina_login'))
         
     return render_template('cadastro.html')
 
