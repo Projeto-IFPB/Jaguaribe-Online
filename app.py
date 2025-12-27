@@ -1,18 +1,47 @@
-from flask import Flask, render_template, request,redirect, url_for
+import csv
+from dotenv import load_dotenv
+from flask import Flask, render_template, request, redirect, url_for,flash
 import os
 from werkzeug.utils import secure_filename
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
+from werkzeug.security import check_password_hash,generate_password_hash
 
+load_dotenv()
 app = Flask(__name__)
+app.secret_key = os.getenv('SECRET_KEY', 'chave_MasterCard_Nao_tem_preco')
 
 #configuração para upload fotos produtos
 
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-#cadastro produtos
+#arquivos CSV
 
+USUARIOS = "data/usuarios.csv"
 PRODUTOS = "data/produtos.csv"
 
+# login Manager
+
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+
+class Usuario(UserMixin):
+    def __init__(self, id, username):
+        self.id = id
+        self.username = username
+
+@login_manager.user_loader
+def load_user(user_id):
+    with open('users.csv', mode='r') as file:
+        leitor = csv.DictReader(file)
+        for linha in leitor:
+            if linha['id'] == user_id:
+                return Usuario(linha['id'], linha['username'])
+    return None
+
+
+
+#cadastro produtos
 def ler_produtos():
     if os.path.exists(PRODUTOS):
         with open(PRODUTOS, "r", encoding="utf-8") as f:
@@ -109,6 +138,38 @@ def cadastro_produtos():
     
     produtos = ler_produtos()
     return render_template("cadastro_produtos.html")
+
+@app.route('/cadastro', methods=['GET', 'POST'])
+def cadastro():
+    if request.method == 'POST':
+
+        nome = request.form.get('nome')
+        data = request.form.get('data')
+        username = request.form.get('username')
+        senha = request.form.get('senha')
+        confirmar = request.form.get('confirmar')
+
+
+        if senha != confirmar:
+            flash('As senhas não coincidem!')
+            return redirect(url_for('cadastro'))
+
+        password_hash = generate_password_hash(senha, method='pbkdf2:sha256')
+        
+        proximo_id = 1
+        with open(USUARIOS, mode='r') as file:
+            leitor = csv.DictReader(file)
+            for linha in leitor:
+                proximo_id += 1
+
+        with open(USUARIOS, mode='a', newline='') as file:
+            escrever = csv.writer(file)
+            escrever.writerow([proximo_id, username, nome, data, password_hash])
+        
+        flash('Cadastro realizado com sucesso! Faça login.', 'success')
+        return redirect(url_for('login'))
+        
+    return render_template('cadastro.html')
 
 @app.route("/login")
 def pagina_login():
