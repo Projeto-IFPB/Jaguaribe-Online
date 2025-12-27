@@ -186,9 +186,28 @@ def cadastro():
         
     return render_template('cadastro.html')
 
-@app.route("/login")
+@app.route("/login", methods=["GET","POST"])
 def pagina_login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        senha = request.form.get('senha')
+
+        with open(USUARIOS, mode='r') as file:
+            leitor = csv.DictReader(file)
+            for linha in leitor:
+                if linha['username'] == username:
+                    if check_password_hash(linha['password_hash'], senha):
+                        usuario = Usuario(linha['id'], linha['username'])
+                        login_user(usuario)
+                        return redirect(url_for('pagina_perfil'))
+        
+        flash('Usuário ou senha inválidos')
     return render_template("login.html")
+
+@app.route('/perfil')
+@login_required
+def pagina_perfil():
+    return render_template("perfil.html")
 
 
 if __name__ == "__main__":

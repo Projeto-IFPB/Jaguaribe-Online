@@ -1,2 +1,3 @@
 id,username,nome,data,password_hash
 
+1,software>hardware,software da silva junior,0001-01-01,pbkdf2:sha256:1000000$ki5HBt1GP1mCAvI0$a3700a2f0d81705b8e35b2442086617abe562a6c0506c9c22595f4f9b29f741c
