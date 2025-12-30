@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Detalhes do Produto{% endblock %}
+{% block title %}Detalhes - {{  produto.nome }}{% endblock %}
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/produto_descricao.css') }}">
@@ -8,14 +8,14 @@
 
 {% block content %}
 <main class="produto-detalhe">
-    <h1>Morango</h1>
-    <img class="img_dc" src="https://noticiasconcursos.com.br/wp-content/uploads/2022/03/noticiasconcursos.com.br-como-escolher-morangos-veja-beneficios-e-receitas-como-escolher-morangos-veja-beneficios-e-receitas-reproducao-canva.jpg" alt="Imagem de morangos da feira.">
+    <h1>{{ produto.nome }}</h1>
+    <img class="img_dc" src="{{ url_for('static', filename='uploads/' + produto.imagem) }}" alt="Imagem de {{ produto.nome }}">
     <section>
       <div class="descricao">
-        <p><strong>Preço:</strong> R$ 5,50</p>
-        <p><strong>Vendedor:</strong> Nome do vendedor</p>
+        <p><strong>Preço:</strong> {{ produto.preco }}</p>
+        <p><strong>Vendedor:</strong> {{ produto.vendedor }}</p>
         <h2>Descrição</h2>
-        <p>Descrição completa do produto.</p>
+        <p>{{ produto.descricao }}</p>
         <a class="voltar"  href="{{ url_for('pagina_produtos') }}">Voltar</a>
       </div>
     </section>
