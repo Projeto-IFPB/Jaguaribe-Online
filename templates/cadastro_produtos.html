@@ -5,17 +5,20 @@
 {% block css %} <link rel="stylesheet" href="/static/css/formulario2.css"> {% endblock %}
 
 {% block content %}
-
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div style="color: green;">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 
     <h1>Cadastro de Produto</h1>
     <div class="container">
 
         <form action="{{url_for('cadastro_produtos')}}" method="post" enctype="multipart/form-data">
-
-            <div class="campo">
-                <label for="vendedor">Nome do Vendedor</label>
-                <input type="text" id="vendedor" name="vendedor" placeholder="nome do vendedor" required>
-            </div>
 
             <div class="campo">
                 <label for="nome">Nome do Produto</label>

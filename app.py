@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for,flash
 import os
 from werkzeug.utils import secure_filename
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash,generate_password_hash
 
 load_dotenv()
@@ -26,17 +26,18 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'pagina_login'
 
 class Usuario(UserMixin):
-    def __init__(self, id, username):
-        self.id = id
+    def __init__(self, username, nome_completo):
+        self.id = username
         self.username = username
+        self.nome_completo = nome_completo
 
 @login_manager.user_loader
 def load_user(user_id):
-    with open(USUARIOS, mode='r') as file:
-        leitor = csv.DictReader(file)
+    with open(USUARIOS, mode='r') as arq:
+        leitor = csv.DictReader(arq, delimiter=";")
         for linha in leitor:
-            if linha['id'] == user_id:
-                return Usuario(linha['id'], linha['username'])
+            if linha['username'] == user_id:
+                return Usuario(linha['username'], linha['nome'])
     return None
 
 
@@ -44,41 +45,43 @@ def load_user(user_id):
 #cadastro produtos
 def ler_produtos():
     if os.path.exists(PRODUTOS):
-        with open(PRODUTOS, "r", encoding="utf-8") as f:
-            return [linha.strip() for linha in f if linha.strip()]
+        with open(PRODUTOS, "r", encoding="utf-8") as arq:
+            return [linha.strip() for linha in arq if linha.strip()]
     return[]
 
-def guardar_produtos(produto, nome_imagem, preco, vendedor, descricao):
+def guardar_produtos(produto, nome_imagem, preco, vendedor, username_vendedor, descricao):
     id = 1
     if os.path.exists(PRODUTOS) and os.path.getsize(PRODUTOS) > 0:
-        with open(PRODUTOS, 'r', encoding='utf-8') as f:
-            ultima_linha = f.readlines()[-1].strip()
+        with open(PRODUTOS, 'r', encoding='utf-8') as arq:
+            ultima_linha = arq.readlines()[-1].strip()
             if ultima_linha:
-                ultimo_id = ultima_linha.split('=', 1)[0]
+                ultimo_id = ultima_linha.split(';', 1)[0]
                 id = int(ultimo_id) + 1
-    with open(PRODUTOS, 'a', encoding='utf-8') as f:
-        f.write(f"{id} = {produto} = {nome_imagem} = {preco} = {vendedor} = {descricao}\n")
+    with open(PRODUTOS, 'a', newline='' , encoding='utf-8') as arq:
+        escrever = csv.writer(arq, delimiter=';')
+        escrever.writerow([id, produto, nome_imagem, preco, vendedor, username_vendedor, descricao])
+
 
 # Ler arquivo com produtos
 
 def ler_produtos_card():
     produtos = []
-    if not os.path.exists('data/produtos.csv'):
+    if not os.path.exists(PRODUTOS):
         return []
 
-    with open('data/produtos.csv', 'r', encoding='utf-8') as arq:
+    with open(PRODUTOS, 'r', encoding='utf-8') as arq:
         linhas = arq.readlines()
         if not linhas:
             return []
         
         # .strip() remove o \n e [x.strip() for x in ...] remove espaços ao redor do '='
-        cabecalho = [x.strip() for x in linhas[0].strip().split('=')]
+        cabecalho = [x.strip() for x in linhas[0].strip().split(';')]
         
         for linha in linhas[1:]:
             if not linha.strip(): # Pula linhas vazias para evitar o IndexError
                 continue
                 
-            valores = [x.strip() for x in linha.strip().split('=')]
+            valores = [x.strip() for x in linha.strip().split(';')]
             
             # Verifica se a linha tem o mesmo número de colunas que o cabeçalho
             if len(valores) == len(cabecalho):
@@ -130,14 +133,15 @@ def produto_descricao():
     return render_template("produto_descricao.html")
 
 
-@app.route("/cadastro produtos", methods=["GET","POST"])
+@app.route("/cadastro_produtos", methods=["GET","POST"])
 @login_required
 def cadastro_produtos():
 
     if request.method == "POST":
         produto = request.form.get("produto")
         preco = request.form.get("preco")
-        vendedor = request.form.get("vendedor")
+        vendedor = current_user.nome_completo
+        username_vendedor = current_user.username
         descricao = request.form.get("descricao")
 
         file = request.files.get('imagem')
@@ -148,9 +152,10 @@ def cadastro_produtos():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             nome_imagem = filename
 
-        if produto and preco and vendedor:
-            guardar_produtos(produto,nome_imagem,preco,vendedor,descricao)
+        if produto and preco and username_vendedor:
+            guardar_produtos(produto,nome_imagem,preco,vendedor,username_vendedor,descricao)
 
+        flash("Produto cadastrado com sucesso")
         return redirect(url_for('cadastro_produtos'))
     
     produtos = ler_produtos()
@@ -164,23 +169,23 @@ def cadastro():
         username = request.form.get('username')
         senha = request.form.get('senha')
         confirmar = request.form.get('confirmar')
-
-
+#logica para simular unique de um banco de dados/tipo ele ve o arquivo e ve se ja existe um usuario igual ao digitado
+        with open(USUARIOS, mode='r') as arq:
+            leitor = csv.DictReader(arq, delimiter=";") 
+            for linha in leitor:
+                if linha['username'].strip().lower() == username.strip().lower():
+                    flash('Este nome de usuário já está em uso. Escolha outro.')
+                    return redirect(url_for('cadastro'))
+                
         if senha != confirmar:
             flash('As senhas não coincidem!')
             return redirect(url_for('cadastro'))
 
         password_hash = generate_password_hash(senha, method='pbkdf2:sha256')
         
-        proximo_id = 1
-        with open(USUARIOS, mode='r') as file:
-            leitor = csv.DictReader(file)
-            for linha in leitor:
-                proximo_id += 1
-
-        with open(USUARIOS, mode='a', newline='') as file:
-            escrever = csv.writer(file)
-            escrever.writerow([proximo_id, username, nome, data, password_hash])
+        with open(USUARIOS, mode='a', newline='') as arq:
+            escrever = csv.writer(arq, delimiter=";")
+            escrever.writerow([username, nome, data, password_hash])
         
         flash('Cadastro realizado com sucesso! Faça login.', 'success')
         return redirect(url_for('pagina_login'))
@@ -193,12 +198,12 @@ def pagina_login():
         username = request.form.get('username')
         senha = request.form.get('senha')
 
-        with open(USUARIOS, mode='r') as file:
-            leitor = csv.DictReader(file)
+        with open(USUARIOS, mode='r') as arq:
+            leitor = csv.DictReader(arq, delimiter=";")
             for linha in leitor:
                 if linha['username'] == username:
                     if check_password_hash(linha['password_hash'], senha):
-                        usuario = Usuario(linha['id'], linha['username'])
+                        usuario = Usuario(linha['username'], linha['nome'])
                         login_user(usuario)
                         return redirect(url_for('pagina_perfil'))
         
@@ -208,7 +213,18 @@ def pagina_login():
 @app.route('/perfil')
 @login_required
 def pagina_perfil():
-    return render_template("perfil.html")
+    meus_produtos = []
+    
+    with open(PRODUTOS, mode='r') as arq:
+        leitor = csv.DictReader(arq , delimiter=';')
+        for linha in leitor:
+            atual = current_user.username.strip().lower()
+            vendedor = linha['username_vendedor'].strip().lower()
+            if vendedor == atual :
+                meus_produtos.append(linha)
+    
+    return render_template('perfil.html', produtos=meus_produtos)
+
 
 @app.route('/logout')
 @login_required
