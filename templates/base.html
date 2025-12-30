@@ -27,6 +27,12 @@
                 <li><a href="{{ url_for('pagina_inicial') }} ">Inicio</a></li>
                 <li><a href="{{ url_for('pagina_produtos') }}">Produtos</a></li>
                 
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('pagina_perfil') }}" div class="button-perfil">
+                            <div class="icon-login">
+                                <i class="fa-regular fa-circle-user"></i>
+                            </div>
+                    </a></li>
                 {% else %}
                     <li><a href="{{ url_for('pagina_login') }}" div class="button-login">
                         <div class="icon-login">
