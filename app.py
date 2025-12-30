@@ -32,8 +32,8 @@ class Usuario(UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id):
-    with open(USUARIOS, mode='r') as file:
-        leitor = csv.DictReader(file)
+    with open(USUARIOS, mode='r') as arq:
+        leitor = csv.DictReader(arq, delimiter=";")
         for linha in leitor:
             if linha['id'] == user_id:
                 return Usuario(linha['id'], linha['username'])
@@ -44,20 +44,22 @@ def load_user(user_id):
 #cadastro produtos
 def ler_produtos():
     if os.path.exists(PRODUTOS):
-        with open(PRODUTOS, "r", encoding="utf-8") as f:
-            return [linha.strip() for linha in f if linha.strip()]
+        with open(PRODUTOS, "r", encoding="utf-8") as arq:
+            return [linha.strip() for linha in arq if linha.strip()]
     return[]
 
 def guardar_produtos(produto, nome_imagem, preco, vendedor, descricao):
     id = 1
     if os.path.exists(PRODUTOS) and os.path.getsize(PRODUTOS) > 0:
-        with open(PRODUTOS, 'r', encoding='utf-8') as f:
-            ultima_linha = f.readlines()[-1].strip()
+        with open(PRODUTOS, 'r', encoding='utf-8') as arq:
+            ultima_linha = arq.readlines()[-1].strip()
             if ultima_linha:
-                ultimo_id = ultima_linha.split('=', 1)[0]
+                ultimo_id = ultima_linha.split(';', 1)[0]
                 id = int(ultimo_id) + 1
-    with open(PRODUTOS, 'a', encoding='utf-8') as f:
-        f.write(f"{id} = {produto} = {nome_imagem} = {preco} = {vendedor} = {descricao}\n")
+    with open(PRODUTOS, 'a', encoding='utf-8') as arq:
+        escrever = csv.writer(arq, delimiter=';')
+        escrever.writerow([id, produto, nome_imagem, preco, vendedor, username_vendedor, descricao])
+
 
 # Ler arquivo com produtos
 
@@ -72,13 +74,13 @@ def ler_produtos_card():
             return []
         
         # .strip() remove o \n e [x.strip() for x in ...] remove espaços ao redor do '='
-        cabecalho = [x.strip() for x in linhas[0].strip().split('=')]
+        cabecalho = [x.strip() for x in linhas[0].strip().split(';')]
         
         for linha in linhas[1:]:
             if not linha.strip(): # Pula linhas vazias para evitar o IndexError
                 continue
                 
-            valores = [x.strip() for x in linha.strip().split('=')]
+            valores = [x.strip() for x in linha.strip().split(';')]
             
             # Verifica se a linha tem o mesmo número de colunas que o cabeçalho
             if len(valores) == len(cabecalho):
@@ -173,13 +175,13 @@ def cadastro():
         password_hash = generate_password_hash(senha, method='pbkdf2:sha256')
         
         proximo_id = 1
-        with open(USUARIOS, mode='r') as file:
-            leitor = csv.DictReader(file)
+        with open(USUARIOS, mode='r') as arq:
+            leitor = csv.DictReader(arq, delimiter=";")
             for linha in leitor:
                 proximo_id += 1
 
-        with open(USUARIOS, mode='a', newline='') as file:
-            escrever = csv.writer(file)
+        with open(USUARIOS, mode='a', newline='') as arq:
+            escrever = csv.writer(arq, delimiter=";")
             escrever.writerow([proximo_id, username, nome, data, password_hash])
         
         flash('Cadastro realizado com sucesso! Faça login.', 'success')
@@ -193,8 +195,8 @@ def pagina_login():
         username = request.form.get('username')
         senha = request.form.get('senha')
 
-        with open(USUARIOS, mode='r') as file:
-            leitor = csv.DictReader(file)
+        with open(USUARIOS, mode='r') as arq:
+            leitor = csv.DictReader(arq, delimiter=";")
             for linha in leitor:
                 if linha['username'] == username:
                     if check_password_hash(linha['password_hash'], senha):
