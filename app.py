@@ -1,6 +1,6 @@
 import csv
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect, url_for,flash,
+from flask import Flask, render_template, request, redirect, url_for,flash
 import os
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
@@ -57,7 +57,7 @@ def guardar_produtos(produto, nome_imagem, preco, vendedor, username_vendedor, d
             if ultima_linha:
                 ultimo_id = ultima_linha.split(';', 1)[0]
                 id = int(ultimo_id) + 1
-    with open(PRODUTOS, 'a', encoding='utf-8') as arq:
+    with open(PRODUTOS, 'a', newline='' , encoding='utf-8') as arq:
         escrever = csv.writer(arq, delimiter=';')
         escrever.writerow([id, produto, nome_imagem, preco, vendedor, username_vendedor, descricao])
 
@@ -212,7 +212,18 @@ def pagina_login():
 @app.route('/perfil')
 @login_required
 def pagina_perfil():
-    return render_template("perfil.html")
+    meus_produtos = []
+    
+    with open(PRODUTOS, mode='r') as arq:
+        leitor = csv.DictReader(arq , delimiter=';')
+        for linha in leitor:
+            atual = current_user.username.strip().lower()
+            vendedor = linha['username_vendedor'].strip().lower()
+            if vendedor == atual :
+                meus_produtos.append(linha)
+    
+    return render_template('perfil.html', produtos=meus_produtos)
+
 
 @app.route('/logout')
 @login_required

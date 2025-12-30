@@ -3,3 +3,8 @@ id;nome;imagem;preco;vendedor;username_vendedor;descricao
 2;Pera;pera.jpg;1.00;Ryan;ryan123;Pera fresquinha
 3;Banana;banana.webp;3.00;joao123;João;Palma de banana
 4;Maça;maca.jpg;3.00;Ryan;ryan123;Maça fresquinha
+5;camisa do flamengo;flamengo.jpg;1599.99;diogo presida;mengao;Original e usada pelo Arrasca
+6;ana;None;10;diogo presida;mengao;res
+7;teste;None;99;diogo presida;mengao;teste
+8;teste 2;None;889;diogo presida;mengao;teste
+9;teste3;None;999;diogo presida;mengao;1000

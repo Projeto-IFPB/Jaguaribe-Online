@@ -3,5 +3,14 @@
 {% block title %} pagina Perfil {% endblock %}
 
 {% block content %}
-<p>Em Breve</p>
+<br>
+<h1>Olá, {{ current_user.nome_completo }}!</h1>
+<br> <br>
+<h2>Seus produtos cadastrados:</h2>
+<br> <br>
+<ul>
+    {% for produtos in produtos %}
+        <li>{{ produtos.nome }} - R$ {{ produtos.preco }} - {{ produtos.descricao}} </li>
+    {% endfor %}
+</ul>
 {% endblock %}
