@@ -40,7 +40,7 @@
                     <h1>{{ produto.nome }}</h1>
                     <h2>{{ produto.descricao }}</h2>
                     <span>R$ {{ produto.preco }}</span>
-                    <a href="" class="btn_saiba_mais">Saiba Mais</a>
+                    <a href="{{ url_for('produto_descricao', produto_id=produto.id ) }}" class="btn_saiba_mais">Saiba Mais</a>
                 </div>
             </div>
         {% endfor %}
