@@ -2,15 +2,43 @@
 
 {% block title %} pagina Perfil {% endblock %}
 
+{% block css%} <link rel="stylesheet" href="style-perfil.css"> {% endblock %}
+
 {% block content %}
 <br>
 <h1>Olá, {{ current_user.nome_completo }}!</h1>
-<br> <br>
-<h2>Seus produtos cadastrados:</h2>
-<br> <br>
-<ul>
-    {% for produtos in produtos %}
-        <li>{{ produtos.nome }} - R$ {{ produtos.preco }} - {{ produtos.descricao}} </li>
-    {% endfor %}
-</ul>
+<br>
+
+<h2>Seus produtos</h2>
+
+<div class="container-tabela">
+    <table class="tabela-produtos">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for produto in produtos %} 
+            <tr>
+                <td>{{ produto.nome }}</td> 
+                
+                <td>R$ {{ produto.preco }}</td>
+                
+                <td>{{ produto.descricao }}</td>
+
+                <td class="acoes">
+                    <button class="botao-editar">Editar</button>
+                    <button class="botao-excluir">Excluir</button>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
 {% endblock %}
