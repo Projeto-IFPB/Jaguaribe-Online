@@ -26,11 +26,14 @@
             <ul>
                 <li><a href="{{ url_for('pagina_inicial') }} ">Inicio</a></li>
                 <li><a href="{{ url_for('pagina_produtos') }}">Produtos</a></li>
-                <li><a href="{{ url_for('pagina_login') }}" div class="button-login">
-                            <div class="icon-login">
-                                <i class="fa-regular fa-circle-user"></i>
-                            </div>
+                
+                {% else %}
+                    <li><a href="{{ url_for('pagina_login') }}" div class="button-login">
+                        <div class="icon-login">
+                            <i class="fa-regular fa-circle-user"></i>
+                        </div>
                     </a></li>
+                {% endif %}
             </ul>
         </div>          
     </nav>
