@@ -1,9 +1,9 @@
 import csv
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect, url_for,flash
+from flask import Flask, render_template, request, redirect, url_for,flash,
 import os
 from werkzeug.utils import secure_filename
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash,generate_password_hash
 
 load_dotenv()
@@ -49,7 +49,7 @@ def ler_produtos():
             return [linha.strip() for linha in arq if linha.strip()]
     return[]
 
-def guardar_produtos(produto, nome_imagem, preco, vendedor, descricao):
+def guardar_produtos(produto, nome_imagem, preco, vendedor, username_vendedor, descricao):
     id = 1
     if os.path.exists(PRODUTOS) and os.path.getsize(PRODUTOS) > 0:
         with open(PRODUTOS, 'r', encoding='utf-8') as arq:
@@ -59,17 +59,17 @@ def guardar_produtos(produto, nome_imagem, preco, vendedor, descricao):
                 id = int(ultimo_id) + 1
     with open(PRODUTOS, 'a', encoding='utf-8') as arq:
         escrever = csv.writer(arq, delimiter=';')
-        escrever.writerow([id, produto, nome_imagem, preco, vendedor, descricao])
+        escrever.writerow([id, produto, nome_imagem, preco, vendedor, username_vendedor, descricao])
 
 
 # Ler arquivo com produtos
 
 def ler_produtos_card():
     produtos = []
-    if not os.path.exists('data/produtos.csv'):
+    if not os.path.exists(PRODUTOS):
         return []
 
-    with open('data/produtos.csv', 'r', encoding='utf-8') as arq:
+    with open(PRODUTOS, 'r', encoding='utf-8') as arq:
         linhas = arq.readlines()
         if not linhas:
             return []
@@ -140,7 +140,8 @@ def cadastro_produtos():
     if request.method == "POST":
         produto = request.form.get("produto")
         preco = request.form.get("preco")
-        vendedor = request.form.get("vendedor")
+        vendedor = current_user.nome_completo
+        username_vendedor = current_user.username
         descricao = request.form.get("descricao")
 
         file = request.files.get('imagem')
@@ -151,8 +152,8 @@ def cadastro_produtos():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             nome_imagem = filename
 
-        if produto and preco and vendedor:
-            guardar_produtos(produto,nome_imagem,preco,vendedor,descricao)
+        if produto and preco and username_vendedor:
+            guardar_produtos(produto,nome_imagem,preco,vendedor,username_vendedor,descricao)
 
         return redirect(url_for('cadastro_produtos'))
     
