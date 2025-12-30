@@ -26,17 +26,18 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'pagina_login'
 
 class Usuario(UserMixin):
-    def __init__(self, id, username):
-        self.id = id
+    def __init__(self, username, nome_completo):
+        self.id = username
         self.username = username
+        self.nome_completo = nome_completo
 
 @login_manager.user_loader
 def load_user(user_id):
     with open(USUARIOS, mode='r') as arq:
         leitor = csv.DictReader(arq, delimiter=";")
         for linha in leitor:
-            if linha['id'] == user_id:
-                return Usuario(linha['id'], linha['username'])
+            if linha['username'] == user_id:
+                return Usuario(linha['username'], linha['nome'])
     return None
 
 
@@ -58,7 +59,7 @@ def guardar_produtos(produto, nome_imagem, preco, vendedor, descricao):
                 id = int(ultimo_id) + 1
     with open(PRODUTOS, 'a', encoding='utf-8') as arq:
         escrever = csv.writer(arq, delimiter=';')
-        escrever.writerow([id, produto, nome_imagem, preco, vendedor, username_vendedor, descricao])
+        escrever.writerow([id, produto, nome_imagem, preco, vendedor, descricao])
 
 
 # Ler arquivo com produtos
@@ -132,7 +133,7 @@ def produto_descricao():
     return render_template("produto_descricao.html")
 
 
-@app.route("/cadastro produtos", methods=["GET","POST"])
+@app.route("/cadastro_produtos", methods=["GET","POST"])
 @login_required
 def cadastro_produtos():
 
@@ -166,23 +167,23 @@ def cadastro():
         username = request.form.get('username')
         senha = request.form.get('senha')
         confirmar = request.form.get('confirmar')
-
-
+#logica para simular unique de um banco de dados/tipo ele ve o arquivo e ve se ja existe um usuario igual ao digitado
+        with open(USUARIOS, mode='r') as arq:
+            leitor = csv.DictReader(arq, delimiter=";") 
+            for linha in leitor:
+                if linha['username'].strip().lower() == username.strip().lower():
+                    flash('Este nome de usuário já está em uso. Escolha outro.')
+                    return redirect(url_for('cadastro'))
+                
         if senha != confirmar:
             flash('As senhas não coincidem!')
             return redirect(url_for('cadastro'))
 
         password_hash = generate_password_hash(senha, method='pbkdf2:sha256')
         
-        proximo_id = 1
-        with open(USUARIOS, mode='r') as arq:
-            leitor = csv.DictReader(arq, delimiter=";")
-            for linha in leitor:
-                proximo_id += 1
-
         with open(USUARIOS, mode='a', newline='') as arq:
             escrever = csv.writer(arq, delimiter=";")
-            escrever.writerow([proximo_id, username, nome, data, password_hash])
+            escrever.writerow([username, nome, data, password_hash])
         
         flash('Cadastro realizado com sucesso! Faça login.', 'success')
         return redirect(url_for('pagina_login'))
@@ -200,7 +201,7 @@ def pagina_login():
             for linha in leitor:
                 if linha['username'] == username:
                     if check_password_hash(linha['password_hash'], senha):
-                        usuario = Usuario(linha['id'], linha['username'])
+                        usuario = Usuario(linha['username'], linha['nome'])
                         login_user(usuario)
                         return redirect(url_for('pagina_perfil'))
         
