@@ -155,6 +155,7 @@ def cadastro_produtos():
         if produto and preco and username_vendedor:
             guardar_produtos(produto,nome_imagem,preco,vendedor,username_vendedor,descricao)
 
+        flash("Produto cadastrado com sucesso")
         return redirect(url_for('cadastro_produtos'))
     
     produtos = ler_produtos()
