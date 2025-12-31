@@ -17,7 +17,7 @@
     </form>
 
     <form action="{{ url_for('pagina_produtos') }}" method="GET" class="filtro">
-        <label for="filtro-categoria">Filtrar por:</label>
+        <label for="filtro-categoria">Filtrar por:</label>  
         <input type="hidden" name="busca" value="{{ request.args.get('busca', '') }}">
         
         <select name="ordem" id="ordem">
@@ -40,7 +40,7 @@
                     <h1>{{ produto.nome }}</h1>
                     <h2>{{ produto.descricao }}</h2>
                     <span>R$ {{ produto.preco }}</span>
-                    <button>Saiba mais</button>
+                    <a href="{{ url_for('produto_descricao', produto_id=produto.id ) }}" class="btn_saiba_mais">Saiba Mais</a>
                 </div>
             </div>
         {% endfor %}

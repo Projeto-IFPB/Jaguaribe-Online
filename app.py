@@ -128,9 +128,24 @@ def pagina_produtos():
         
     return render_template("produtos.html", produtos=lista_de_produtos)
         
-@app.route("/produto")
-def produto_descricao():
-    return render_template("produto_descricao.html")
+@app.route("/produto/<int:produto_id>")
+def produto_descricao(produto_id):
+    # Carrega a lista de produtos
+    lista_de_produtos = ler_produtos_card()
+
+    # Procura o produto pelo ID
+    produto_selecionado = None
+    for produto in lista_de_produtos:
+        if int(produto['id']) == produto_id:
+            produto_selecionado = produto
+            break
+
+    if produto_selecionado:
+        return render_template("produto_descricao.html", produto=produto_selecionado)
+    
+    # Se o produto não for encontrado
+    flash("Produto não encontrado.")
+    return redirect(url_for('pagina_produtos'))
 
 
 @app.route("/cadastro_produtos", methods=["GET","POST"])
