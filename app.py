@@ -246,6 +246,26 @@ def pagina_perfil():
     
     return render_template('perfil.html', produtos=meus_produtos)
 
+@app.route('/excluir_produto/<id_produto>', methods=['POST'])
+@login_required
+def excluir_produto(id_produto):
+    linhas_mantidas = []
+    campos = ['id', 'nome', 'imagem', 'preco', 'vendedor', 'username_vendedor', 'descricao']
+
+    with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        for linha in leitor:
+            if linha['id'] != str(id_produto) or linha['username_vendedor'] != current_user.username:
+                linhas_mantidas.append(linha)
+
+    with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
+        escrever = csv.DictWriter(arq, fieldnames=campos, delimiter=';')
+        escrever.writeheader()
+        escrever.writerows(linhas_mantidas)
+
+    flash('Produto excluído com sucesso!', 'success')
+    return redirect(url_for('pagina_perfil'))
+
 
 @app.route('/logout')
 @login_required

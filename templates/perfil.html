@@ -33,7 +33,22 @@
 
                 <td class="acoes">
                     <button class="botao-editar">Editar</button>
-                    <button class="botao-excluir">Excluir</button>
+                    <button class="botao-excluir" onclick="abrirModal('{{ produto.id }}')">
+                        Excluir
+                    </button>
+                    <div id="modal-{{ produto.id }}" class="meu-modal-overlay">
+                        <div class="meu-modal-conteudo">
+                            <h3>Confirmar Exclusão</h3>
+                            <p>Deseja mesmo excluir o produto <strong>{{ produto.nome }}</strong>?</p>
+                            
+                            <div class="botoes-row">
+                                <button onclick="fecharModal('{{ produto.id }}')" class="btn-cancelar">Cancelar</button>
+                                <form action="{{ url_for('excluir_produto', id_produto=produto.id) }}" method="POST">
+                                    <button type="submit" class="btn-confirmar">Excluir</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
             {% endfor %}

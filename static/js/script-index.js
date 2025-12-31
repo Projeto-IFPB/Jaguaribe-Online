@@ -19,3 +19,18 @@ toggleButton.addEventListener('click', () => {
 
 navbarLinks.classList.toggle('active');
 });
+//modal excluir produto
+function abrirModal(id) {
+    document.getElementById('modal-' + id).style.display = 'flex';
+}
+
+function fecharModal(id) {
+    document.getElementById('modal-' + id).style.display = 'none';
+}
+
+// Fechar se clicar fora da caixa branca
+window.onclick = function(event) {
+    if (event.target.className === 'meu-modal-overlay') {
+        event.target.style.display = 'none';
+    }
+}
