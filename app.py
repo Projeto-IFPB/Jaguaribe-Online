@@ -250,7 +250,7 @@ def pagina_perfil():
 @login_required
 def excluir_produto(id_produto):
     linhas_mantidas = []
-    campos = ['id', 'nome', 'nome_imagem', 'preco', 'vendedor', 'username_vendedor', 'descricao']
+    campos = ['id', 'nome', 'imagem', 'preco', 'vendedor', 'username_vendedor', 'descricao']
 
     with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
         leitor = csv.DictReader(arq, delimiter=';')
