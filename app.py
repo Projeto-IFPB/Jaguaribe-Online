@@ -50,16 +50,22 @@ def ler_produtos():
     return[]
 
 def guardar_produtos(produto, nome_imagem, preco, vendedor, username_vendedor, descricao):
-    id = 1
-    if os.path.exists(PRODUTOS) and os.path.getsize(PRODUTOS) > 0:
+    id_novo = 1
+    if os.path.exists(PRODUTOS):
         with open(PRODUTOS, 'r', encoding='utf-8') as arq:
-            ultima_linha = arq.readlines()[-1].strip()
-            if ultima_linha:
-                ultimo_id = ultima_linha.split(';', 1)[0]
-                id = int(ultimo_id) + 1
+            leitor = csv.DictReader(arq, delimiter=';')
+            ids_existentes = []
+            for linha in leitor:
+                if linha['id']:
+                    ids_existentes.append(int(linha['id']))
+            
+            # Se houver IDs, o novo será o maior + 1
+            if ids_existentes:
+                id_novo = max(ids_existentes) + 1
+
     with open(PRODUTOS, 'a', newline='' , encoding='utf-8') as arq:
         escrever = csv.writer(arq, delimiter=';')
-        escrever.writerow([id, produto, nome_imagem, preco, vendedor, username_vendedor, descricao])
+        escrever.writerow([id_novo, produto, nome_imagem, preco, vendedor, username_vendedor, descricao])
 
 
 # Ler arquivo com produtos
