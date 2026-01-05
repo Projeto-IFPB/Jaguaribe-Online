@@ -1,24 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-body {
+.sessao-cadastro {
     font-family: 'Inter', sans-serif;
     background-color: #f4f4f9;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    padding-top: 50px;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 20px;
 }
 
-
-h1, h2 {
+.sessao-cadastro h2 {
     color: #333;
     margin-bottom: 20px;
     text-align: center;
 }
 
-
-form {
+.sessao-cadastro form {
     background-color: white;
     padding: 40px;
     width: 100%;
@@ -29,11 +28,11 @@ form {
     flex-direction: column; 
 }
 
-form br {
+.sessao-cadastro form br {
     display: none;
 }
 
-form label {
+.sessao-cadastro form label {
     font-weight: 600;
     font-size: 0.9rem;
     color: #555;
@@ -41,13 +40,11 @@ form label {
     margin-top: 15px;
 }
 
-
-form label:first-of-type {
+.sessao-cadastro form label:first-of-type {
     margin-top: 0;
 }
 
-
-form input {
+.sessao-cadastro form input {
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -56,14 +53,12 @@ form input {
     transition: 0.3s;
 }
 
-
-form input:focus {
+.sessao-cadastro form input:focus {
     border-color: #28a745;
     box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
 }
 
-
-form button {
+.sessao-cadastro form button {
     margin-top: 25px;
     padding: 12px;
     background-color: #28a745;
@@ -76,29 +71,27 @@ form button {
     transition: background-color 0.3s;
 }
 
-form button:hover {
+.sessao-cadastro form button:hover {
     background-color: green;
 }
 
-
-p {
+.sessao-cadastro p {
     margin-top: 20px;
     font-size: 0.9rem;
     color: #666;
 }
 
-p a {
+.sessao-cadastro p a {
     color: #28a745;
     text-decoration: none;
     font-weight: bold;
 }
 
-p a:hover {
+.sessao-cadastro p a:hover {
     text-decoration: underline;
 }
 
-
-div[style*="color"] {
+.sessao-cadastro div[style*="color"] {
     background-color: #fff;
     padding: 10px;
     border: 1px solid #ddd;
