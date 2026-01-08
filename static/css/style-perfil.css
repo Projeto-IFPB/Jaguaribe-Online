@@ -105,21 +105,6 @@ body {
 .btn-excluir:hover , .btn-editar:hover{
     transform: scale(1.2);
 }
-/*Modais----------*/
-.modais {
-  display: none; 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
-    justify-content: center;
-    align-items: center;
-    padding: 0; 
-    margin: 0;
-}
 /*Modal Excluir -------*/
 .modal_excluir {
     background: white;

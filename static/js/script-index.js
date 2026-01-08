@@ -35,6 +35,13 @@ function Abrir_ModalEditar(id) {
 function Fechar_ModalEditar(id) {
     document.getElementById('modal_editar_' + id).style.display = 'none';
 }
+function Abrir_ModalSaibaMais(id) {
+    document.getElementById('modal-saiba-mais-' + id).style.display = 'flex';
+}
+
+function Fechar_ModalSaibaMais(id) {
+    document.getElementById('modal-saiba-mais-' + id).style.display = 'none';
+}
 // Fechar se clicar fora da caixa branca
 window.onclick = function(event) {
     if (event.target.className === 'modais') {

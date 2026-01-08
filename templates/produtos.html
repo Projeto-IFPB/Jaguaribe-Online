@@ -40,7 +40,26 @@
                     <h1>{{ produto.nome }}</h1>
                     <h2>{{ produto.descricao }}</h2>
                     <span>R$ {{ produto.preco }}</span>
-                    <a href="{{ url_for('produto_descricao', produto_id=produto.id ) }}" class="btn_saiba_mais">Saiba Mais</a>
+                    <button type="button" class="btn_saiba_mais" onclick="Abrir_ModalSaibaMais('{{ produto.id }}')">
+                        Saiba Mais
+                    </button>
+                </div>
+            </div>
+            <div id="modal-saiba-mais-{{ produto.id }}" class="modais">
+                <div class="modal-saiba-mais">
+                    <main class="produto-detalhe">
+                        <h1>{{ produto.nome }}</h1>
+                        <img class="img_dc" src="{{ url_for('static', filename='uploads/' + produto.imagem) }}" alt="Imagem de {{ produto.nome }}">
+                        <section>
+                            <div class="descricao">
+                                <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
+                                <p><strong>Vendedor:</strong> {{ produto.vendedor }}</p>
+                                <h2>Descrição</h2>
+                                <p>{{ produto.descricao }}</p>
+                                <button type="button" class="voltar" onclick="Fechar_ModalSaibaMais('{{ produto.id }}')">Voltar</button>
+                            </div>
+                        </section>
+                    </main>
                 </div>
             </div>
         {% endfor %}
