@@ -20,17 +20,24 @@ toggleButton.addEventListener('click', () => {
 navbarLinks.classList.toggle('active');
 });
 //modal excluir produto
-function abrirModal(id) {
-    document.getElementById('modal-' + id).style.display = 'flex';
+function Abrir_ModalExcluir(id) {
+    document.getElementById('modal_excluir_' + id).style.display = 'flex';
 }
 
-function fecharModal(id) {
-    document.getElementById('modal-' + id).style.display = 'none';
+function Fechar_ModalExcluir(id) {
+    document.getElementById('modal_excluir_' + id).style.display = 'none';
 }
 
+function Abrir_ModalEditar(id) {
+    document.getElementById('modal_editar_' + id).style.display = 'flex';
+}
+
+function Fechar_ModalEditar(id) {
+    document.getElementById('modal_editar_' + id).style.display = 'none';
+}
 // Fechar se clicar fora da caixa branca
 window.onclick = function(event) {
-    if (event.target.className === 'meu-modal-overlay') {
+    if (event.target.className === 'modais') {
         event.target.style.display = 'none';
     }
 }
