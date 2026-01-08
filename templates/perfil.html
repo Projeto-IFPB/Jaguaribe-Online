@@ -32,11 +32,40 @@
                 <td>{{ produto.descricao }}</td>
 
                 <td class="acoes">
-                    <a href="{{ url_for('editar_produto', id_produto=produto.id) }}" class="btn-editar">Editar</a>
-                    <button class="botao-excluir" onclick="Abrir_ModalExcluir('{{ produto.id }}')">
+                    <button class="btn-editar" onclick="Abrir_ModalEditar('{{produto.id}}')">
+                        Editar
+                    </button>
+                    <div id="modal_editar_{{ produto.id }}" class="modais">
+                        <div class="modal_editar">
+                            <h1>Editando: </h1>
+                            <p class="nome_produto"><b>{{ produto.nome }}</b></p>
+                            <form action="{{ url_for('editar_produto', id_produto=produto.id) }}" method="POST" enctype="multipart/form-data">
+                                <div>
+                                    <label>Nome do Produto:</label>
+                                    <input type="text" name="nome" value="{{ produto.nome }}" required>
+                                </div>
+                                <div>
+                                    <label>Preço:</label>
+                                    <input type="text" name="preco" value="{{ produto.preco }}" required>
+                                </div>
+                                <div>
+                                    <label>Descrição:</label>
+                                    <textarea name="descricao" required>{{ produto.descricao }}</textarea>
+                                </div>
+                                <div>
+                                    <label>Imagem atual: {{ produto.nome_imagem }}</label><br>
+                                    <label>Trocar imagem (deixe vazio para manter a atual):</label>
+                                    <input type="file" name="imagem">
+                                </div>
+                                <button type="submit">Salvar Alterações</button>
+                                <button type="button" onclick="Fechar_ModalEditar('{{ produto.id }}')">Cancelar</button>
+                            </form>
+                        </div>
+                    </div>
+                    <button class="btn-excluir" onclick="Abrir_ModalExcluir('{{ produto.id }}')">
                         Excluir
                     </button>
-                    <div id="modal-{{ produto.id }}" class="modais">
+                    <div id="modal_excluir_{{ produto.id }}" class="modais">
                         <div class="modal_excluir">
                             <h3>Confirmar Exclusão</h3>
                             <p>Deseja mesmo excluir o produto <strong>"{{ produto.nome }}"</strong>?</p>
