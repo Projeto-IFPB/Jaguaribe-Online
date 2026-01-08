@@ -54,6 +54,15 @@
                             <div class="descricao">
                                 <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
                                 <p><strong>Vendedor:</strong> {{ produto.vendedor }}</p>
+                                {% if produto.whatsapp_vendedor != 'None'  %}
+                                    <a href="https://wa.me/{{ produto.whatsapp_vendedor }}?text=Olá! Vi que estava vendendo o produto '{{ produto.nome }}' na Feira de Jaguaribe e gostaria de reservá-lo." 
+                                    target="_blank" 
+                                    class="btn-whatsapp">
+                                        <i class="bi bi-whatsapp"></i> Conversar com Vendedor
+                                    </a>
+                                {% else %}
+                                    <p style="color: gray; font-size: 0.9rem;">Vendedor Não Informou Numero.</p>
+                                {% endif %}                             
                                 <h2>Descrição</h2>
                                 <p>{{ produto.descricao }}</p>
                                 <button type="button" class="voltar" onclick="Fechar_ModalSaibaMais('{{ produto.id }}')">Voltar</button>

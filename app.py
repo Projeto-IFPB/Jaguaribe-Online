@@ -96,6 +96,20 @@ def ler_produtos_card():
                 
     return produtos
 
+#whatsapp do vendedor 
+def buscar_whatsapp(username_vendedor):
+    if not os.path.exists(USUARIOS):
+        return 'None'
+        
+    with open(USUARIOS, 'r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        for usuario in leitor:
+            if usuario['username'] == username_vendedor:
+                # Se o campo existir e não for vazio, retorna o número, senão 'None'
+                whatsapp = usuario.get('whatsapp')
+                return whatsapp if whatsapp and whatsapp.strip() != "" else 'None'
+    
+    return 'None'
 #rotas 
 @app.route("/")
 def pagina_inicial():
@@ -110,6 +124,9 @@ def pagina_produtos():
 
     # Carrega todos os produtos
     lista_de_produtos = ler_produtos_card()
+    for p in lista_de_produtos:
+        p['whatsapp_vendedor'] = buscar_whatsapp(p['username_vendedor'])
+
 
     # Filtra pela busca
     if termo_busca:
@@ -190,7 +207,7 @@ def cadastro():
         username = request.form.get('username')
         senha = request.form.get('senha')
         confirmar = request.form.get('confirmar')
-        whatsapp_limpo = request.form.get('whatsapp').strip()
+        whatsapp_limpo = request.form.get('whatsapp','').strip()
 #logica para simular unique de um banco de dados/tipo ele ve o arquivo e ve se ja existe um usuario igual ao digitado
         with open(USUARIOS, mode='r') as arq:
             leitor = csv.DictReader(arq, delimiter=";") 
@@ -206,7 +223,9 @@ def cadastro():
         password_hash = generate_password_hash(senha, method='pbkdf2:sha256')
         
         whatsapp = ''.join(filter(str.isdigit, whatsapp_limpo))
-        if whatsapp and not whatsapp.startswith('55'):
+        if not whatsapp:
+            whatsapp = 'None'
+        elif whatsapp and not whatsapp.startswith('55'):
             whatsapp = '55' + whatsapp
 
         with open(USUARIOS, mode='a', newline='') as arq:

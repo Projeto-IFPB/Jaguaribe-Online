@@ -244,7 +244,7 @@ body {
 
 .voltar{
     width: 10.0rem;
-    margin-top: 5.0rem;
+    margin-top: 1.0rem;
     background-color: var(--white);
     border-radius: 1.2rem;
     color: var(--green-dark);
@@ -268,4 +268,27 @@ body {
     width: 30.0rem;
     height: 25.0rem;
     border-radius: 10%;
+}
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #25d366; /* Verde oficial do WhatsApp */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 15px 0 0 1px;
+    transition: background 0.3s ease;
+    width: 100%; /* Para ocupar a largura do modal */
+}
+
+.btn-whatsapp:hover {
+    background-color: #128c7e;
+    color: white;
+}
+
+.btn-whatsapp i {
+    font-size: 1.4rem;
 }
