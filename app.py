@@ -190,6 +190,7 @@ def cadastro():
         username = request.form.get('username')
         senha = request.form.get('senha')
         confirmar = request.form.get('confirmar')
+        whatsapp_limpo = request.form.get('whatsapp').strip()
 #logica para simular unique de um banco de dados/tipo ele ve o arquivo e ve se ja existe um usuario igual ao digitado
         with open(USUARIOS, mode='r') as arq:
             leitor = csv.DictReader(arq, delimiter=";") 
@@ -197,16 +198,20 @@ def cadastro():
                 if linha['username'].strip().lower() == username.strip().lower():
                     flash('Este nome de usuário já está em uso. Escolha outro.')
                     return redirect(url_for('cadastro'))
-                
+
         if senha != confirmar:
             flash('As senhas não coincidem!')
             return redirect(url_for('cadastro'))
 
         password_hash = generate_password_hash(senha, method='pbkdf2:sha256')
         
+        whatsapp = ''.join(filter(str.isdigit, whatsapp_limpo))
+        if whatsapp and not whatsapp.startswith('55'):
+            whatsapp = '55' + whatsapp
+
         with open(USUARIOS, mode='a', newline='') as arq:
             escrever = csv.writer(arq, delimiter=";")
-            escrever.writerow([username, nome, data, password_hash])
+            escrever.writerow([username, nome, data, whatsapp, password_hash])
         
         flash('Cadastro realizado com sucesso! Faça login.', 'success')
         return redirect(url_for('pagina_login'))
