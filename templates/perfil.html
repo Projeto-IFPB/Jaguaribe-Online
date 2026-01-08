@@ -32,7 +32,7 @@
                 <td>{{ produto.descricao }}</td>
 
                 <td class="acoes">
-                    <button class="botao-editar">Editar</button>
+                    <a href="{{ url_for('editar_produto', id_produto=produto.id) }}" class="btn-editar">Editar</a>
                     <button class="botao-excluir" onclick="abrirModal('{{ produto.id }}')">
                         Excluir
                     </button>

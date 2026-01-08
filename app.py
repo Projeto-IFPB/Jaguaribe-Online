@@ -236,7 +236,7 @@ def pagina_login():
 def pagina_perfil():
     meus_produtos = []
     
-    with open(PRODUTOS, mode='r') as arq:
+    with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
         leitor = csv.DictReader(arq , delimiter=';')
         for linha in leitor:
             atual = current_user.username.strip().lower()
@@ -266,6 +266,56 @@ def excluir_produto(id_produto):
     flash('Produto excluído com sucesso!', 'success')
     return redirect(url_for('pagina_perfil'))
 
+@app.route('/editar_produto/<id_produto>', methods=['GET', 'POST'])
+@login_required
+def editar_produto(id_produto):
+    campos = ['id', 'nome', 'imagem', 'preco', 'vendedor', 'username_vendedor', 'descricao']
+    linhas_atualizadas = []
+    produto_atual = None
+
+    # 1. Ler o arquivo para encontrar o produto e carregar os outros
+    if os.path.exists(PRODUTOS):
+        with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
+            leitor = csv.DictReader(arq, delimiter=';')
+            for linha in leitor:
+                if linha['id'] == str(id_produto):
+                    # Verificação de segurança: só o dono edita
+                    if linha['username_vendedor'] != current_user.username:
+                        flash("Acesso negado!", "danger")
+                        return redirect(url_for('pagina_perfil'))
+                    produto_atual = linha
+                linhas_atualizadas.append(linha)
+
+    if not produto_atual:
+        flash("Produto não encontrado!", "danger")
+        return redirect(url_for('pagina_perfil'))
+
+    # 2. Processar a atualização (Quando o formulário é enviado)
+    if request.method == 'POST':
+        for linha in linhas_atualizadas:
+            if linha['id'] == str(id_produto):
+                linha['nome'] = request.form.get('nome')
+                linha['preco'] = request.form.get('preco')
+                linha['descricao'] = request.form.get('descricao')
+
+                # Tratamento da Imagem
+                file = request.files.get('imagem')
+                if file and file.filename != '':
+                    filename = secure_filename(file.filename)
+                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    linha['imagem'] = filename # Atualiza o nome do arquivo no CSV
+
+        # 3. Salvar de volta no CSV
+        with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
+            escrever = csv.DictWriter(arq, fieldnames=campos, delimiter=';')
+            escrever.writeheader()
+            escrever.writerows(linhas_atualizadas)
+
+        flash("Produto atualizado com sucesso!", "success")
+        return redirect(url_for('pagina_perfil'))
+
+    # Se for GET, mostra o formulário preenchido
+    return render_template('editar_produto.html', produto=produto_atual)
 
 @app.route('/logout')
 @login_required
