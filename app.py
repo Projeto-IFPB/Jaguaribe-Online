@@ -236,7 +236,7 @@ def pagina_login():
 def pagina_perfil():
     meus_produtos = []
     
-    with open(PRODUTOS, mode='r') as arq:
+    with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
         leitor = csv.DictReader(arq , delimiter=';')
         for linha in leitor:
             atual = current_user.username.strip().lower()
