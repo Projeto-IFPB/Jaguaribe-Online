@@ -20,17 +20,17 @@ toggleButton.addEventListener('click', () => {
 navbarLinks.classList.toggle('active');
 });
 //modal excluir produto
-function abrirModal(id) {
+function Abrir_ModalExcluir(id) {
     document.getElementById('modal-' + id).style.display = 'flex';
 }
 
-function fecharModal(id) {
+function Fechar_ModalExcluir(id) {
     document.getElementById('modal-' + id).style.display = 'none';
 }
 
 // Fechar se clicar fora da caixa branca
 window.onclick = function(event) {
-    if (event.target.className === 'meu-modal-overlay') {
+    if (event.target.className === 'modais') {
         event.target.style.display = 'none';
     }
 }

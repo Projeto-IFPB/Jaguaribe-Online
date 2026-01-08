@@ -109,7 +109,7 @@ body {
 .botao-excluir:hover {
     transform: scale(1.2);
 }
-.meu-modal-overlay {
+.modais {
   display: none; 
     position: fixed;
     top: 0;
@@ -123,7 +123,7 @@ body {
     padding: 0; 
     margin: 0;
 }
-.meu-modal-conteudo {
+.modal_excluir {
     background: white;
     padding: 20px;
     border-radius: 8px;
@@ -131,7 +131,7 @@ body {
     text-align: center;
     color: #333;
 }
-.botoes-row {
+.botoes{
     display: flex; 
     justify-content: space-around; 
     margin-top: 20px; 
