@@ -232,7 +232,7 @@ body {
 /* Carrossel de Imagens ------------------------------------------*/
 
 .first_section {
-    background-color: var(--green-mid-dark);
+    background:linear-gradient(to right, #047857, #064E3B);
     display: flex; 
     flex-direction: column; 
     align-items: center; 
