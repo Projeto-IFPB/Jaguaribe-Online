@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--gray-light);
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_flex {
+  background-color: var(--white);
+  padding: 3rem;
+  border-radius: 0.8rem;
+  width: 100%;
+  max-width: 38rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.login_flex form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login_flex label {
+  font-size: 1.4rem;
+  color: var(--black);
+  margin-bottom: 0.4rem;
+}
+
+.login_flex input {
+  padding: 1rem;
+  font-size: 1.4rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  margin-bottom: 1.6rem;
+}
+
+.login_flex input:focus {
+  border-color: var(--green-mid);
+  box-shadow: 0 0 0 2px rgba(26, 122, 64, 0.2);
+}
+
+.login_flex button {
+  padding: 1.2rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  background-color: var(--green-mid);
+  color: var(--white);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login_flex button:hover {
+  background-color: var(--green-mid-dark);
+}
+
+main p {
+  margin-top: 1.6rem;
+  font-size: 1.3rem;
+  color: #555;
+}
+
+main p a {
+  color: var(--green-dark);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+main p a:hover {
+  text-decoration: underline;
+}
+
+h2{
+    margin-bottom: 1.2rem;
+}
