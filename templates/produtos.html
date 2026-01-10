@@ -12,6 +12,7 @@
         <input type="text" name="busca" placeholder="O que você procura?" value="{{ request.args.get('busca', '') }}">
         <button type="submit">Buscar</button>
     </form>
+    
     <div class="filtro_cadastro">
         <div class="filtro">
             <label for="filtro-categoria">Filtrar por:</label>
@@ -25,6 +26,19 @@
             <a class="cadastrando" href="{{ url_for('cadastro_produtos' ) }}">Cadastrar um produto</a>
         </div>
     </div>
+
+    <form action="{{ url_for('pagina_produtos') }}" method="GET" class="filtro">
+        <label for="filtro-categoria">Filtrar por:</label>  
+        <input type="hidden" name="busca" value="{{ request.args.get('busca', '') }}">
+        
+        <select name="ordem" id="ordem">
+            <option value="az" {% if request.args.get('ordem') == 'az' %}selected{% endif %}>A- Z</option>
+            <option value="maior-preco" {% if request.args.get('ordem') == 'maior-preco' %} selected {% endif %}>Maior Preço</option>
+            <option value="menor-preco" {% if request.args.get('ordem') == 'menor-preco' %} selected {% endif %}>Menor Preço</option>
+        </select>
+        <button type="submit" class="btn_filtrar">Filtrar</button>
+    </form>
+
 </div>
 
 <div class="container-cards">
@@ -37,7 +51,26 @@
                     <h1>{{ produto.nome }}</h1>
                     <h2>{{ produto.descricao }}</h2>
                     <span>R$ {{ produto.preco }}</span>
-                    <button>Saiba mais</button>
+                    <button type="button" class="btn_saiba_mais" onclick="Abrir_ModalSaibaMais('{{ produto.id }}')">
+                        Saiba Mais
+                    </button>
+                </div>
+            </div>
+            <div id="modal-saiba-mais-{{ produto.id }}" class="modais">
+                <div class="modal-saiba-mais">
+                    <main class="produto-detalhe">
+                        <h1>{{ produto.nome }}</h1>
+                        <img class="img_dc" src="{{ url_for('static', filename='uploads/' + produto.imagem) }}" alt="Imagem de {{ produto.nome }}">
+                        <section>
+                            <div class="descricao">
+                                <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
+                                <p><strong>Vendedor:</strong> {{ produto.vendedor }}</p>
+                                <h2>Descrição</h2>
+                                <p>{{ produto.descricao }}</p>
+                                <button type="button" class="voltar" onclick="Fechar_ModalSaibaMais('{{ produto.id }}')">Voltar</button>
+                            </div>
+                        </section>
+                    </main>
                 </div>
             </div>
         {% endfor %}

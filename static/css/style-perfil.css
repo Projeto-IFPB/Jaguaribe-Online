@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+
+.container-tabela {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+
+}
+
+.container-tabela h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.tabela-produtos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabela-produtos th {
+    background-color: #28a745; /* Verde do IFPB */
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.tabela-produtos td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd; 
+    color: #555;
+    vertical-align: middle;
+}
+
+
+.tabela-produtos tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabela-produtos tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+.acoes {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-editar {
+    background: none;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+}
+
+
+.btn-excluir {
+    background: none;
+    border: none;
+    background-color: #dc3545;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+}
+.btn-excluir:hover , .btn-editar:hover{
+    transform: scale(1.2);
+}
+/*Modal Excluir -------*/
+.modal_excluir {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    text-align: center;
+    color: #333;
+}
+.botoes{
+    display: flex; 
+    justify-content: space-around; 
+    margin-top: 20px; 
+}
+.btn-confirmar { 
+    background: #d9534f; 
+    color: white; border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+}
+.btn-cancelar { 
+    background: #6c757d; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+}
+/*Modal Editar ------------*/
+.modal_editar {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto; /* Permite rolar se o formulário for longo */
+}
+
+.modal_editar div {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.modal_editar input, .modal_editar textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.modal_editar h1{
+    margin-bottom: 0.5rem;
+}
+.nome_produto {
+    margin-bottom: 2rem;
+    color: #28a745;
+    font-size: 3.5rem;
+    text-align: center;
+}

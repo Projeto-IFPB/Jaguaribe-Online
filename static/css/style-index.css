@@ -70,7 +70,7 @@ body {
 }
 
 /* Container do Botão de Login */
-.button-login {
+.button-login , .button-perfil{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -109,8 +109,20 @@ body {
     pointer-events: none;
     white-space: nowrap;
 }
+.button-perfil::after {
+    content: "Perfil";
+    position: absolute;
+    opacity: 0;
+    right: 20px;
+    color: var(--white);
+    font-size: 1.4rem;
+    font-weight: bold;
+    transition: all 0.4s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
 
-.button-login:hover {
+.button-login:hover ,.button-perfil:hover{
     width: 110px;
     background-color: var(--green-mid-dark);
     justify-content: flex-start; 
@@ -118,11 +130,11 @@ body {
     box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
 }
 
-.button-login:hover .icon-login {
+.button-login:hover .icon-login , .button-perfil:hover .icon-login {
     transform: scale(0.9);
 }
 
-.button-login:hover::after {
+.button-login:hover::after , .button-perfil:hover::after{
     opacity: 1;
     right: 25px;
 }
@@ -177,7 +189,7 @@ body {
 }
 
 /* Remove o formato de "botão circular" no celular */
-.button-login {
+.button-login , .button-perfil{
     width: 100%;
     height: auto;
     justify-content: flex-start;
@@ -201,8 +213,17 @@ body {
     padding: 0 1rem;
     font-weight: normal;
 }
+.button-perfil::after {
+    content: "Perfil";
+    position: static;
+    opacity: 1;
+    color: var(--white);
+    font-size: 1.5rem;
+    padding: 0 1rem;
+    font-weight: normal;
+}
 
-.button-login:hover {
+.button-login:hover , .button-perfil:hover{
     width: 100%;
 }
 
@@ -460,4 +481,18 @@ body {
 .direitos {
     text-align: center;
     line-height: 2rem;
+}
+/*Modais */
+.modais {
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 0; 
+    margin: 0;
 }
