@@ -13,21 +13,12 @@
         <button type="submit">Buscar</button>
     </form>
     
-    <div class="filtro_cadastro">
-        <div class="filtro">
-            <label for="filtro-categoria">Filtrar por:</label>
-            <select id="filtro-categoria">
-            <option value="az">A - Z</option>
-            <option value="maior-preço">Maior Preço</option>
-            <option value="menor-preço">Menor Preço</option>
-            </select>
-        </div>
+    <div class="space_cadastro">
         <div class="div_cadastro"> 
             <a class="cadastrando" href="{{ url_for('cadastro_produtos' ) }}">Cadastrar um produto</a>
         </div>
-    </div>
 
-    <form action="{{ url_for('pagina_produtos') }}" method="GET" class="filtro">
+        <form action="{{ url_for('pagina_produtos') }}" method="GET" class="filtro">
         <label for="filtro-categoria">Filtrar por:</label>  
         <input type="hidden" name="busca" value="{{ request.args.get('busca', '') }}">
         
@@ -38,7 +29,7 @@
         </select>
         <button type="submit" class="btn_filtrar">Filtrar</button>
     </form>
-
+    </div>
 </div>
 
 <div class="container-cards">

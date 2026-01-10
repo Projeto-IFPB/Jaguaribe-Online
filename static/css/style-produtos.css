@@ -197,7 +197,7 @@ body {
     transition: 0.3s;
 }
 
-.filtro_cadastro{
+.space_cadastro{
     margin-top: 1.2rem;
     display: flex;
     justify-content: space-between;
