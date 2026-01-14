@@ -96,6 +96,18 @@ def ler_produtos_card():
                 
     return produtos
 
+# Ler todos os usuários cadastrados no sistema
+def ler_todos_usuarios():
+    usuarios = []
+    if not os.path.exists(USUARIOS):
+        return []
+
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=";")
+        for linha in leitor:
+            usuarios.append(linha)
+    return usuarios
+
 #whatsapp do vendedor 
 def buscar_whatsapp(username_vendedor):
     if not os.path.exists(USUARIOS):
@@ -267,8 +279,10 @@ def pagina_perfil():
             vendedor = linha['username_vendedor'].strip().lower()
             if vendedor == atual :
                 meus_produtos.append(linha)
+
+        todos_usuarios = ler_todos_usuarios()
     
-    return render_template('perfil.html', produtos=meus_produtos)
+    return render_template('perfil.html', produtos=meus_produtos, usuarios=todos_usuarios)
 
 @app.route('/excluir_produto/<id_produto>', methods=['POST'])
 @login_required
@@ -340,6 +354,52 @@ def editar_produto(id_produto):
 
     # Se for GET, mostra o formulário preenchido
     return render_template('editar_produto.html', produto=produto_atual)
+
+# Rota que permite que o admin exclua a conta de um vendedor
+@app.route('/excluir_usuario/<username>')
+@login_required
+def excluir_vendedor(username):
+
+    # Evitar que o admin exclua a si próprio por acidente
+    if username == current_user.username:
+        flash('Você não pode excluir sua própria conta de administrador por aqui.', 'danger')
+        return redirect(url_for('pagina_perfil'))
+    
+    # --- 2. REMOVER USUÁRIO DO CSV ---
+    usuarios_mantidos = []
+    campos_usuarios = ['username', 'nome', 'data', 'whatsapp', 'password_hash']
+    
+    if os.path.exists(USUARIOS):
+        with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+            leitor = csv.DictReader(arq, delimiter=";")
+            for linha in leitor:
+                if linha['username'] != username:
+                    usuarios_mantidos.append(linha)
+        
+        with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
+            escrever = csv.DictWriter(arq, fieldnames=campos_usuarios, delimiter=';')
+            escrever.writeheader()
+            escrever.writerows(usuarios_mantidos)
+
+    # --- 3. REMOVER PRODUTOS DO USUÁRIO DO CSV ---
+    produtos_mantidos = []
+    campos_produtos = ['id', 'nome', 'imagem', 'preco', 'vendedor', 'username_vendedor', 'descricao']
+    
+    if os.path.exists(PRODUTOS):
+        with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
+            leitor = csv.DictReader(arq, delimiter=';')
+            for linha in leitor:
+                # Se o username_vendedor for diferente do alvo, nós mantemos o produto
+                if linha['username_vendedor'] != username:
+                    produtos_mantidos.append(linha)
+        
+        with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
+            escrever = csv.DictWriter(arq, fieldnames=campos_produtos, delimiter=';')
+            escrever.writeheader()
+            escrever.writerows(produtos_mantidos)
+
+    flash(f'O usuário "{username}" e todos os seus produtos foram removidos com sucesso.', 'success')
+    return redirect(url_for('pagina_perfil')) # Redireciona de volta para a lista
 
 @app.route('/logout')
 @login_required
