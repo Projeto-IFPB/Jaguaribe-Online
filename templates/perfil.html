@@ -5,6 +5,8 @@
 {% block css%} <link rel="stylesheet" href="static/css/style-perfil.css"> {% endblock %}
 
 {% block content %}
+<a href="{{ url_for('logout' ) }}" style="display: flex; justify-content: right; margin: 0 0.5rem;">Logout</a>
+
 <br>
 <h1>Olá, {{ current_user.nome_completo }}!</h1>
 <br>
@@ -85,4 +87,31 @@
         </tbody>
     </table>
 </div>
+
+<!-- Mensagem que aparece se o admin tentar excluir a sua própria conta -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<!-- Dashboard de administrador -->
+<table border="">
+    <thead>
+        <th>Username</th>
+        <th>Nome</th>
+        <th>Ação</th>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.nome }}</td>
+                <td><a href="{{ url_for('excluir_vendedor', username=usuario.username) }}">Excluir</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
