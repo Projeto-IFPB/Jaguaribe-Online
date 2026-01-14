@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %} Painel Administrativo {% endblock %}
+
+{% block css %} <link rel="stylesheet" href="/static/css/style-perfil.css"> {% endblock %}
+
+{% block content %}
+<div class="painel-admin">
+
+    <h2>Dashboard de Administrador</h2>
+
+    <div class="tabela-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome de Usuário</th>
+                    <th>Nome do Vendedor</th>
+                    <th class="coluna-acoes">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Chefia123</td>
+                    <td>Ryan Chefe</td>
+                    <td class="coluna-acoes">
+                        <button class="botao-ver">Ver Produtos</button>
+                        <button class="botao-excluir">Excluir</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>mano_clash</td>
+                    <td>Lemuel Clash</td>
+                    <td class="coluna-acoes">
+                        <button class="botao-ver">Ver Produtos</button>
+                        <button class="botao-excluir">Excluir</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Diogo D. Ace</td>
+                    <td>DD</td>
+                    <td class="coluna-acoes">
+                        <button class="botao-ver">Ver Produtos</button>
+                        <button class="botao-excluir">Excluir</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
