@@ -98,20 +98,41 @@
 {% endwith %}
 
 <!-- Dashboard de administrador -->
-<table border="">
-    <thead>
-        <th>Username</th>
-        <th>Nome</th>
-        <th>Ação</th>
-    </thead>
-    <tbody>
-        {% for usuario in usuarios %}
-            <tr>
-                <td>{{ usuario.username }}</td>
-                <td>{{ usuario.nome }}</td>
-                <td><a href="{{ url_for('excluir_vendedor', username=usuario.username) }}">Excluir</a></td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="painel-admin">
+
+    <h2>Dashboard de Administrador</h2>
+
+    <div class="tabela-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Nome</th>
+                    <th class="coluna-acoes">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.username }}</td>
+                        <td>{{ usuario.nome }}</td>
+                        
+                        <td class="coluna-acoes">
+                            <div class="acoes">
+                                <button class="botao-ver">Ver Produtos</button>
+
+                                <a href="{{ url_for('excluir_vendedor', username=usuario.username) }}" class="botao-excluir">
+                                    Excluir
+                                </a>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
 {% endblock %}
