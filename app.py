@@ -26,10 +26,13 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'pagina_login'
 
 class Usuario(UserMixin):
-    def __init__(self, username, nome_completo):
+    def __init__(self, username, nome_completo, data_nascimento, whatsapp, senha):
         self.id = username
         self.username = username
         self.nome_completo = nome_completo
+        self.data = data_nascimento
+        self.whatsapp = whatsapp
+        self.senha = senha
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -37,7 +40,7 @@ def load_user(user_id):
         leitor = csv.DictReader(arq, delimiter=";")
         for linha in leitor:
             if linha['username'] == user_id:
-                return Usuario(linha['username'], linha['nome'])
+                return Usuario(linha['username'], linha['nome'], linha['data'], linha['whatsapp'], linha['password_hash'])
     return None
 
 
