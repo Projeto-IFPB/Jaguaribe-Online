@@ -18,16 +18,17 @@ body {
 
 
 .container-tabela {
-    max-width: 1000px;
-    margin: 5.0rem auto;
-    padding: 2.0rem;
+    max-width: 80%;
+    margin: 1.0rem auto 7.0rem;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 0.4rem 1.5rem rgba(0,0,0,0.1); 
+    padding: 1.5rem;
+    overflow-x: auto;
 
 }
 
-.container-tabela h1 {
+#seus_produtos {
     text-align: center;
     color: #333;
     margin-bottom: 3.0rem;
@@ -53,8 +54,8 @@ body {
     color: #555;
     vertical-align: middle;
 }
+
 .tabela-produtos td:nth-child(3) {
-    max-width: 15rem;      
     white-space: nowrap;    
     overflow: hidden;       
     text-overflow: ellipsis;
@@ -68,13 +69,12 @@ body {
     background-color: #f1f1f1;
 }
 
-
 .acoes {
     display: flex;
     gap: 1.0rem;
 }
 
-.btn-editar {
+.acoes .btn-editar {
     background: none;
     border: none;
     background-color: #28a745;
@@ -88,12 +88,12 @@ body {
     text-decoration: none;
     display: inline-block;
     transition: 0.3s;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     font-family: 'Inter', sans-serif;
 }
 
 
-.btn-excluir {
+.acoes .btn-excluir {
     background: none;
     border: none;
     background-color: #dc3545;
@@ -107,7 +107,7 @@ body {
     text-decoration: none;
     display: inline-block;
     transition: 0.3s;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     font-family: 'Inter', sans-serif;
 }
 .btn-excluir:hover , .btn-editar:hover{
@@ -141,6 +141,7 @@ body {
     color: white;
     border: 2px solid #6c1413;
 }
+
 /*Modais de Edição ------------*/
 
 .modal_editar_usuario h1{
@@ -200,10 +201,108 @@ body {
     border: 2px solid #6c1413;
 }
 
-@media (max-width: 600px){
+
+.painel-admin * {
+    box-sizing: border-box;
 }
+
+.painel-admin {
+    font-family: 'Inter', sans-serif;
+    max-width: 80%;
+    margin: 3rem auto 6rem;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0.4rem 1.5rem rgba(0,0,0,0.1); 
+}
+
+.painel-admin h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.875rem;
+    font-size: 2rem;
+}
+
+.painel-admin .tabela-admin {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.625rem;
+}
+
+.painel-admin th {
+    background-color: #0d6efd;
+    color: white;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap;
+    font-size: 1.5rem;
+    padding: 1.5rem;
+}
+
+.painel-admin td {
+    color: #555;
+    vertical-align: middle;
+    font-size: 1.5rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid #ddd; 
+}
+
+.painel-admin tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.painel-admin tr:hover {
+    background-color: #f1f1f1;
+}
+
+.painel-admin .coluna-acoes {
+    width: 16rem;
+    text-align: center;
+}
+
+.painel-admin .acoes {
+    display: flex;
+    gap: 0.625rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.painel-admin .botao-ver,
+.painel-admin .botao-excluir {
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s;
+    font-family: 'Inter', sans-serif;
+    line-height: normal;
+    border-radius: 0.4rem;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.2rem;
+}
+
+.painel-admin .botao-ver {
+    background-color: #0d6efd;
+    color: white;
+}
+.painel-admin .botao-ver:hover {
+    background-color: #0b5ed7;
+}
+
+.painel-admin .botao-excluir {
+    background-color: #dc3545;
+    color: white;
+}
+.painel-admin .botao-excluir:hover {
+    background-color: #bb2d3b;
+}
+
+@media (max-width: 600px){
+    /* Tabela de Produtos */
     .container-tabela{
-        padding: 0%;
+        max-width: 95%;
     }
     .tabela-produtos th{
         text-align: center;
@@ -229,105 +328,20 @@ body {
     }
     .tabela-produtos td:nth-child(3) {
         max-width: 10rem; 
+    }
+
+    /* Dashboard admin */
+
+    .painel-admin {
+        max-width: 95%;
+        margin: 2rem auto;
+        overflow-x: auto; /* CRUCIAL: Ativa a rolagem lateral quando necessário */
+        padding: 0.5rem; /* Dá um respiro interno */
+    }
+
+    .painel-admin .botao-excluir {
+        padding: 0.8rem 1.9rem;
+    }
+
+
 } 
-
-.painel-admin * {
-    box-sizing: border-box;
-}
-
-.painel-admin {
-    font-family: 'Inter', sans-serif;
-    max-width: 62.5rem;
-    margin: 3.125rem auto;
-    padding: 1.25rem;
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.25rem 0.9375rem rgba(0,0,0,0.1);
-    min-height: auto;
-}
-
-.painel-admin h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 1.875rem;
-    font-size: 2rem;
-}
-
-.painel-admin .tabela-container {
-    width: 100%;
-    overflow-x: auto;
-}
-
-.painel-admin table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 0.625rem;
-}
-.painel-admin th {
-    background-color: #0d6efd;
-    color: white;
-    padding: 0.9375rem;
-    text-align: left;
-    font-weight: 600;
-    font-size: 1rem;
-    white-space: nowrap;
-}
-
-.painel-admin td {
-    padding: 0.9375rem;
-    border-bottom: 0.0625rem solid #ddd;
-    color: #555;
-    vertical-align: middle;
-    font-size: 0.95rem;
-}
-
-.painel-admin tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.painel-admin tr:hover {
-    background-color: #f1f1f1;
-}
-
-.painel-admin .coluna-acoes {
-    width: 16rem;
-    text-align: center;
-}
-
-.painel-admin .acoes {
-    display: flex;
-    gap: 0.625rem;
-    justify-content: center;
-    align-items: center;
-}
-
-.painel-admin .botao-ver,
-.painel-admin .botao-excluir {
-    padding: 0.5rem 0.75rem;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.2s;
-    font-size: 0.9rem;
-    font-family: 'Inter', sans-serif;
-    line-height: normal;
-}
-
-.painel-admin .botao-ver {
-    background-color: #0d6efd;
-    color: white;
-}
-.painel-admin .botao-ver:hover {
-    background-color: #0b5ed7;
-}
-
-.painel-admin .botao-excluir {
-    background-color: #dc3545;
-    color: white;
-}
-.painel-admin .botao-excluir:hover {
-    background-color: #bb2d3b;
-}

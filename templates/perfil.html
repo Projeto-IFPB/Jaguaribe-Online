@@ -8,23 +8,34 @@
 <a href="{{ url_for('logout' ) }}" style="display: flex; justify-content: right; margin: 0 0.5rem;">Logout</a>
 
 {% with messages = get_flashed_messages(category_filter=['successo'],with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-        <div style="color: green;">
-            {{ message }}
-        </div>
-        {% endfor %}
-    {% endif %}
+{% if messages %}
+{% for category, message in messages %}
+<div style="color: green;">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
 {% endwith %}
+
 {% with messages = get_flashed_messages(category_filter=['erro_username'],with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-        <div style="color: red;">
-            {{ message }}
-        </div>
-        {% endfor %}
-    {% endif %}
+{% if messages %}
+{% for category, message in messages %}
+<div style="color: red;">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
 {% endwith %}
+
+<!-- Mensagem que aparece se o admin tentar excluir a sua própria conta -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}" style="text-align: center; color: green;">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
 <div class="perfil-info">
     <p><strong>Username atual:</strong> {{ current_user.username }}</p>
     <button type="button" class="btn-editar-username" onclick="AbrirModal('modal_username')">
@@ -197,7 +208,7 @@
     </div>
 </div>
 
-<h2>Seus produtos</h2>
+<h2 id="seus_produtos">Seus produtos</h2>
 
 <div class="container-tabela">
     <table class="tabela-produtos">
@@ -220,9 +231,7 @@
                 <td>{{ produto.descricao }}</td>
 
                 <td class="acoes">
-                    <button class="btn-editar" onclick="AbrirModal('modal_editar_{{produto.id}}')">
-                        Editar
-                    </button>
+                    <button class="btn-editar" onclick="AbrirModal('modal_editar_{{produto.id}}')">Editar</button>
                     <div id="modal_editar_{{ produto.id }}" class="modais">
                         <div class="modal_editar_usuario">
                             <h1>Editando: </h1>
@@ -250,9 +259,7 @@
                             </form>
                         </div>
                     </div>
-                    <button class="btn-excluir" onclick="AbrirModal('modal_excluir_{{ produto.id }}')">
-                        Excluir
-                    </button>
+                    <button class="btn-excluir" onclick="AbrirModal('modal_excluir_{{ produto.id }}')">Excluir</button>
                     <div id="modal_excluir_{{ produto.id }}" class="modais">
                         <div class="modal_excluir">
                             <h3>Confirmar Exclusão</h3>
@@ -274,22 +281,13 @@
     </table>
 </div>
 
-<!-- Mensagem que aparece se o admin tentar excluir a sua própria conta -->
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }}">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
 
 <!-- Dashboard de administrador -->
 <div class="painel-admin">
 
     <h2>Dashboard de Administrador</h2>
 
-    <div class="tabela-container">
-        <table>
+        <table class="tabela-admin">
             <thead>
                 <tr>
                     <th>Username</th>
@@ -305,7 +303,7 @@
                         
                         <td class="coluna-acoes">
                             <div class="acoes">
-                                <button class="botao-ver">Ver Produtos</button>
+                                <button class="botao-ver">Produtos</button>
 
                                 <a href="{{ url_for('excluir_vendedor', username=usuario.username) }}" class="botao-excluir">
                                     Excluir
@@ -317,7 +315,6 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div>
 
 </div>
 
