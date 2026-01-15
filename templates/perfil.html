@@ -86,6 +86,39 @@
         </form>
     </div>
 </div>
+{% with messages = get_flashed_messages(category_filter=['erro_data'],with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: red;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="perfil-info">
+    <p><strong>Data de Nascimento:</strong> {{ current_user.data.split('-')[2] }}/{{ current_user.data.split('-')[1] }}/{{ current_user.data.split('-')[0] }}</p>
+    <button type="button" class="btn-editar-nome" onclick="AbrirModal('modal_data')">
+        Alterar Data de Nascimento
+    </button>
+</div>
+
+<div id="modal_data" class="modais" style="display: none;">
+    <div class="modal_editar_usuario">
+        <h1>Alterar Data</h1>
+        
+        <form action="{{ url_for('alterar_data_vendedor') }}" method="POST">
+            <div>
+                <label for="nova_data">Nova Data:</label>
+                <input type="date" id="nova_data" name="nova_data" required>
+            </div>
+            
+            <div class="botoes-modal">
+                <button type="submit" class="btn-salvar">Confirmar Alteração</button>
+                <button type="button" class="btn-cancelar" onclick="FecharModal('modal_data')">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <h2>Seus produtos</h2>
 

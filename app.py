@@ -506,6 +506,35 @@ def alterar_nome_vendedor():
     flash("Nome de vendedor atualizado com sucesso!", "successo")
     return redirect(url_for('pagina_perfil'))
 
+@app.route('/alterar_data_vendedor', methods=['POST'])
+@login_required
+def alterar_data_vendedor():
+    nova_data = request.form.get('nova_data')
+
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        for linha in leitor:
+            if linha['username'] == current_user.username:
+                if linha['data'] == nova_data:
+                    flash("A nova data deve ser diferente da atual.", "erro_data")
+                    return redirect(url_for('pagina_perfil'))
+
+    linhas_usuarios = []
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        campos = leitor.fieldnames
+        for linha in leitor:
+            if linha['username'] == current_user.username:
+                linha['data'] = nova_data 
+            linhas_usuarios.append(linha)
+
+    with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
+        escrever = csv.DictWriter(arq, fieldnames=campos, delimiter=';')
+        escrever.writeheader()
+        escrever.writerows(linhas_usuarios)
+
+    flash("Data de Nascimento atualizada com sucesso!", "successo")
+    return redirect(url_for('pagina_perfil'))
 
 @app.route('/logout')
 @login_required
