@@ -576,6 +576,46 @@ def alterar_senha():
     flash("Senha alterada com sucesso!", "successo") 
     return redirect(url_for('pagina_perfil'))
 
+@app.route('/alterar_whatsapp', methods=['POST'])
+@login_required
+def alterar_whatsapp():
+    whatsapp = request.form.get('novo_telefone','').strip()
+    novo_whatsapp = ''.join(filter(str.isdigit, whatsapp))
+
+    if not novo_whatsapp:
+            novo_whatsapp = 'None'
+    elif novo_whatsapp and not novo_whatsapp.startswith('55'):
+            novo_whatsapp = '55' + novo_whatsapp
+    
+
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        for linha in leitor:
+            if linha['username'] == current_user.username:
+                if linha['whatsapp'] == novo_whatsapp:
+                    flash("O novo número deve ser diferente da atual.", "erro_telefone")
+                    return redirect(url_for('pagina_perfil'))
+    
+   
+
+
+    linhas_usuarios = []
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        campos = leitor.fieldnames
+        for linha in leitor:
+            if linha['username'] == current_user.username:
+                linha['whatsapp'] = novo_whatsapp
+            linhas_usuarios.append(linha)
+
+    with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
+        escrever = csv.DictWriter(arq, fieldnames=campos, delimiter=';')
+        escrever.writeheader()
+        escrever.writerows(linhas_usuarios)
+
+    flash("Número de telefone alterado com sucesso atualizada com sucesso!", "successo")
+    return redirect(url_for('pagina_perfil'))
+
 @app.route('/logout')
 @login_required
 def logout():

@@ -160,6 +160,43 @@
         </form>
     </div>
 
+{% with messages = get_flashed_messages(category_filter=['erro_telefone'],with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: red;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="perfil-info">
+    {% if current_user.whatsapp == "None" %}
+        <p><strong>telefone:</strong>Número de telefone não informado</p>
+    {% else %}
+        <p><strong>telefone:</strong>{{current_user.whatsapp}}</p>
+    {% endif %}
+    <button type="button" class="btn-editar-nome" onclick="AbrirModal('modal_telefone')">
+        Alterar telefone
+    </button>
+</div>
+<div id="modal_telefone" class="modais" style="display: none;">
+    <div class="modal_editar_usuario">
+        <h1>Alterar telefone</h1>
+        
+        <form action="{{ url_for('alterar_whatsapp') }}" method="POST">
+            <div>
+                <label for="novo_telefone">Novo telefone:</label>
+                <input type="text" id="novo_telefone" name="novo_telefone" placeholder="Deixe em branco para apagar o número" minlength="11">
+            </div>
+            
+            <div class="botoes-modal">
+                <button type="submit" class="btn-salvar">Confirmar Alteração</button>
+                <button type="button" class="btn-cancelar" onclick="FecharModal('modal_telefone')">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <h2>Seus produtos</h2>
 
 <div class="container-tabela">
