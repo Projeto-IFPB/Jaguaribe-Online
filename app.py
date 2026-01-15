@@ -460,6 +460,52 @@ def alterar_username():
     flash("Username alterado com sucesso em todo o sistema!", "successo")
     return redirect(url_for('pagina_perfil'))
 
+@app.route('/alterar_nome_vendedor', methods=['POST'])
+@login_required
+def alterar_nome_vendedor():
+    novo_nome = request.form.get('novo_nome', '')
+    username = current_user.username 
+    nome_antigo = current_user.nome_completo
+
+    
+    if novo_nome == nome_antigo:
+        flash("O novo nome deve ser diferente do atual.", "erro_nome")
+        return redirect(url_for('pagina_perfil'))
+    
+    linhas_produtos = []
+    with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        campos_produtos = leitor.fieldnames
+        for linha in leitor:
+
+            if linha['username_vendedor'] == username:
+                linha['vendedor'] = novo_nome
+            linhas_produtos.append(linha)
+    
+
+    with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
+        escrever = csv.DictWriter(arq, fieldnames=campos_produtos, delimiter=';')
+        escrever.writeheader()
+        escrever.writerows(linhas_produtos)
+
+    linhas_usuarios = []
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        campos_usuarios = leitor.fieldnames
+        for linha in leitor:
+            if linha['username'] == username:
+                linha['nome'] = novo_nome 
+            linhas_usuarios.append(linha)
+
+    with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
+        escrever = csv.DictWriter(arq, fieldnames=campos_usuarios, delimiter=';')
+        escrever.writeheader()
+        escrever.writerows(linhas_usuarios)
+
+    current_user.nome_completo = novo_nome 
+    flash("Nome de vendedor atualizado com sucesso!", "successo")
+    return redirect(url_for('pagina_perfil'))
+
 
 @app.route('/logout')
 @login_required

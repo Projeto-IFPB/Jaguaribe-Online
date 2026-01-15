@@ -52,6 +52,40 @@
         </form>
     </div>
 </div>
+{% with messages = get_flashed_messages(category_filter=['erro_nome'],with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: red;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="perfil-info">
+    <p><strong>Nome atual:</strong> {{ current_user.nome_completo }}</p>
+    <button type="button" class="btn-editar-nome" onclick="AbrirModal('modal_nome')">
+        Alterar Nome
+    </button>
+</div>
+
+<div id="modal_nome" class="modais" style="display: none;">
+    <div class="modal_editar_usuario">
+        <h1>Alterar Nome</h1>
+        
+        <form action="{{ url_for('alterar_nome_vendedor') }}" method="POST">
+            <div>
+                <label for="novo_nome">Novo Nome:</label>
+                <input type="text" id="novo_nome" name="novo_nome" placeholder="Digite o novo nome" required>
+            </div>
+            
+            <div class="botoes-modal">
+                <button type="submit" class="btn-salvar">Confirmar Alteração</button>
+                <button type="button" class="btn-cancelar" onclick="FecharModal('modal_nome')">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <h2>Seus produtos</h2>
 
