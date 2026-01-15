@@ -201,7 +201,7 @@ body {
 }
 
 @media (max-width: 600px){
-
+}
     .container-tabela{
         padding: 0%;
     }
@@ -230,3 +230,104 @@ body {
     .tabela-produtos td:nth-child(3) {
         max-width: 10rem; 
 } 
+
+.painel-admin * {
+    box-sizing: border-box;
+}
+
+.painel-admin {
+    font-family: 'Inter', sans-serif;
+    max-width: 62.5rem;
+    margin: 3.125rem auto;
+    padding: 1.25rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.9375rem rgba(0,0,0,0.1);
+    min-height: auto;
+}
+
+.painel-admin h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.875rem;
+    font-size: 2rem;
+}
+
+.painel-admin .tabela-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.painel-admin table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.625rem;
+}
+.painel-admin th {
+    background-color: #0d6efd;
+    color: white;
+    padding: 0.9375rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.painel-admin td {
+    padding: 0.9375rem;
+    border-bottom: 0.0625rem solid #ddd;
+    color: #555;
+    vertical-align: middle;
+    font-size: 0.95rem;
+}
+
+.painel-admin tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.painel-admin tr:hover {
+    background-color: #f1f1f1;
+}
+
+.painel-admin .coluna-acoes {
+    width: 16rem;
+    text-align: center;
+}
+
+.painel-admin .acoes {
+    display: flex;
+    gap: 0.625rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.painel-admin .botao-ver,
+.painel-admin .botao-excluir {
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    line-height: normal;
+}
+
+.painel-admin .botao-ver {
+    background-color: #0d6efd;
+    color: white;
+}
+.painel-admin .botao-ver:hover {
+    background-color: #0b5ed7;
+}
+
+.painel-admin .botao-excluir {
+    background-color: #dc3545;
+    color: white;
+}
+.painel-admin .botao-excluir:hover {
+    background-color: #bb2d3b;
+}
