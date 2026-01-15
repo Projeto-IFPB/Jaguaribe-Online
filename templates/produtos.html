@@ -42,7 +42,7 @@
                     <h1>{{ produto.nome }}</h1>
                     <h2>{{ produto.descricao }}</h2>
                     <span>R$ {{ produto.preco }}</span>
-                    <button type="button" class="btn_saiba_mais" onclick="Abrir_ModalSaibaMais('{{ produto.id }}')">
+                    <button type="button" class="btn_saiba_mais" onclick="AbrirModal('modal-saiba-mais-{{ produto.id }}')">
                         Saiba Mais
                     </button>
                 </div>
@@ -67,7 +67,7 @@
                                 {% endif %}                             
                                 <h2>Descrição</h2>
                                 <p>{{ produto.descricao }}</p>
-                                <button type="button" class="voltar" onclick="Fechar_ModalSaibaMais('{{ produto.id }}')">Voltar</button>
+                                <button type="button" class="voltar" onclick="FecharModal('modal-saiba-mais-{{ produto.id }}')">Voltar</button>
                             </div>
                         </section>
                     </main>

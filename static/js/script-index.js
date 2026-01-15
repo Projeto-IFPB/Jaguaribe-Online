@@ -19,29 +19,21 @@ toggleButton.addEventListener('click', () => {
 
 navbarLinks.classList.toggle('active');
 });
-//modal excluir produto
-function Abrir_ModalExcluir(id) {
-    document.getElementById('modal_excluir_' + id).style.display = 'flex';
+//modais
+function AbrirModal(idModal) {
+    const modal = document.getElementById(idModal);
+    if (modal) {
+        modal.style.display = 'flex';
+    }
 }
 
-function Fechar_ModalExcluir(id) {
-    document.getElementById('modal_excluir_' + id).style.display = 'none';
+function FecharModal(idModal) {
+    const modal = document.getElementById(idModal);
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
-function Abrir_ModalEditar(id) {
-    document.getElementById('modal_editar_' + id).style.display = 'flex';
-}
-
-function Fechar_ModalEditar(id) {
-    document.getElementById('modal_editar_' + id).style.display = 'none';
-}
-function Abrir_ModalSaibaMais(id) {
-    document.getElementById('modal-saiba-mais-' + id).style.display = 'flex';
-}
-
-function Fechar_ModalSaibaMais(id) {
-    document.getElementById('modal-saiba-mais-' + id).style.display = 'none';
-}
 // Fechar se clicar fora da caixa branca
 window.onclick = function(event) {
     if (event.target.className === 'modais') {

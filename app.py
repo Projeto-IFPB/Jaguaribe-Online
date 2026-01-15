@@ -26,10 +26,13 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'pagina_login'
 
 class Usuario(UserMixin):
-    def __init__(self, username, nome_completo):
+    def __init__(self, username, nome_completo, data_nascimento, whatsapp, senha):
         self.id = username
         self.username = username
         self.nome_completo = nome_completo
+        self.data = data_nascimento
+        self.whatsapp = whatsapp
+        self.senha = senha
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -37,7 +40,7 @@ def load_user(user_id):
         leitor = csv.DictReader(arq, delimiter=";")
         for linha in leitor:
             if linha['username'] == user_id:
-                return Usuario(linha['username'], linha['nome'])
+                return Usuario(linha['username'], linha['nome'], linha['data'], linha['whatsapp'], linha['senha'])
     return None
 
 
@@ -259,8 +262,8 @@ def pagina_login():
             leitor = csv.DictReader(arq, delimiter=";")
             for linha in leitor:
                 if linha['username'] == username:
-                    if check_password_hash(linha['password_hash'], senha):
-                        usuario = Usuario(linha['username'], linha['nome'])
+                    if check_password_hash(linha['senha'], senha):
+                        usuario = Usuario(linha['username'], linha['nome'], linha['data'], linha['whatsapp'], linha['senha'])
                         login_user(usuario)
                         return redirect(url_for('pagina_perfil'))
         
@@ -367,7 +370,7 @@ def excluir_vendedor(username):
     
     # --- 2. REMOVER USUÁRIO DO CSV ---
     usuarios_mantidos = []
-    campos_usuarios = ['username', 'nome', 'data', 'whatsapp', 'password_hash']
+    campos_usuarios = ['username', 'nome', 'data', 'whatsapp', 'senha']
     
     if os.path.exists(USUARIOS):
         with open(USUARIOS, mode='r', encoding='utf-8') as arq:
@@ -400,6 +403,218 @@ def excluir_vendedor(username):
 
     flash(f'O usuário "{username}" e todos os seus produtos foram removidos com sucesso.', 'success')
     return redirect(url_for('pagina_perfil')) # Redireciona de volta para a lista
+
+@app.route('/alterar_username', methods=['POST'])
+@login_required
+def alterar_username():
+    novo_username = request.form.get('novo_username', '').strip()
+    username_antigo = current_user.username
+
+    if not novo_username or novo_username == username_antigo:
+        flash("Digite um novo username diferente do atual.", "erro_username")
+        return redirect(url_for('pagina_perfil'))
+
+
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor_user = csv.DictReader(arq, delimiter=';')
+        for usuario in leitor_user:
+            if usuario['username'] == novo_username:
+                flash("Este username já está em uso por outro usuário!", "erro_username")
+                return redirect(url_for('pagina_perfil'))
+
+    linhas_produtos = []
+    with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        campos_produtos = leitor.fieldnames
+        for linha in leitor:
+            if linha['username_vendedor'] == username_antigo:
+                linha['username_vendedor'] = novo_username
+            linhas_produtos.append(linha)
+
+    with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
+        escrever = csv.DictWriter(arq, fieldnames=campos_produtos, delimiter=';')
+        escrever.writeheader()
+        escrever.writerows(linhas_produtos)
+
+    linhas_usuarios = []
+    if os.path.exists(USUARIOS):
+        with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+            leitor = csv.DictReader(arq, delimiter=';')
+            campos_usuarios = leitor.fieldnames
+            for linha in leitor:
+
+                if linha['username'] == username_antigo:
+                    linha['username'] = novo_username
+                linhas_usuarios.append(linha)
+
+        with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
+            escrever = csv.DictWriter(arq, fieldnames=campos_usuarios, delimiter=';')
+            escrever.writeheader()
+            escrever.writerows(linhas_usuarios)
+
+    current_user.id = novo_username  
+    current_user.username = novo_username
+
+    login_user(current_user)
+    
+    flash("Username alterado com sucesso em todo o sistema!", "successo")
+    return redirect(url_for('pagina_perfil'))
+
+@app.route('/alterar_nome_vendedor', methods=['POST'])
+@login_required
+def alterar_nome_vendedor():
+    novo_nome = request.form.get('novo_nome', '')
+    username = current_user.username 
+    nome_antigo = current_user.nome_completo
+
+    
+    if novo_nome == nome_antigo:
+        flash("O novo nome deve ser diferente do atual.", "erro_nome")
+        return redirect(url_for('pagina_perfil'))
+    
+    linhas_produtos = []
+    with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        campos_produtos = leitor.fieldnames
+        for linha in leitor:
+
+            if linha['username_vendedor'] == username:
+                linha['vendedor'] = novo_nome
+            linhas_produtos.append(linha)
+    
+
+    with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
+        escrever = csv.DictWriter(arq, fieldnames=campos_produtos, delimiter=';')
+        escrever.writeheader()
+        escrever.writerows(linhas_produtos)
+
+    linhas_usuarios = []
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        campos_usuarios = leitor.fieldnames
+        for linha in leitor:
+            if linha['username'] == username:
+                linha['nome'] = novo_nome 
+            linhas_usuarios.append(linha)
+
+    with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
+        escrever = csv.DictWriter(arq, fieldnames=campos_usuarios, delimiter=';')
+        escrever.writeheader()
+        escrever.writerows(linhas_usuarios)
+
+    current_user.nome_completo = novo_nome 
+    flash("Nome de vendedor atualizado com sucesso!", "successo")
+    return redirect(url_for('pagina_perfil'))
+
+@app.route('/alterar_data_vendedor', methods=['POST'])
+@login_required
+def alterar_data_vendedor():
+    nova_data = request.form.get('nova_data')
+
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        for linha in leitor:
+            if linha['username'] == current_user.username:
+                if linha['data'] == nova_data:
+                    flash("A nova data deve ser diferente da atual.", "erro_data")
+                    return redirect(url_for('pagina_perfil'))
+
+    linhas_usuarios = []
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        campos = leitor.fieldnames
+        for linha in leitor:
+            if linha['username'] == current_user.username:
+                linha['data'] = nova_data 
+            linhas_usuarios.append(linha)
+
+    with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
+        escrever = csv.DictWriter(arq, fieldnames=campos, delimiter=';')
+        escrever.writeheader()
+        escrever.writerows(linhas_usuarios)
+
+    flash("Data de Nascimento atualizada com sucesso!", "successo")
+    return redirect(url_for('pagina_perfil'))
+
+@app.route('/alterar_senha', methods=['POST'])
+@login_required
+def alterar_senha():
+    senha_atual = request.form.get('senha_atual')
+    nova_senha = request.form.get('nova_senha')
+    confirmar_senha = request.form.get('confirmar_senha')
+
+    if not check_password_hash(current_user.senha, senha_atual):
+        flash("A senha atual está incorreta!", "erro_senha")
+        return redirect(url_for('pagina_perfil'))
+
+    if check_password_hash(current_user.senha, nova_senha):
+        flash("A nova senha não pode ser igual à atual!", "erro_senha")
+        return redirect(url_for('pagina_perfil'))
+
+    if nova_senha != confirmar_senha:
+        flash("As novas senhas não coincidem!", "erro_senha")
+        return redirect(url_for('pagina_perfil'))
+
+    novo_hash = generate_password_hash(nova_senha, method='pbkdf2:sha256')
+    
+    linhas_usuarios = []
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        campos = leitor.fieldnames
+        for linha in leitor:
+            if linha['username'] == current_user.username:
+                linha['senha'] = novo_hash 
+            linhas_usuarios.append(linha)
+   
+    with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
+            escrever = csv.DictWriter(arq, fieldnames=campos, delimiter=';')
+            escrever.writeheader()
+            escrever.writerows(linhas_usuarios)
+
+    current_user.senha = novo_hash
+    
+    flash("Senha alterada com sucesso!", "successo") 
+    return redirect(url_for('pagina_perfil'))
+
+@app.route('/alterar_whatsapp', methods=['POST'])
+@login_required
+def alterar_whatsapp():
+    whatsapp = request.form.get('novo_telefone','').strip()
+    novo_whatsapp = ''.join(filter(str.isdigit, whatsapp))
+
+    if not novo_whatsapp:
+            novo_whatsapp = 'None'
+    elif novo_whatsapp and not novo_whatsapp.startswith('55'):
+            novo_whatsapp = '55' + novo_whatsapp
+    
+
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        for linha in leitor:
+            if linha['username'] == current_user.username:
+                if linha['whatsapp'] == novo_whatsapp:
+                    flash("O novo número deve ser diferente da atual.", "erro_telefone")
+                    return redirect(url_for('pagina_perfil'))
+    
+   
+
+
+    linhas_usuarios = []
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        campos = leitor.fieldnames
+        for linha in leitor:
+            if linha['username'] == current_user.username:
+                linha['whatsapp'] = novo_whatsapp
+            linhas_usuarios.append(linha)
+
+    with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
+        escrever = csv.DictWriter(arq, fieldnames=campos, delimiter=';')
+        escrever.writeheader()
+        escrever.writerows(linhas_usuarios)
+
+    flash("Número de telefone alterado com sucesso atualizada com sucesso!", "successo")
+    return redirect(url_for('pagina_perfil'))
 
 @app.route('/logout')
 @login_required

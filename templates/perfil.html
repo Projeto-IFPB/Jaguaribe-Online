@@ -7,9 +7,195 @@
 {% block content %}
 <a href="{{ url_for('logout' ) }}" style="display: flex; justify-content: right; margin: 0 0.5rem;">Logout</a>
 
-<br>
-<h1>Olá, {{ current_user.nome_completo }}!</h1>
-<br>
+{% with messages = get_flashed_messages(category_filter=['successo'],with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: green;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+{% with messages = get_flashed_messages(category_filter=['erro_username'],with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: red;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="perfil-info">
+    <p><strong>Username atual:</strong> {{ current_user.username }}</p>
+    <button type="button" class="btn-editar-username" onclick="AbrirModal('modal_username')">
+        Alterar Username
+    </button>
+</div>
+
+<div id="modal_username" class="modais" style="display: none;">
+    <div class="modal_editar_usuario">
+        <h1>Alterar Username</h1>
+        <p>Lembre-se: isso mudará seu login e atualizará todos os seus produtos.</p>
+        
+        <form action="{{ url_for('alterar_username') }}" method="POST">
+            <div>
+                <label for="novo_username">Novo Username:</label>
+                <input type="text" id="novo_username" name="novo_username" 
+                       placeholder="Digite o novo username" required>
+            </div>
+            
+            <div class="botoes-modal">
+                <button type="submit" class="btn-salvar">Confirmar Alteração</button>
+                <button type="button" class="btn-cancelar" onclick="FecharModal('modal_username')">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% with messages = get_flashed_messages(category_filter=['erro_nome'],with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: red;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="perfil-info">
+    <p><strong>Nome atual:</strong> {{ current_user.nome_completo }}</p>
+    <button type="button" class="btn-editar-nome" onclick="AbrirModal('modal_nome')">
+        Alterar Nome
+    </button>
+</div>
+
+<div id="modal_nome" class="modais" style="display: none;">
+    <div class="modal_editar_usuario">
+        <h1>Alterar Nome</h1>
+        
+        <form action="{{ url_for('alterar_nome_vendedor') }}" method="POST">
+            <div>
+                <label for="novo_nome">Novo Nome:</label>
+                <input type="text" id="novo_nome" name="novo_nome" placeholder="Digite o novo nome" required>
+            </div>
+            
+            <div class="botoes-modal">
+                <button type="submit" class="btn-salvar">Confirmar Alteração</button>
+                <button type="button" class="btn-cancelar" onclick="FecharModal('modal_nome')">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% with messages = get_flashed_messages(category_filter=['erro_data'],with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: red;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="perfil-info">
+    <p><strong>Data de Nascimento:</strong> {{ current_user.data.split('-')[2] }}/{{ current_user.data.split('-')[1] }}/{{ current_user.data.split('-')[0] }}</p>
+    <button type="button" class="btn-editar-nome" onclick="AbrirModal('modal_data')">
+        Alterar Data de Nascimento
+    </button>
+</div>
+
+<div id="modal_data" class="modais" style="display: none;">
+    <div class="modal_editar_usuario">
+        <h1>Alterar Data</h1>
+        
+        <form action="{{ url_for('alterar_data_vendedor') }}" method="POST">
+            <div>
+                <label for="nova_data">Nova Data:</label>
+                <input type="date" id="nova_data" name="nova_data" required>
+            </div>
+            
+            <div class="botoes-modal">
+                <button type="submit" class="btn-salvar">Confirmar Alteração</button>
+                <button type="button" class="btn-cancelar" onclick="FecharModal('modal_data')">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% with messages = get_flashed_messages(category_filter=['erro_senha'],with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: red;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="perfil-info">
+    <p><strong>Senha:</strong>**************</p>
+    <button type="button" class="btn-editar-nome" onclick="AbrirModal('modal_senha')">
+        Alterar Senha
+    </button>
+</div>
+
+<div id="modal_senha" class="modais" style="display: none;">
+    <div class="modal_editar_usuario">
+        <h1>Alterar Senha</h1>
+        
+        <form action="{{ url_for('alterar_senha') }}" method="POST">
+            <div>
+                <label for="senha_atual">Senha Atual:</label>
+                <input type="password" id="senha_atual" name="senha_atual" required>
+            </div>
+            <div>
+                <label for="nova_senha">Nova Senha:</label>
+                <input type="password" id="nova_senha" name="nova_senha" required>
+            </div>
+            <div>
+                <label for="confirmar_senha">Confirmar Nova Senha:</label>
+                <input type="password" id="confirmar_senha" name="confirmar_senha" required>
+            </div>
+            
+            <div class="botoes-modal">
+                <button type="submit" class="btn-salvar">Confirmar Alteração</button>
+                <button type="button" class="btn-cancelar" onclick="FecharModal('modal_senha')">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% with messages = get_flashed_messages(category_filter=['erro_telefone'],with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: red;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="perfil-info">
+    {% if current_user.whatsapp == "None" %}
+        <p><strong>telefone:</strong>Número de telefone não informado</p>
+    {% else %}
+        <p><strong>telefone:</strong>{{current_user.whatsapp}}</p>
+    {% endif %}
+    <button type="button" class="btn-editar-nome" onclick="AbrirModal('modal_telefone')">
+        Alterar telefone
+    </button>
+</div>
+<div id="modal_telefone" class="modais" style="display: none;">
+    <div class="modal_editar_usuario">
+        <h1>Alterar telefone</h1>
+        
+        <form action="{{ url_for('alterar_whatsapp') }}" method="POST">
+            <div>
+                <label for="novo_telefone">Novo telefone:</label>
+                <input type="text" id="novo_telefone" name="novo_telefone" placeholder="Deixe em branco para apagar o número" minlength="11">
+            </div>
+            
+            <div class="botoes-modal">
+                <button type="submit" class="btn-salvar">Confirmar Alteração</button>
+                <button type="button" class="btn-cancelar" onclick="FecharModal('modal_telefone')">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <h2>Seus produtos</h2>
 
@@ -34,11 +220,11 @@
                 <td>{{ produto.descricao }}</td>
 
                 <td class="acoes">
-                    <button class="btn-editar" onclick="Abrir_ModalEditar('{{produto.id}}')">
+                    <button class="btn-editar" onclick="AbrirModal('modal_editar_{{produto.id}}')">
                         Editar
                     </button>
                     <div id="modal_editar_{{ produto.id }}" class="modais">
-                        <div class="modal_editar">
+                        <div class="modal_editar_usuario">
                             <h1>Editando: </h1>
                             <p class="nome_produto"><b>{{ produto.nome }}</b></p>
                             <form action="{{ url_for('editar_produto', id_produto=produto.id) }}" method="POST" enctype="multipart/form-data">
@@ -60,11 +246,11 @@
                                     <input type="file" name="imagem">
                                 </div>
                                 <button type="submit">Salvar Alterações</button>
-                                <button type="button" onclick="Fechar_ModalEditar('{{ produto.id }}')">Cancelar</button>
+                                <button type="button" onclick="FecharModal('modal_editar_{{ produto.id }}')">Cancelar</button>
                             </form>
                         </div>
                     </div>
-                    <button class="btn-excluir" onclick="Abrir_ModalExcluir('{{ produto.id }}')">
+                    <button class="btn-excluir" onclick="AbrirModal('modal_excluir_{{ produto.id }}')">
                         Excluir
                     </button>
                     <div id="modal_excluir_{{ produto.id }}" class="modais">
@@ -73,7 +259,7 @@
                             <p>Deseja mesmo excluir o produto <strong>"{{ produto.nome }}"</strong>?</p>
                             
                             <div class="botoes">
-                                <button onclick="Fechar_ModalExcluir('{{ produto.id }}')" class="btn-cancelar">Cancelar</button>
+                                <button onclick="FecharModal('modal_excluir_{{ produto.id }}')" class="btn-cancelar-tabela">Cancelar</button>
                                 <form action="{{ url_for('excluir_produto', id_produto=produto.id) }}" method="POST">
                                     <button type="submit" class="btn-confirmar">Excluir</button>
                                 </form>
