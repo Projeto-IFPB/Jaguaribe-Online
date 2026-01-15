@@ -119,6 +119,46 @@
         </form>
     </div>
 </div>
+{% with messages = get_flashed_messages(category_filter=['erro_senha'],with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: red;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="perfil-info">
+    <p><strong>Senha:</strong>**************</p>
+    <button type="button" class="btn-editar-nome" onclick="AbrirModal('modal_senha')">
+        Alterar Senha
+    </button>
+</div>
+
+<div id="modal_senha" class="modais" style="display: none;">
+    <div class="modal_editar_usuario">
+        <h1>Alterar Senha</h1>
+        
+        <form action="{{ url_for('alterar_senha') }}" method="POST">
+            <div>
+                <label for="senha_atual">Senha Atual:</label>
+                <input type="password" id="senha_atual" name="senha_atual" required>
+            </div>
+            <div>
+                <label for="nova_senha">Nova Senha:</label>
+                <input type="password" id="nova_senha" name="nova_senha" required>
+            </div>
+            <div>
+                <label for="confirmar_senha">Confirmar Nova Senha:</label>
+                <input type="password" id="confirmar_senha" name="confirmar_senha" required>
+            </div>
+            
+            <div class="botoes-modal">
+                <button type="submit" class="btn-salvar">Confirmar Alteração</button>
+                <button type="button" class="btn-cancelar" onclick="FecharModal('modal_senha')">Cancelar</button>
+            </div>
+        </form>
+    </div>
 
 <h2>Seus produtos</h2>
 

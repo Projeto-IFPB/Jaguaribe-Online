@@ -536,6 +536,46 @@ def alterar_data_vendedor():
     flash("Data de Nascimento atualizada com sucesso!", "successo")
     return redirect(url_for('pagina_perfil'))
 
+@app.route('/alterar_senha', methods=['POST'])
+@login_required
+def alterar_senha():
+    senha_atual = request.form.get('senha_atual')
+    nova_senha = request.form.get('nova_senha')
+    confirmar_senha = request.form.get('confirmar_senha')
+
+    if not check_password_hash(current_user.senha, senha_atual):
+        flash("A senha atual está incorreta!", "erro_senha")
+        return redirect(url_for('pagina_perfil'))
+
+    if check_password_hash(current_user.senha, nova_senha):
+        flash("A nova senha não pode ser igual à atual!", "erro_senha")
+        return redirect(url_for('pagina_perfil'))
+
+    if nova_senha != confirmar_senha:
+        flash("As novas senhas não coincidem!", "erro_senha")
+        return redirect(url_for('pagina_perfil'))
+
+    novo_hash = generate_password_hash(nova_senha, method='pbkdf2:sha256')
+    
+    linhas_usuarios = []
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        campos = leitor.fieldnames
+        for linha in leitor:
+            if linha['username'] == current_user.username:
+                linha['senha'] = novo_hash 
+            linhas_usuarios.append(linha)
+   
+    with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
+            escrever = csv.DictWriter(arq, fieldnames=campos, delimiter=';')
+            escrever.writeheader()
+            escrever.writerows(linhas_usuarios)
+
+    current_user.senha = novo_hash
+    
+    flash("Senha alterada com sucesso!", "successo") 
+    return redirect(url_for('pagina_perfil'))
+
 @app.route('/logout')
 @login_required
 def logout():
