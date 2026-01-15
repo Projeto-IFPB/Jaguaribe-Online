@@ -40,7 +40,7 @@ def load_user(user_id):
         leitor = csv.DictReader(arq, delimiter=";")
         for linha in leitor:
             if linha['username'] == user_id:
-                return Usuario(linha['username'], linha['nome'], linha['data'], linha['whatsapp'], linha['password_hash'])
+                return Usuario(linha['username'], linha['nome'], linha['data'], linha['whatsapp'], linha['senha'])
     return None
 
 
@@ -262,8 +262,8 @@ def pagina_login():
             leitor = csv.DictReader(arq, delimiter=";")
             for linha in leitor:
                 if linha['username'] == username:
-                    if check_password_hash(linha['password_hash'], senha):
-                        usuario = Usuario(linha['username'], linha['nome'])
+                    if check_password_hash(linha['senha'], senha):
+                        usuario = Usuario(linha['username'], linha['nome'], linha['data'], linha['whatsapp'], linha['senha'])
                         login_user(usuario)
                         return redirect(url_for('pagina_perfil'))
         
@@ -370,7 +370,7 @@ def excluir_vendedor(username):
     
     # --- 2. REMOVER USUÁRIO DO CSV ---
     usuarios_mantidos = []
-    campos_usuarios = ['username', 'nome', 'data', 'whatsapp', 'password_hash']
+    campos_usuarios = ['username', 'nome', 'data', 'whatsapp', 'senha']
     
     if os.path.exists(USUARIOS):
         with open(USUARIOS, mode='r', encoding='utf-8') as arq:
