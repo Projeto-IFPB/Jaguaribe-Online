@@ -7,9 +7,51 @@
 {% block content %}
 <a href="{{ url_for('logout' ) }}" style="display: flex; justify-content: right; margin: 0 0.5rem;">Logout</a>
 
-<br>
-<h1>Olá, {{ current_user.nome_completo }}!</h1>
-<br>
+{% block content %}
+{% with messages = get_flashed_messages(category_filter=['successo'],with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: green;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+{% with messages = get_flashed_messages(category_filter=['erro_username'],with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div style="color: red;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="perfil-info">
+    <p><strong>Username atual:</strong> {{ current_user.username }}</p>
+    <button type="button" class="btn-editar-username" onclick="AbrirModal('modal_username')">
+        Alterar Username
+    </button>
+</div>
+
+<div id="modal_username" class="modais" style="display: none;">
+    <div class="modal_editar_usuario">
+        <h1>Alterar Username</h1>
+        <p>Lembre-se: isso mudará seu login e atualizará todos os seus produtos.</p>
+        
+        <form action="{{ url_for('alterar_username') }}" method="POST">
+            <div>
+                <label for="novo_username">Novo Username:</label>
+                <input type="text" id="novo_username" name="novo_username" 
+                       placeholder="Digite o novo username" required>
+            </div>
+            
+            <div class="botoes-modal">
+                <button type="submit" class="btn-salvar">Confirmar Alteração</button>
+                <button type="button" class="btn-cancelar" onclick="FecharModal('modal_username')">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <h2>Seus produtos</h2>
 

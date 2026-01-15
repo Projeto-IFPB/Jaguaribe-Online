@@ -404,6 +404,63 @@ def excluir_vendedor(username):
     flash(f'O usuário "{username}" e todos os seus produtos foram removidos com sucesso.', 'success')
     return redirect(url_for('pagina_perfil')) # Redireciona de volta para a lista
 
+@app.route('/alterar_username', methods=['POST'])
+@login_required
+def alterar_username():
+    novo_username = request.form.get('novo_username', '').strip()
+    username_antigo = current_user.username
+
+    if not novo_username or novo_username == username_antigo:
+        flash("Digite um novo username diferente do atual.", "erro_username")
+        return redirect(url_for('pagina_perfil'))
+
+
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        leitor_user = csv.DictReader(arq, delimiter=';')
+        for usuario in leitor_user:
+            if usuario['username'] == novo_username:
+                flash("Este username já está em uso por outro usuário!", "erro_username")
+                return redirect(url_for('pagina_perfil'))
+
+    linhas_produtos = []
+    with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
+        leitor = csv.DictReader(arq, delimiter=';')
+        campos_produtos = leitor.fieldnames
+        for linha in leitor:
+            if linha['username_vendedor'] == username_antigo:
+                linha['username_vendedor'] = novo_username
+            linhas_produtos.append(linha)
+
+    with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
+        escrever = csv.DictWriter(arq, fieldnames=campos_produtos, delimiter=';')
+        escrever.writeheader()
+        escrever.writerows(linhas_produtos)
+
+    linhas_usuarios = []
+    if os.path.exists(USUARIOS):
+        with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+            leitor = csv.DictReader(arq, delimiter=';')
+            campos_usuarios = leitor.fieldnames
+            for linha in leitor:
+
+                if linha['username'] == username_antigo:
+                    linha['username'] = novo_username
+                linhas_usuarios.append(linha)
+
+        with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
+            escrever = csv.DictWriter(arq, fieldnames=campos_usuarios, delimiter=';')
+            escrever.writeheader()
+            escrever.writerows(linhas_usuarios)
+
+    current_user.id = novo_username  
+    current_user.username = novo_username
+
+    login_user(current_user)
+    
+    flash("Username alterado com sucesso em todo o sistema!", "successo")
+    return redirect(url_for('pagina_perfil'))
+
+
 @app.route('/logout')
 @login_required
 def logout():
