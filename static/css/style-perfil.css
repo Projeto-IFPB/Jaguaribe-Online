@@ -116,56 +116,34 @@ body {
 /*Modal Excluir -------*/
 .modal_excluir {
     background: white;
-    padding: 2.0rem;
-    border-radius: 0.8rem;
-    max-width: 40.0rem;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
     text-align: center;
     color: #333;
 }
 .botoes{
     display: flex; 
     justify-content: space-around; 
-    margin-top: 2.0rem; 
+    margin-top: 20px; 
 }
-.btn-confirmar { 
-    background: #d9534f; 
-    color: white; border: none; 
-    padding: 1.0rem 2.0rem; 
-    cursor: pointer; 
-    border-radius: 5px; 
-}
-.btn-cancelar { 
-    background: #6c757d; 
-    color: white; 
-    border: none; 
+
+.btn-cancelar-tabela, .btn-confirmar { 
+    background: white; 
+    color: red; 
+    border:2px solid red; 
     padding: 10px 20px; 
     cursor: pointer; 
     border-radius: 5px; 
 }
-/*Modal Editar ------------*/
-.modal_editar {
-    background-color: white;
-    padding: 30px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto; /* Permite rolar se o formulário for longo */
+.btn-cancelar-tabela:hover, .btn-confirmar:hover {
+    background-color: red;
+    color: white;
+    border: 2px solid #6c1413;
 }
+/*Modais de Edição ------------*/
 
-.modal_editar div {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.modal_editar input, .modal_editar textarea {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-.modal_editar h1{
+.modal_editar_usuario h1{
     margin-bottom: 0.5rem;
 }
 .nome_produto {
@@ -174,6 +152,54 @@ body {
     font-size: 3.5rem;
     text-align: center;
 }
+
+.modal_editar_usuario {
+    background-color: white;
+    padding: 2.0rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 50rem;
+    text-align: center;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal_editar_usuario input, .modal_editar_usuario textarea {
+    width: 100%;
+    padding: 1.0rem;
+    margin: 1.5rem 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.btn-salvar { 
+    background-color: white; 
+    color: #28a745; 
+    border: 2px solid #28a745; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+.btn-cancelar { 
+    background-color: white; 
+    color: #dc3545; 
+    border: 2px solid #dc3545; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    margin-left: 10px; 
+}
+.btn-salvar:hover {
+    background: #28a745;
+    color: white;
+    border: 2px solid #064006
+}
+.btn-cancelar:hover{
+    background: #dc3545;
+    color: white;
+    border: 2px solid #6c1413;
+}
+
 @media (max-width: 600px){
 
     .container-tabela{

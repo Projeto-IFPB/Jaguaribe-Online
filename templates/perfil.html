@@ -7,7 +7,6 @@
 {% block content %}
 <a href="{{ url_for('logout' ) }}" style="display: flex; justify-content: right; margin: 0 0.5rem;">Logout</a>
 
-{% block content %}
 {% with messages = get_flashed_messages(category_filter=['successo'],with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
@@ -159,6 +158,7 @@
             </div>
         </form>
     </div>
+</div>
 
 {% with messages = get_flashed_messages(category_filter=['erro_telefone'],with_categories=true) %}
     {% if messages %}
@@ -224,7 +224,7 @@
                         Editar
                     </button>
                     <div id="modal_editar_{{ produto.id }}" class="modais">
-                        <div class="modal_editar">
+                        <div class="modal_editar_usuario">
                             <h1>Editando: </h1>
                             <p class="nome_produto"><b>{{ produto.nome }}</b></p>
                             <form action="{{ url_for('editar_produto', id_produto=produto.id) }}" method="POST" enctype="multipart/form-data">
@@ -259,7 +259,7 @@
                             <p>Deseja mesmo excluir o produto <strong>"{{ produto.nome }}"</strong>?</p>
                             
                             <div class="botoes">
-                                <button onclick="FecharModal('modal_excluir_{{ produto.id }}')" class="btn-cancelar">Cancelar</button>
+                                <button onclick="FecharModal('modal_excluir_{{ produto.id }}')" class="btn-cancelar-tabela">Cancelar</button>
                                 <form action="{{ url_for('excluir_produto', id_produto=produto.id) }}" method="POST">
                                     <button type="submit" class="btn-confirmar">Excluir</button>
                                 </form>
