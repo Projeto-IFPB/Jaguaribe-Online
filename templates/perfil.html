@@ -34,7 +34,7 @@
                 <td>{{ produto.descricao }}</td>
 
                 <td class="acoes">
-                    <button class="btn-editar" onclick="Abrir_ModalEditar('{{produto.id}}')">
+                    <button class="btn-editar" onclick="AbrirModal('modal_editar_{{produto.id}}')">
                         Editar
                     </button>
                     <div id="modal_editar_{{ produto.id }}" class="modais">
@@ -60,11 +60,11 @@
                                     <input type="file" name="imagem">
                                 </div>
                                 <button type="submit">Salvar Alterações</button>
-                                <button type="button" onclick="Fechar_ModalEditar('{{ produto.id }}')">Cancelar</button>
+                                <button type="button" onclick="FecharModal('modal_editar_{{ produto.id }}')">Cancelar</button>
                             </form>
                         </div>
                     </div>
-                    <button class="btn-excluir" onclick="Abrir_ModalExcluir('{{ produto.id }}')">
+                    <button class="btn-excluir" onclick="AbrirModal('modal_excluir_{{ produto.id }}')">
                         Excluir
                     </button>
                     <div id="modal_excluir_{{ produto.id }}" class="modais">
@@ -73,7 +73,7 @@
                             <p>Deseja mesmo excluir o produto <strong>"{{ produto.nome }}"</strong>?</p>
                             
                             <div class="botoes">
-                                <button onclick="Fechar_ModalExcluir('{{ produto.id }}')" class="btn-cancelar">Cancelar</button>
+                                <button onclick="FecharModal('modal_excluir_{{ produto.id }}')" class="btn-cancelar">Cancelar</button>
                                 <form action="{{ url_for('excluir_produto', id_produto=produto.id) }}" method="POST">
                                     <button type="submit" class="btn-confirmar">Excluir</button>
                                 </form>
