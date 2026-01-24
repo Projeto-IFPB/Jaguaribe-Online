@@ -5,7 +5,11 @@
 {% block css%} <link rel="stylesheet" href="static/css/style-perfil.css"> {% endblock %}
 
 {% block content %}
-<a href="{{ url_for('logout' ) }}" style="display: flex; justify-content: right; margin: 0 0.5rem;">Logout</a>
+<div class="flex_logout">
+    <a class="css_logout" href="{{ url_for('logout' ) }}">Logout</a>
+</div>
+
+<h1 class="h1_perfil">Suas configurações de perfil</h1>
 
 {% with messages = get_flashed_messages(category_filter=['successo'],with_categories=true) %}
 {% if messages %}
