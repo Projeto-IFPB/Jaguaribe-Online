@@ -386,3 +386,31 @@ body {
   }
 }
 
+/* Estilizando botões da página de perfil */
+
+.perfil-info button {
+    margin-top: 0.8rem;
+    background-color: #2e7d32; 
+    color: var(--white); 
+    font-weight: bolder;
+    border: none;
+    border-radius: 0.8rem;
+    padding: 1.2rem 2.4rem;
+    width: 200px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1.6rem;
+    letter-spacing: 0.5px;
+}
+
+/* Efeito ao passar o mouse */
+.perfil-info button:hover {
+    background-color: #388e3c; 
+    transform: translateY(-3px); 
+}
+
+/* Efeito ao clicar */
+.perfil-info button:active {
+    transform: translateY(0); 
+    background-color: #1b5e20; 
+}
