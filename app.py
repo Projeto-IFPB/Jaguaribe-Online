@@ -18,9 +18,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 USUARIOS = "data/usuarios.csv"
 PRODUTOS = "data/produtos.csv"
-
-#Lista Admin
-ADMINS = ['mengao']
+#arquivos de texto
+ADMIN = "data/admin.txt"
 # login Manager
 
 login_manager = LoginManager(app)
