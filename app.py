@@ -604,6 +604,7 @@ def alterar_senha():
 def alterar_whatsapp():
     whatsapp = request.form.get('novo_telefone','').strip()
     novo_whatsapp = ''.join(filter(str.isdigit, whatsapp))
+    campos_usuarios =['username','nome','data','whatsapp','senha']
 
     if not novo_whatsapp:
             novo_whatsapp = 'None'
@@ -612,10 +613,11 @@ def alterar_whatsapp():
     
 
     with open(USUARIOS, mode='r', encoding='utf-8') as arq:
-        leitor = csv.DictReader(arq, delimiter=';')
-        for linha in leitor:
-            if linha['username'] == current_user.username:
-                if linha['whatsapp'] == novo_whatsapp:
+        linhas = arq.readlines()
+        for linha in linhas[1:]:
+            dados = linha.strip().split(';')
+            if dados[0] == current_user.username:
+                if dados[3] == novo_whatsapp:
                     flash("O novo número deve ser diferente da atual.", "erro_telefone")
                     return redirect(url_for('pagina_perfil'))
     
@@ -624,17 +626,18 @@ def alterar_whatsapp():
 
     linhas_usuarios = []
     with open(USUARIOS, mode='r', encoding='utf-8') as arq:
-        leitor = csv.DictReader(arq, delimiter=';')
-        campos = leitor.fieldnames
-        for linha in leitor:
-            if linha['username'] == current_user.username:
-                linha['whatsapp'] = novo_whatsapp
-            linhas_usuarios.append(linha)
+        linhas = arq.readlines()
+        for linha in linhas[1:]:
+            dados = linha.strip().split(';')
+            if dados[0] == current_user.username:
+                dados[3] = novo_whatsapp
+            nova_linha = ';'.join(dados)
+            linhas_usuarios.append(nova_linha)
 
     with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
-        escrever = csv.DictWriter(arq, fieldnames=campos, delimiter=';')
-        escrever.writeheader()
-        escrever.writerows(linhas_usuarios)
+        arq.write(';'.join(campos_usuarios)+ '\n')
+        for i in linhas_usuarios:
+            arq.write(i +'\n')
 
     flash("Número de telefone alterado com sucesso atualizada com sucesso!", "successo")
     return redirect(url_for('pagina_perfil'))
