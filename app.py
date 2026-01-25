@@ -265,11 +265,12 @@ def pagina_login():
         senha = request.form.get('senha')
 
         with open(USUARIOS, mode='r') as arq:
-            leitor = csv.DictReader(arq, delimiter=";")
-            for linha in leitor:
-                if linha['username'] == username:
-                    if check_password_hash(linha['senha'], senha):
-                        usuario = Usuario(linha['username'], linha['nome'], linha['data'], linha['whatsapp'], linha['senha'])
+            linhas = arq.readlines()
+            for linha in linhas[1:]:
+                dados = linha.strip().split(';')
+                if dados[0] == username:
+                    if check_password_hash(dados[4], senha):
+                        usuario = Usuario(dados[0], dados[1], dados[2], dados[3], dados[4])
                         login_user(usuario)
                         return redirect(url_for('pagina_perfil'))
         
