@@ -283,12 +283,15 @@ def pagina_perfil():
     meus_produtos = []
     
     with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
-        leitor = csv.DictReader(arq , delimiter=';')
-        for linha in leitor:
+        linhas = arq.readlines()
+        cabecalho = [c.strip() for c in linhas[0].split(';')]
+        for linha in linhas[1:]:
+            dados = linha.strip().split(';')
             atual = current_user.username.strip().lower()
-            vendedor = linha['username_vendedor'].strip().lower()
+            vendedor = dados[5].strip().lower()
             if vendedor == atual :
-                meus_produtos.append(linha)
+                item = dict(zip(cabecalho, dados))
+                meus_produtos.append(item)
 
         todos_usuarios = ler_todos_usuarios()
     
