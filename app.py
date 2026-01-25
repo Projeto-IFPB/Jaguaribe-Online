@@ -563,6 +563,7 @@ def alterar_senha():
     senha_atual = request.form.get('senha_atual')
     nova_senha = request.form.get('nova_senha')
     confirmar_senha = request.form.get('confirmar_senha')
+    campos_usuarios =['username','nome','data','whatsapp','senha']
 
     if not check_password_hash(current_user.senha, senha_atual):
         flash("A senha atual está incorreta!", "erro_senha")
@@ -580,17 +581,18 @@ def alterar_senha():
     
     linhas_usuarios = []
     with open(USUARIOS, mode='r', encoding='utf-8') as arq:
-        leitor = csv.DictReader(arq, delimiter=';')
-        campos = leitor.fieldnames
-        for linha in leitor:
-            if linha['username'] == current_user.username:
-                linha['senha'] = novo_hash 
-            linhas_usuarios.append(linha)
+        linhas = arq.readlines()
+        for linha in linhas[1:]:
+            dados = linha.strip().split(';')
+            if dados[0] == current_user.username:
+                dados[4] = novo_hash 
+            nova_linha = ';'.join(dados)
+            linhas_usuarios.append(nova_linha)
    
     with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
-            escrever = csv.DictWriter(arq, fieldnames=campos, delimiter=';')
-            escrever.writeheader()
-            escrever.writerows(linhas_usuarios)
+        arq.write(';'.join(campos_usuarios)+ '\n')
+        for i in linhas_usuarios:
+            arq.write(i +'\n')
 
     current_user.senha = novo_hash
     
