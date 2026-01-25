@@ -373,7 +373,7 @@ def excluir_vendedor(username):
 
     # Evitar que o admin exclua a si próprio por acidente
     if username == current_user.username:
-        flash('Você não pode excluir sua própria conta de administrador por aqui.', 'danger')
+        flash('Você não pode excluir sua própria conta de administrador por aqui.', 'dashboard_erro')
         return redirect(url_for('pagina_perfil'))
     
     # --- 2. REMOVER USUÁRIO DO CSV ---
@@ -382,15 +382,17 @@ def excluir_vendedor(username):
     
     if os.path.exists(USUARIOS):
         with open(USUARIOS, mode='r', encoding='utf-8') as arq:
-            leitor = csv.DictReader(arq, delimiter=";")
-            for linha in leitor:
-                if linha['username'] != username:
+            linhas = arq.readlines()
+            for linha in linhas[1:]:
+                dados = linha.strip().split(';')
+                if dados[0] != username:
                     usuarios_mantidos.append(linha)
         
         with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
-            escrever = csv.DictWriter(arq, fieldnames=campos_usuarios, delimiter=';')
-            escrever.writeheader()
-            escrever.writerows(usuarios_mantidos)
+            arq.write(";".join(campos_usuarios) + "\n")
+        
+            for i in usuarios_mantidos:
+                arq.write(i)
 
     # --- 3. REMOVER PRODUTOS DO USUÁRIO DO CSV ---
     produtos_mantidos = []
@@ -398,18 +400,20 @@ def excluir_vendedor(username):
     
     if os.path.exists(PRODUTOS):
         with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
-            leitor = csv.DictReader(arq, delimiter=';')
-            for linha in leitor:
+            linhas = arq.readlines()
+            for linha in linhas[1:]:
+                dados = linha.strip().split(';')
                 # Se o username_vendedor for diferente do alvo, nós mantemos o produto
-                if linha['username_vendedor'] != username:
+                if dados[5] != username:
                     produtos_mantidos.append(linha)
         
         with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
-            escrever = csv.DictWriter(arq, fieldnames=campos_produtos, delimiter=';')
-            escrever.writeheader()
-            escrever.writerows(produtos_mantidos)
+            arq.write(";".join(campos_produtos) + "\n")
+        
+            for i in produtos_mantidos:
+                arq.write(i)
 
-    flash(f'O usuário "{username}" e todos os seus produtos foram removidos com sucesso.', 'success')
+    flash(f'O usuário "{username}" e todos os seus produtos foram removidos com sucesso.', 'successo')
     return redirect(url_for('pagina_perfil')) # Redireciona de volta para a lista
 
 @app.route('/alterar_username', methods=['POST'])
