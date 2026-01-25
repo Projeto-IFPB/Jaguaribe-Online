@@ -121,11 +121,12 @@ def buscar_whatsapp(username_vendedor):
         return 'None'
         
     with open(USUARIOS, 'r', encoding='utf-8') as arq:
-        leitor = csv.DictReader(arq, delimiter=';')
-        for usuario in leitor:
-            if usuario['username'] == username_vendedor:
+        linhas = arq.readlines()
+        for linha in linhas[1:]:
+            dados = linha.strip().split(';')
+            if dados[0] == username_vendedor:      
                 # Se o campo existir e não for vazio, retorna o número, senão 'None'
-                whatsapp = usuario.get('whatsapp')
+                whatsapp = dados[3]
                 return whatsapp if whatsapp and whatsapp.strip() != "" else 'None'
     
     return 'None'
