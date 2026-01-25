@@ -329,44 +329,40 @@ def editar_produto(id_produto):
     # 1. Ler o arquivo para encontrar o produto e carregar os outros
     if os.path.exists(PRODUTOS):
         with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
-            leitor = csv.DictReader(arq, delimiter=';')
-            for linha in leitor:
-                if linha['id'] == str(id_produto):
+            linhas = arq.readlines()
+            for linha in linhas[1:]:
+                dados = linha.strip().split(';')
+                if dados[0] == str(id_produto):
                     # Verificação de segurança: só o dono edita
-                    if linha['username_vendedor'] != current_user.username:
-                        flash("Acesso negado!", "danger")
+                    if dados[5] != current_user.username:
+                        flash("Acesso negado!", "error_editar_produtos")
                         return redirect(url_for('pagina_perfil'))
                     produto_atual = linha
+    # 2. Processar a atualização (Quando o formulário é enviado)
+                    if request.method == 'POST':
+                            if dados[0] == str(id_produto):
+                                dados[1] = request.form.get('nome')
+                                dados[3] = request.form.get('preco')
+                                dados[6] = request.form.get('descricao')
+
+                                # Tratamento da Imagem
+                                file = request.files.get('imagem')
+                                if file and file.filename != '':
+                                    filename = secure_filename(file.filename)
+                                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                                    dados[2] = filename # Atualiza o nome do arquivo no CSV
+                            linha = ';'.join(dados)
                 linhas_atualizadas.append(linha)
 
     if not produto_atual:
         flash("Produto não encontrado!", "danger")
         return redirect(url_for('pagina_perfil'))
-
-    # 2. Processar a atualização (Quando o formulário é enviado)
-    if request.method == 'POST':
-        for linha in linhas_atualizadas:
-            if linha['id'] == str(id_produto):
-                linha['nome'] = request.form.get('nome')
-                linha['preco'] = request.form.get('preco')
-                linha['descricao'] = request.form.get('descricao')
-
-                # Tratamento da Imagem
-                file = request.files.get('imagem')
-                if file and file.filename != '':
-                    filename = secure_filename(file.filename)
-                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                    linha['imagem'] = filename # Atualiza o nome do arquivo no CSV
-
-        # 3. Salvar de volta no CSV
-        with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
-            escrever = csv.DictWriter(arq, fieldnames=campos, delimiter=';')
-            escrever.writeheader()
-            escrever.writerows(linhas_atualizadas)
-
-        flash("Produto atualizado com sucesso!", "success")
-        return redirect(url_for('pagina_perfil'))
-
+    
+    # 3. Salvar de volta no CSV
+    with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
+        arq.write(";".join(campos) + "\n")
+        for i in linhas_atualizadas:
+            arq.write(i)
     # Se for GET, mostra o formulário preenchido
     return render_template('editar_produto.html', produto=produto_atual)
 
