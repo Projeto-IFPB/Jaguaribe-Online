@@ -14,11 +14,20 @@
 {% with messages = get_flashed_messages(category_filter=['successo'],with_categories=true) %}
 {% if messages %}
 {% for category, message in messages %}
-<div style="color: green;">
+<div style="color: green; text-align: center;">
     {{ message }}
 </div>
 {% endfor %}
 {% endif %}
+{% endwith %}
+
+<!-- Mensagem que aparece se o admin tentar excluir a sua própria conta -->
+{% with messages = get_flashed_messages(category_filter=['dashboard_erro'],with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}" style="text-align: center; color: red;">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
 {% endwith %}
 
 {% with messages = get_flashed_messages(category_filter=['erro_username'],with_categories=true) %}
@@ -29,15 +38,6 @@
 </div>
 {% endfor %}
 {% endif %}
-{% endwith %}
-
-<!-- Mensagem que aparece se o admin tentar excluir a sua própria conta -->
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }}" style="text-align: center; color: green;">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
 {% endwith %}
 
 <div class="perfil-info">
@@ -221,115 +221,125 @@
         </form>
     </div>
 </div>
+{% if session.get('perfil') != 'admin' %}
+    <h2 id="seus_produtos">Seus produtos</h2>
 
-<h2 id="seus_produtos">Seus produtos</h2>
-
-<div class="container-tabela">
-    <table class="tabela-produtos">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Preço</th>
-                <th>Descrição</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-            {% for produto in produtos %} 
-            <tr>
-                <td>{{ produto.nome }}</td> 
-                
-                <td>R$ {{ produto.preco }}</td>
-                
-                <td>{{ produto.descricao }}</td>
-
-                <td class="acoes">
-                    <button class="btn-editar" onclick="AbrirModal('modal_editar_{{produto.id}}')">Editar</button>
-                    <div id="modal_editar_{{ produto.id }}" class="modais">
-                        <div class="modal_editar_usuario">
-                            <h1>Editando: </h1>
-                            <p class="nome_produto"><b>{{ produto.nome }}</b></p>
-                            <form action="{{ url_for('editar_produto', id_produto=produto.id) }}" method="POST" enctype="multipart/form-data">
-                                <div>
-                                    <label>Nome do Produto:</label>
-                                    <input type="text" name="nome" value="{{ produto.nome }}" required>
-                                </div>
-                                <div>
-                                    <label>Preço:</label>
-                                    <input type="text" name="preco" value="{{ produto.preco }}" required>
-                                </div>
-                                <div>
-                                    <label>Descrição:</label>
-                                    <textarea name="descricao" required>{{ produto.descricao }}</textarea>
-                                </div>
-                                <div>
-                                    <label>Imagem atual: {{ produto.nome_imagem }}</label><br>
-                                    <label>Trocar imagem (deixe vazio para manter a atual):</label>
-                                    <input type="file" name="imagem">
-                                </div>
-                                <button type="submit">Salvar Alterações</button>
-                                <button type="button" onclick="FecharModal('modal_editar_{{ produto.id }}')">Cancelar</button>
-                            </form>
-                        </div>
-                    </div>
-                    <button class="btn-excluir" onclick="AbrirModal('modal_excluir_{{ produto.id }}')">Excluir</button>
-                    <div id="modal_excluir_{{ produto.id }}" class="modais">
-                        <div class="modal_excluir">
-                            <h3>Confirmar Exclusão</h3>
-                            <p>Deseja mesmo excluir o produto <strong>"{{ produto.nome }}"</strong>?</p>
-                            
-                            <div class="botoes">
-                                <button onclick="FecharModal('modal_excluir_{{ produto.id }}')" class="btn-cancelar-tabela">Cancelar</button>
-                                <form action="{{ url_for('excluir_produto', id_produto=produto.id) }}" method="POST">
-                                    <button type="submit" class="btn-confirmar">Excluir</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
-
-        </tbody>
-    </table>
-</div>
-
-
-<!-- Dashboard de administrador -->
-<div class="painel-admin">
-
-    <h2>Dashboard de Administrador</h2>
-
-        <table class="tabela-admin">
+    <div class="container-tabela">
+        <table class="tabela-produtos">
             <thead>
                 <tr>
-                    <th>Username</th>
                     <th>Nome</th>
-                    <th class="coluna-acoes">Ações</th>
+                    <th>Preço</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                {% for usuario in usuarios %}
-                    <tr>
-                        <td>{{ usuario.username }}</td>
-                        <td>{{ usuario.nome }}</td>
-                        
-                        <td class="coluna-acoes">
-                            <div class="acoes">
-                                <button class="botao-ver">Produtos</button>
+                
+                {% for produto in produtos %} 
+                <tr>
+                    <td>{{ produto.nome }}</td> 
+                    
+                    <td>R$ {{ produto.preco }}</td>
+                    
+                    <td>{{ produto.descricao }}</td>
 
-                                <a href="{{ url_for('excluir_vendedor', username=usuario.username) }}" class="botao-excluir">
-                                    Excluir
-                                </a>
+                    <td class="acoes">
+                        <button class="btn-editar" onclick="AbrirModal('modal_editar_{{produto.id}}')">Editar</button>
+                        <div id="modal_editar_{{ produto.id }}" class="modais">
+                            <div class="modal_editar_usuario">
+                                <h1>Editando: </h1>
+                                <p class="nome_produto"><b>{{ produto.nome }}</b></p>
+                                <form action="{{ url_for('editar_produto', id_produto=produto.id) }}" method="POST" enctype="multipart/form-data">
+                                    <div>
+                                        <label>Nome do Produto:</label>
+                                        <input type="text" name="nome" value="{{ produto.nome }}" required>
+                                    </div>
+                                    <div>
+                                        <label>Preço:</label>
+                                        <input type="text" name="preco" value="{{ produto.preco }}" required>
+                                    </div>
+                                    <div>
+                                        <label>Descrição:</label>
+                                        <textarea name="descricao" required>{{ produto.descricao }}</textarea>
+                                    </div>
+                                    <div>
+                                        <label>Imagem atual: {{ produto.nome_imagem }}</label><br>
+                                        <label>Trocar imagem (deixe vazio para manter a atual):</label>
+                                        <input type="file" name="imagem">
+                                    </div>
+                                    <button type="submit">Salvar Alterações</button>
+                                    <button type="button" onclick="FecharModal('modal_editar_{{ produto.id }}')">Cancelar</button>
+                                </form>
                             </div>
-                        </td>
-                        
-                    </tr>
+                        </div>
+                        <button class="btn-excluir" onclick="AbrirModal('modal_excluir_{{ produto.id }}')">Excluir</button>
+                        <div id="modal_excluir_{{ produto.id }}" class="modais">
+                            <div class="modal_excluir">
+                                <h3>Confirmar Exclusão</h3>
+                                <p>Deseja mesmo excluir o produto <br><strong>"{{ produto.nome }}"</strong>?</p>
+                                
+                                <div class="botoes">
+                                    <button onclick="FecharModal('modal_excluir_{{ produto.id }}')" class="btn-cancelar-tabela">Cancelar</button>
+                                    <form action="{{ url_for('excluir_produto', id_produto=produto.id) }}" method="POST">
+                                        <button type="submit" class="btn-confirmar">Excluir</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
                 {% endfor %}
+
             </tbody>
         </table>
+    </div>
 
-</div>
+{% else %}
+    <!-- Dashboard de administrador -->
+    <div class="painel-admin">
+
+        <h2>Dashboard de Administrador</h2>
+
+            <table class="tabela-admin">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Nome</th>
+                        <th class="coluna-acoes">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                        <tr>
+                            <td>{{ usuario.username }}</td>
+                            <td>{{ usuario.nome }}</td>
+                            
+                            <td class="coluna-acoes">
+                                <div class="acoes">
+                                    <button class="botao-ver">Produtos</button>
+                                    <button class="btn-excluir" onclick="AbrirModal('modal_excluir_{{ usuario.id }}')">Excluir</button>
+                                    <div id="modal_excluir_{{ usuario.id }}" class="modais">
+                                        <div class="modal_excluir">
+                                            <h3>Confirmar Exclusão</h3>
+                                            <p class="strong_admin">Deseja mesmo excluir o usuario <br><strong>"{{ usuario.username }}"</strong>?</p>
+                                            
+                                            <div class="botoes">
+                                                <button onclick="FecharModal('modal_excluir_{{ usuario.id }}')" class="btn-cancelar-tabela">Cancelar</button>
+                                                <form action="{{ url_for('excluir_vendedor', username=usuario.username) }}" method="POST">
+                                                    <button type="submit" class="btn-confirmar">Excluir</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+{% endif %}
+    </div>
 
 {% endblock %}
