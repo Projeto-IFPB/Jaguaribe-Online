@@ -463,9 +463,9 @@ def alterar_username():
             linhas_usuarios.append(nova_linha)
 
         with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
-        arq.write(';'.join(campos_usuarios)+ '\n')
-        for i in linhas_usuarios:
-            arq.write(i +'\n')
+            arq.write(';'.join(campos_usuarios)+ '\n')
+            for i in linhas_usuarios:
+                arq.write(i +'\n')
 
     current_user.id = novo_username  
     current_user.username = novo_username
@@ -481,6 +481,8 @@ def alterar_nome_vendedor():
     novo_nome = request.form.get('novo_nome', '')
     username = current_user.username 
     nome_antigo = current_user.nome_completo
+    campos_produtos = ['id', 'nome', 'imagem', 'preco', 'vendedor', 'username_vendedor', 'descricao']
+    campos_usuarios =['username','nome','data','whatsapp','senha']
 
     
     if novo_nome == nome_antigo:
@@ -489,33 +491,34 @@ def alterar_nome_vendedor():
     
     linhas_produtos = []
     with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
-        leitor = csv.DictReader(arq, delimiter=';')
-        campos_produtos = leitor.fieldnames
-        for linha in leitor:
-
-            if linha['username_vendedor'] == username:
-                linha['vendedor'] = novo_nome
-            linhas_produtos.append(linha)
+        linhas = arq.readlines()
+        for linha in linhas[1:]:
+            dados = linha.strip().split(";")
+            if dados[5] == username:
+                dados[4] = novo_nome
+            nova_linha = ';'.join(dados)
+            linhas_produtos.append(nova_linha)
     
 
     with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
-        escrever = csv.DictWriter(arq, fieldnames=campos_produtos, delimiter=';')
-        escrever.writeheader()
-        escrever.writerows(linhas_produtos)
+        arq.write(';'.join(campos_produtos)+ '\n')
+        for i in linhas_produtos:
+            arq.write(i +'\n')
 
     linhas_usuarios = []
     with open(USUARIOS, mode='r', encoding='utf-8') as arq:
-        leitor = csv.DictReader(arq, delimiter=';')
-        campos_usuarios = leitor.fieldnames
-        for linha in leitor:
-            if linha['username'] == username:
-                linha['nome'] = novo_nome 
-            linhas_usuarios.append(linha)
+        linhas = arq.readlines()
+        for linha in linhas[1:]:
+            dados = linha.strip().split(";")
+            if dados[0] == username:
+                dados[1] = novo_nome 
+            nova_linha = ';'.join(dados)
+            linhas_usuarios.append(nova_linha)
 
     with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
-        escrever = csv.DictWriter(arq, fieldnames=campos_usuarios, delimiter=';')
-        escrever.writeheader()
-        escrever.writerows(linhas_usuarios)
+        arq.write(';'.join(campos_usuarios)+ '\n')
+        for i in linhas_usuarios:
+            arq.write(i +'\n')
 
     current_user.nome_completo = novo_nome 
     flash("Nome de vendedor atualizado com sucesso!", "successo")
