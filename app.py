@@ -45,7 +45,11 @@ def load_user(user_id):
                     return Usuario(dados[0], dados[1], dados[2], dados[3], dados[4])
     return None
 
-
+#carregar admin
+def carregar_admins():
+    with open(ADMIN, 'r') as arq:
+        return [linha.strip() for linha in arq.readlines()]
+    return []
 
 #cadastro produtos
 def ler_produtos():
