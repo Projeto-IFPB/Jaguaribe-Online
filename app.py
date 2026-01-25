@@ -304,15 +304,17 @@ def excluir_produto(id_produto):
     campos = ['id', 'nome', 'imagem', 'preco', 'vendedor', 'username_vendedor', 'descricao']
 
     with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
-        leitor = csv.DictReader(arq, delimiter=';')
-        for linha in leitor:
-            if linha['id'] != str(id_produto) or linha['username_vendedor'] != current_user.username:
-                linhas_mantidas.append(linha)
+        linhas = arq.readlines()
+        for linha in linhas[1:]:
+            dados = linha.strip().split(';')
+            if dados[0] != str(id_produto) or dados[5] != current_user.username:
+                linhas_mantidas.append(linha.strip())
 
     with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
-        escrever = csv.DictWriter(arq, fieldnames=campos, delimiter=';')
-        escrever.writeheader()
-        escrever.writerows(linhas_mantidas)
+        arq.write(";".join(campos) + "\n")
+        
+        for i in linhas_mantidas:
+            arq.write(i + '\n')
 
     flash('Produto excluído com sucesso!', 'success')
     return redirect(url_for('pagina_perfil'))
