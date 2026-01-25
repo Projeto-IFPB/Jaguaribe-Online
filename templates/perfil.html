@@ -21,6 +21,15 @@
 {% endif %}
 {% endwith %}
 
+<!-- Mensagem que aparece se o admin tentar excluir a sua própria conta -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}" style="text-align: center; color: red;">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
 {% with messages = get_flashed_messages(category_filter=['erro_username'],with_categories=true) %}
 {% if messages %}
 {% for category, message in messages %}
@@ -29,15 +38,6 @@
 </div>
 {% endfor %}
 {% endif %}
-{% endwith %}
-
-<!-- Mensagem que aparece se o admin tentar excluir a sua própria conta -->
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }}" style="text-align: center; color: green;">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
 {% endwith %}
 
 <div class="perfil-info">

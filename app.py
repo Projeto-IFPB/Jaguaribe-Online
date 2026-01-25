@@ -1,4 +1,3 @@
-import csv
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for,flash
 import os
@@ -37,10 +36,12 @@ class Usuario(UserMixin):
 @login_manager.user_loader
 def load_user(user_id):
     with open(USUARIOS, mode='r') as arq:
-        leitor = csv.DictReader(arq, delimiter=";")
-        for linha in leitor:
-            if linha['username'] == user_id:
-                return Usuario(linha['username'], linha['nome'], linha['data'], linha['whatsapp'], linha['senha'])
+        linhas = arq.readlines()
+        for linha in linhas[1:]:
+            dados = linha.strip().split(';')
+            if len(dados) >= 5:
+                if dados[0] == user_id:
+                    return Usuario(dados[0], dados[1], dados[2], dados[3], dados[4])
     return None
 
 
