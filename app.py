@@ -108,9 +108,11 @@ def ler_todos_usuarios():
         return []
 
     with open(USUARIOS, mode='r', encoding='utf-8') as arq:
-        leitor = csv.DictReader(arq, delimiter=";")
-        for linha in leitor:
-            usuarios.append(linha)
+        linhas = arq.readlines()
+        for linha in linhas[1:]:
+            dados = linha.strip().split(';')
+            retorno = Usuario(dados[0], dados[1], dados[2], dados[3], dados[4])
+            usuarios.append(retorno)      
     return usuarios
 
 #whatsapp do vendedor 
