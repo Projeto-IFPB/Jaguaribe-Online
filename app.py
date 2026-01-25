@@ -421,48 +421,51 @@ def excluir_vendedor(username):
 def alterar_username():
     novo_username = request.form.get('novo_username', '').strip()
     username_antigo = current_user.username
+    campos_produtos = ['id', 'nome', 'imagem', 'preco', 'vendedor', 'username_vendedor', 'descricao']
+    campos_usuarios =['username','nome','data','whatsapp','senha']
 
-    if not novo_username or novo_username == username_antigo:
+    if novo_username == username_antigo:
         flash("Digite um novo username diferente do atual.", "erro_username")
         return redirect(url_for('pagina_perfil'))
 
 
     with open(USUARIOS, mode='r', encoding='utf-8') as arq:
-        leitor_user = csv.DictReader(arq, delimiter=';')
-        for usuario in leitor_user:
-            if usuario['username'] == novo_username:
+        linhas = arq.readlines()
+        for linha in linhas[1:]:
+            usuario = linha.strip().split(';')
+            if usuario[0] == novo_username:
                 flash("Este username já está em uso por outro usuário!", "erro_username")
                 return redirect(url_for('pagina_perfil'))
 
     linhas_produtos = []
     with open(PRODUTOS, mode='r', encoding='utf-8') as arq:
-        leitor = csv.DictReader(arq, delimiter=';')
-        campos_produtos = leitor.fieldnames
-        for linha in leitor:
-            if linha['username_vendedor'] == username_antigo:
-                linha['username_vendedor'] = novo_username
-            linhas_produtos.append(linha)
+        linhas = arq.readlines()
+        for linha in linhas[1:]:
+            dados = linha.strip().split(';')
+            if dados[5] == username_antigo:
+                dados[5] = novo_username
+            nova_linha = ';'.join(dados)
+            linhas_produtos.append(nova_linha)
 
     with open(PRODUTOS, mode='w', newline='', encoding='utf-8') as arq:
-        escrever = csv.DictWriter(arq, fieldnames=campos_produtos, delimiter=';')
-        escrever.writeheader()
-        escrever.writerows(linhas_produtos)
+        arq.write(';'.join(campos_produtos)+ '\n')
+        for i in linhas_produtos:
+            arq.write(i +'\n')
 
     linhas_usuarios = []
-    if os.path.exists(USUARIOS):
-        with open(USUARIOS, mode='r', encoding='utf-8') as arq:
-            leitor = csv.DictReader(arq, delimiter=';')
-            campos_usuarios = leitor.fieldnames
-            for linha in leitor:
-
-                if linha['username'] == username_antigo:
-                    linha['username'] = novo_username
-                linhas_usuarios.append(linha)
+    with open(USUARIOS, mode='r', encoding='utf-8') as arq:
+        linhas = arq.readlines()
+        for linha in linhas[1:]:
+            dados = linha.strip().split(';')
+            if dados[0] == username_antigo:
+                dados[0] = novo_username
+            nova_linha = ';'.join(dados)
+            linhas_usuarios.append(nova_linha)
 
         with open(USUARIOS, mode='w', newline='', encoding='utf-8') as arq:
-            escrever = csv.DictWriter(arq, fieldnames=campos_usuarios, delimiter=';')
-            escrever.writeheader()
-            escrever.writerows(linhas_usuarios)
+        arq.write(';'.join(campos_usuarios)+ '\n')
+        for i in linhas_usuarios:
+            arq.write(i +'\n')
 
     current_user.id = novo_username  
     current_user.username = novo_username
