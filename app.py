@@ -277,7 +277,8 @@ def pagina_login():
                     if check_password_hash(dados[4], senha):
                         usuario = Usuario(dados[0], dados[1], dados[2], dados[3], dados[4])
                         login_user(usuario)
-                        if usuario.username in ADMINS: 
+                        admins = carregar_admins()
+                        if usuario.username in admins: 
                             session['perfil'] = 'admin'
                         else:
                             session['perfil'] = 'usuario'
@@ -479,6 +480,19 @@ def alterar_username():
             arq.write(';'.join(campos_usuarios)+ '\n')
             for i in linhas_usuarios:
                 arq.write(i +'\n')
+
+    admins = carregar_admins()
+    if username_antigo in admins:
+        novos_admins = []
+        for i in admins:
+            if i == username_antigo:
+                novos_admins.append(novo_username)
+            else:
+                novos_admins.append(i)
+        
+        with open(ADMIN, 'w') as arq:
+            for adm in novos_admins:
+                arq.write(adm + '\n')
 
     current_user.id = novo_username  
     current_user.username = novo_username
