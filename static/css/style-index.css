@@ -76,6 +76,19 @@ header.rolagem .navbar-inicio .navbar-links li a:hover{
 header.rolagem .navbar-inicio .button-login::after,header.rolagem .navbar-inicio .button-perfil::after{
     color: var(--green-mid);
 }
+.navbar-inicio .navbar-links{
+    background:linear-gradient(to right, #047857, #064E3B);
+    width: 100vw;
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    top: 2.8rem;
+}
+header.rolagem .navbar-inicio .navbar-links{
+    background:linear-gradient(to right, white, white);
+    transition: 0.4s;
+    position: static;
+}
 
 .brand {
     color: var(--white);
@@ -193,6 +206,9 @@ header.rolagem .navbar-inicio .button-login::after,header.rolagem .navbar-inicio
     height: 3px;
     background-color: var(--white);
     border-radius: 10px;
+}
+header.rolagem .navbar-inicio .barra{
+    background-color: var(--green-mid);
 }
 
 @media (max-width: 770px) {

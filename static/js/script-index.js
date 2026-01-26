@@ -43,5 +43,5 @@ window.onclick = function(event) {
 window.addEventListener("scroll", function() {
     let header = document.querySelector("header");
     // Se o scroll passar de 50px, adiciona a classe, senão remove
-    header.classList.toggle("rolagem", window.scrollY > 50);
+    header.classList.toggle("rolagem", window.scrollY > 5);
 })
