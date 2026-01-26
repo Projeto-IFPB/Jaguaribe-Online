@@ -471,3 +471,76 @@ body {
     justify-content: center;
   }
 }
+
+.modal_editar_usuario form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2.0rem;
+  background-color: var(--white);
+  border-radius: 1.0rem;
+}
+
+.modal_editar_usuario input[type="text"],
+.modal_editar_usuario input[type="file"],
+.modal_editar_usuario textarea {
+  border: 2px solid #39ff14;
+  border-radius: 0.6rem;
+  padding: 1.0rem;
+  font-size: 1.4rem;
+  background-color: rgba(57, 255, 20, 0.05); /* verde clarinho e transparente */
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal_editar_usuario input[type="text"]:focus,
+.modal_editar_usuario input[type="file"]:focus,
+.modal_editar_usuario textarea:focus {
+  outline: none;
+  background-color: rgba(57, 255, 20, 0.15); /* verde clarinho mais visível */
+  box-shadow: 0 0 8px #39ff14;
+}
+
+/* Botões */
+.modal_editar_usuario button {
+  background-color: #2e7d32; /* verde folha */
+  color: var(--white);
+  font-weight: bolder;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 1.0rem 1.8rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.2s ease;
+  font-size: 1.4rem;
+  margin-right: 1.0rem;
+}
+
+/* Para Chrome, Edge e Safari */
+.modal_editar_usuario input[type="file"]::file-selector-button {
+  background-color: #2e7d32; /* verde folha */
+  color: var(--white);
+  font-weight: bolder;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal_editar_usuario input[type="file"]::file-selector-button:hover {
+  background-color: #388e3c;
+  transform: translateY(-2px);
+}
+
+/* Hover geral */
+.modal_editar_usuario button:hover {
+  background-color: #388e3c; /* verde mais claro */
+  transform: translateY(-3px); /* leve pulo */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Evitando bug do textarea */
+.modal_editar_usuario textarea{
+    resize: vertical;
+}
