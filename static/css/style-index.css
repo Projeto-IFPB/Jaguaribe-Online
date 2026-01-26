@@ -284,7 +284,7 @@ header.rolagem .navbar-inicio .navbar-links{
 
 }
 
-/* Carrossel de Imagens ------------------------------------------*/
+/* Primeiro section ------------------------------------------*/
 
 .inicio_pagina_feira {
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%), url(/static/images/imagem-fundo.jpg);
@@ -293,7 +293,7 @@ header.rolagem .navbar-inicio .navbar-links{
     background-position: center;
     background-repeat: no-repeat;
     font-family: 'Inter', sans-serif;
-    padding: 5rem 3rem;
+    padding: 10rem 7rem;
     height: 60rem;
     color: white;   
 }
@@ -322,6 +322,7 @@ header.rolagem .navbar-inicio .navbar-links{
     color: #E2E8F0;
     font-size: 2rem;
     max-width: 50%;
+    line-height: 3rem;
 }
 
 .inicio_pagina_feira .descricao_feira h3 {
@@ -383,7 +384,7 @@ header.rolagem .navbar-inicio .navbar-links{
         min-height: 100vh;
         padding: 8rem 2rem;
         /* Muda o degradê para vir de baixo, facilitando a leitura em telas verticais */
-        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%), url(img/imagem-fundo.jpg);
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%), url(/static/images/imagem-fundo.jpg);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -392,13 +393,13 @@ header.rolagem .navbar-inicio .navbar-links{
 
     .inicio_pagina_feira .titulo {
         font-size: 3.2rem;
-        line-height: 4.5rem;
+        line-height: 6rem;
         margin: 2rem 0;
     }
 
     .inicio_pagina_feira .descricao_feira {
         max-width: 100%; /* Texto ocupa a largura toda no celular */
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
     .inicio_pagina_feira .botoes {
@@ -420,7 +421,8 @@ header.rolagem .navbar-inicio .navbar-links{
 
 @media (max-width: 480px) {
     .inicio_pagina_feira .titulo {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
+        padding: 3rem 0;
     }
     
     .inicio_pagina_feira {
@@ -428,27 +430,6 @@ header.rolagem .navbar-inicio .navbar-links{
     }
 }   
 
-/* Estilização do botão Ver Produtos */
-
-.button_ver_produtos {
-    padding: 1rem 2rem;
-    border-radius: 20px;
-    display: flex;
-    border: 2px solid var(--white);
-    width: 150px;
-    justify-content: center;
-    margin-top: 2rem;
-    text-decoration: none;
-    color: var(--white);
-    font-size: 1.4rem;
-    font-weight: bold;
-    transition: 0.3s ease;
-}
-
-.button_ver_produtos:hover {
-    background-color: var(--white);
-    color:#047857;
-}
 
 /* Estilizando o Main  */
 .historia_feira {
@@ -477,44 +458,6 @@ header.rolagem .navbar-inicio .navbar-links{
     max-width: 900px;
     width: 100%;
 
-}
-
-/* Fim da Estilização da Main */
-
-
-@media screen and (max-width: 768px) {
-  
-    /* Carrosel */
-    .carrossel {
-        min-height: 35vh;
-    }
-
-    .content {
-        width: 95%; 
-        max-width: 600px;
-    }
-
-    .bar {
-        width: 10px;
-        height: 10px;
-        margin: 4px;
-    }
-
-    .navigation {
-        bottom: 5px;
-    }
-
-    /* Botão Ver Produtos */
-    .button_ver_produtos {
-        padding: 0.8rem 0.8rem;
-        width: 120px;
-        justify-content: center;
-        margin-top: 20px;
-        text-decoration: none;
-        color: var(--white);
-        font-size: 1.2rem;
-
-    }
 }
 
 @media screen and (max-width: 480px) {
