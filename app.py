@@ -302,10 +302,7 @@ def pagina_perfil():
             if vendedor == atual :
                 item = dict(zip(cabecalho, dados))
                 meus_produtos.append(item)
-
-
         todos_usuarios = ler_todos_usuarios()
-    
     return render_template('perfil.html', produtos=meus_produtos, usuarios=todos_usuarios)
 
 @app.route('/excluir_produto/<id_produto>', methods=['POST'])
