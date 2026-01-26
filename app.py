@@ -367,7 +367,7 @@ def editar_produto(id_produto):
     return render_template('editar_produto.html', produto=produto_atual)
 
 # Rota que permite que o admin exclua a conta de um vendedor
-@app.route('/excluir_usuario/<username>')
+@app.route('/excluir_usuario/<username>', methods=['POST'])
 @login_required
 def excluir_vendedor(username):
 

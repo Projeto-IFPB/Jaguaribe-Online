@@ -14,7 +14,7 @@
 {% with messages = get_flashed_messages(category_filter=['successo'],with_categories=true) %}
 {% if messages %}
 {% for category, message in messages %}
-<div style="color: green;">
+<div style="color: green; text-align: center;">
     {{ message }}
 </div>
 {% endfor %}
@@ -22,7 +22,7 @@
 {% endwith %}
 
 <!-- Mensagem que aparece se o admin tentar excluir a sua própria conta -->
-{% with messages = get_flashed_messages(with_categories=true) %}
+{% with messages = get_flashed_messages(category_filter=['dashboard_erro'],with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
       <div class="alert alert-{{ category }}" style="text-align: center; color: red;">{{ message }}</div>
@@ -277,7 +277,7 @@
                     <div id="modal_excluir_{{ produto.id }}" class="modais">
                         <div class="modal_excluir">
                             <h3>Confirmar Exclusão</h3>
-                            <p>Deseja mesmo excluir o produto <strong>"{{ produto.nome }}"</strong>?</p>
+                            <p>Deseja mesmo excluir o produto <br><strong>"{{ produto.nome }}"</strong>?</p>
                             
                             <div class="botoes">
                                 <button onclick="FecharModal('modal_excluir_{{ produto.id }}')" class="btn-cancelar-tabela">Cancelar</button>
@@ -318,10 +318,20 @@
                         <td class="coluna-acoes">
                             <div class="acoes">
                                 <button class="botao-ver">Produtos</button>
-
-                                <a href="{{ url_for('excluir_vendedor', username=usuario.username) }}" class="botao-excluir">
-                                    Excluir
-                                </a>
+                                <button class="btn-excluir" onclick="AbrirModal('modal_excluir_{{ usuario.id }}')">Excluir</button>
+                                <div id="modal_excluir_{{ usuario.id }}" class="modais">
+                                    <div class="modal_excluir">
+                                        <h3>Confirmar Exclusão</h3>
+                                        <p class="strong_admin">Deseja mesmo excluir o usuario <br><strong>"{{ usuario.username }}"</strong>?</p>
+                                        
+                                        <div class="botoes">
+                                            <button onclick="FecharModal('modal_excluir_{{ usuario.id }}')" class="btn-cancelar-tabela">Cancelar</button>
+                                            <form action="{{ url_for('excluir_vendedor', username=usuario.username) }}" method="POST">
+                                                <button type="submit" class="btn-confirmar">Excluir</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </td>
                         
