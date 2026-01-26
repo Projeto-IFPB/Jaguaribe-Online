@@ -40,3 +40,8 @@ window.onclick = function(event) {
         event.target.style.display = 'none';
     }
 }
+window.addEventListener("scroll", function() {
+    let header = document.querySelector("header");
+    // Se o scroll passar de 50px, adiciona a classe, senão remove
+    header.classList.toggle("rolagem", window.scrollY > 5);
+})

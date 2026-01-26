@@ -31,6 +31,9 @@ body {
 
 /* Header ---------------------------------------------------------- */
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,7 +42,41 @@ body {
     padding: 0.5rem 1rem;
     flex-wrap: wrap; 
     font-size: 1.4rem;
+    width: 100%;
+    z-index: 1000;
+    transition: 0.4s;
 }
+.navbar-inicio{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    flex-wrap: wrap; 
+    font-size: 1.4rem;
+    width: 100%;
+    z-index: 1000;
+    transition: 0.4s;
+}
+header.rolagem .navbar-inicio{
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+}
+header.rolagem .navbar-inicio a, header.rolagem .navbar-inicio p, header.rolagem .navbar-inicio .icon-login{
+        color: var(--green-mid);
+}
+header.rolagem .navbar-inicio .navbar-links li a:hover{
+    background-color: white;
+}
+header.rolagem .navbar-inicio .button-login::after,header.rolagem .navbar-inicio .button-perfil::after{
+    color: var(--green-mid);
+}
+
 
 .brand {
     color: var(--white);
@@ -158,6 +195,9 @@ body {
     background-color: var(--white);
     border-radius: 10px;
 }
+header.rolagem .navbar-inicio .barra{
+    background-color: var(--green-mid);
+}
 
 @media (max-width: 770px) {
             
@@ -225,6 +265,19 @@ body {
 
 .button-login:hover , .button-perfil:hover{
     width: 100%;
+}
+.navbar-inicio .navbar-links{
+    background:linear-gradient(to right, #047857, #064E3B);
+    width: 100vw;
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    top: 2.8rem;
+}
+header.rolagem .navbar-inicio .navbar-links{
+    background:linear-gradient(to right, white, white);
+    transition: 0.4s;
+    position: static;
 }
 
 }
