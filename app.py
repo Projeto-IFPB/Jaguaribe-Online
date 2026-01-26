@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect, url_for,flash
+from flask import Flask, render_template, request, redirect, url_for,flash, session
 import os
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
@@ -18,7 +18,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 USUARIOS = "data/usuarios.csv"
 PRODUTOS = "data/produtos.csv"
-
+#arquivos de texto
+ADMIN = "data/admin.txt"
 # login Manager
 
 login_manager = LoginManager(app)
@@ -44,7 +45,11 @@ def load_user(user_id):
                     return Usuario(dados[0], dados[1], dados[2], dados[3], dados[4])
     return None
 
-
+#carregar admin
+def carregar_admins():
+    with open(ADMIN, 'r') as arq:
+        return [linha.strip() for linha in arq.readlines()]
+    return []
 
 #cadastro produtos
 def ler_produtos():
@@ -272,6 +277,11 @@ def pagina_login():
                     if check_password_hash(dados[4], senha):
                         usuario = Usuario(dados[0], dados[1], dados[2], dados[3], dados[4])
                         login_user(usuario)
+                        admins = carregar_admins()
+                        if usuario.username in admins: 
+                            session['perfil'] = 'admin'
+                        else:
+                            session['perfil'] = 'usuario'
                         return redirect(url_for('pagina_perfil'))
         
         flash('Usuário ou senha inválidos')
@@ -292,9 +302,7 @@ def pagina_perfil():
             if vendedor == atual :
                 item = dict(zip(cabecalho, dados))
                 meus_produtos.append(item)
-
         todos_usuarios = ler_todos_usuarios()
-    
     return render_template('perfil.html', produtos=meus_produtos, usuarios=todos_usuarios)
 
 @app.route('/excluir_produto/<id_produto>', methods=['POST'])
@@ -371,6 +379,9 @@ def editar_produto(id_produto):
 @login_required
 def excluir_vendedor(username):
 
+    if session.get('perfil') != 'admin':
+        flash("Acesso negado: Você não tem permissão para esta ação.", "dashboard_erro")
+        return redirect(url_for('pagina_perfil'))
     # Evitar que o admin exclua a si próprio por acidente
     if username == current_user.username:
         flash('Você não pode excluir sua própria conta de administrador por aqui.', 'dashboard_erro')
@@ -466,6 +477,19 @@ def alterar_username():
             arq.write(';'.join(campos_usuarios)+ '\n')
             for i in linhas_usuarios:
                 arq.write(i +'\n')
+
+    admins = carregar_admins()
+    if username_antigo in admins:
+        novos_admins = []
+        for i in admins:
+            if i == username_antigo:
+                novos_admins.append(novo_username)
+            else:
+                novos_admins.append(i)
+        
+        with open(ADMIN, 'w') as arq:
+            for adm in novos_admins:
+                arq.write(adm + '\n')
 
     current_user.id = novo_username  
     current_user.username = novo_username
@@ -646,6 +670,7 @@ def alterar_whatsapp():
 @login_required
 def logout():
     logout_user()
+    session.pop('perfil', None)
     flash('Você foi desconectado com sucesso.')
     return redirect(url_for('pagina_login'))
 
