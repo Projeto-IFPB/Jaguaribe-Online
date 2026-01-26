@@ -679,3 +679,147 @@ h2, h3 {
     padding: 0; 
     margin: 0;
 }
+
+.sobre-feira80 {
+    padding: 5rem 1rem;
+    background-color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+.sobre-conteudo {
+    max-width: 75rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+
+.sobre-imagem {
+    flex: 1;
+    position: relative; /* para o f-anos flutuar */
+}
+
+.sobre-imagem img {
+    width: 100%;
+    height: 100%;       
+    
+    object-fit: cover;
+    border-radius: 2.0rem; 
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.15);
+    transform: rotate(-2.5deg);
+}
+
+.f-anos {
+    position: absolute;
+    bottom: -1.4rem;
+    right: 2rem;
+    background-color: white;
+    padding: 1.8rem 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 1.0rem;
+    min-width: max-content;
+}
+
+
+.f-anos .numero80 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #28a745;
+    line-height: 1;
+}
+
+.f-anos .texto80 {
+    font-size: 0.95rem;
+    color: #666;
+    font-weight: 700;
+    text-align: left;
+    line-height: 1.2;
+    text-transform: uppercase;
+    
+}
+
+
+.sobre-tudo {
+    flex: 1;
+}
+
+.sobre-tudo .destaque-verde {
+    color: #28a745;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.sobre-tudo h2 {
+    font-size: 3.3rem;
+    line-height: 1.2;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    font-family: serif;
+}
+
+.sobre-tudo p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+
+.sobre-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.check-icone {
+    background-color: #caf6d8;
+    color: #28a745;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.info-item strong {
+    display: block;
+    color: #333;
+    margin-bottom: 0.2rem;
+}
+
+.info-item p {
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+
+@media (max-width: 768px) {
+    .sobre-conteudo {
+        flex-direction: column;
+        gap: 3rem;
+        
+    }
+    
+    .f-anos {
+        right: 0;
+        bottom: -1rem;
+    }
+}
