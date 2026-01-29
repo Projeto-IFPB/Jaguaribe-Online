@@ -415,6 +415,12 @@ body {
     transform: translateY(0); 
     background-color: #1b5e20; 
 }
+.btn-editar-admin{
+    background-color: #0d6efd !important;
+}
+.btn-editar-admin:hover{
+    background-color: blue !important;
+}
 
 /* Estilizando botão de logout */
 .css_logout{

@@ -44,9 +44,15 @@
 <div class="perfil-info">
     <div class="perfil_flex">
         <p><strong>Username atual:</strong> {{ current_user.username }}</p>
-        <button type="button" class="btn-editar-username" onclick="AbrirModal('modal_username')">
-         Alterar Username
-        </button>
+        {% if session.get('perfil') != 'admin' %}
+            <button type="button" class="btn-editar" onclick="AbrirModal('modal_username')">
+            Alterar Username
+            </button>
+        {% else %}
+            <button type="button" class="btn-editar-admin" onclick="AbrirModal('modal_username')">
+            Alterar Username
+            </button>
+        {% endif %}
     </div>
 </div>
 
@@ -82,9 +88,15 @@
 <div class="perfil-info">
     <div class="perfil_flex">
         <p><strong>Nome atual:</strong> {{ current_user.nome_completo }}</p>
-        <button type="button" class="btn-editar-nome" onclick="AbrirModal('modal_nome')">
-         Alterar Nome
-        </button>
+        {% if session.get('perfil') != 'admin' %}
+            <button type="button" class="btn-editar" onclick="AbrirModal('modal_nome')">
+            Alterar Nome
+            </button>
+        {% else %}
+            <button type="button" class="btn-editar-admin" onclick="AbrirModal('modal_nome')">
+            Alterar Nome
+            </button>
+        {% endif %}
     </div>
 </div>
 
@@ -117,9 +129,15 @@
 <div class="perfil-info">
     <div class="perfil_flex">
         <p><strong>Data de Nascimento:</strong> {{ current_user.data.split('-')[2] }}/{{ current_user.data.split('-')[1] }}/{{ current_user.data.split('-')[0] }}</p>
-        <button type="button" class="btn-editar-nome" onclick="AbrirModal('modal_data')">
-            Alterar Data de Nascimento
-        </button>
+        {% if session.get('perfil') != 'admin' %}
+            <button type="button" class="btn-editar" onclick="AbrirModal('modal_data')">
+                Alterar Data de Nascimento
+            </button>
+        {% else %}
+            <button type="button" class="btn-editar-admin" onclick="AbrirModal('modal_data')">
+                Alterar Data de Nascimento
+            </button>
+        {% endif %}
     </div>
 </div>
 
@@ -152,9 +170,15 @@
 <div class="perfil-info">
     <div class="perfil_flex">
         <p><strong>Senha:</strong>**************</p>
-        <button type="button" class="btn-editar-nome" onclick="AbrirModal('modal_senha')">
-            Alterar Senha
-        </button>
+        {% if session.get('perfil') != 'admin' %}
+            <button type="button" class="btn-editar" onclick="AbrirModal('modal_senha')">
+                Alterar Senha
+            </button>
+        {% else %}
+            <button type="button" class="btn-editar-admin" onclick="AbrirModal('modal_senha')">
+                Alterar Senha
+            </button>
+        {% endif %}
     </div>
 </div>
 
@@ -200,9 +224,15 @@
         {% else %}
             <p><strong>telefone:</strong> +{{current_user.whatsapp[:2]}} ({{current_user.whatsapp[2:4]}}) {{current_user.whatsapp[4:9]}}-{{current_user.whatsapp[9:]}}</p>
         {% endif %}
-        <button type="button" class="btn-editar-nome" onclick="AbrirModal('modal_telefone')">
-            Alterar telefone
-        </button>
+        {% if session.get('perfil') != 'admin' %}
+            <button type="button" class="btn-editar" onclick="AbrirModal('modal_telefone')">
+                Alterar telefone
+            </button>
+        {% else %}
+            <button type="button" class="btn-editar-admin" onclick="AbrirModal('modal_telefone')">
+                Alterar telefone
+            </button>
+        {% endif %}
     </div>
 </div>
 <div id="modal_telefone" class="modais" style="display: none;">
