@@ -8,58 +8,21 @@
 <!--coloca tudo que colocaria na main, mas n usa a tag main se n buga tudo -->
 
 <!-- Primeira section da página inicial -->
-<section class="sobre-feira80">
-    <div class="sobre-conteudo">
-        
-        <div class="sobre-imagem">
-            <img src="https://picsum.photos/id/192/800/1000" alt="Foto da Feira de Jaguaribe">
-            
-            <div class="f-anos">
-                <span class="numero80">80+</span>
-                <span class="texto80">anos de<br>história</span>
-            </div>
-        </div>
+<section class="inicio_pagina_feira">
+    <h3 id="titulo_tradicao">TRADIÇÃO EM JOÃO PESSOA</h3>
+    <div class="titulo">
+        <h1>Bem-vindo à</h1>
+        <h1 id="titulo_verde">Feira de Jaguaribe</h1>
+    </div>
 
-        <div class="sobre-tudo">
-            <span class="destaque-verde">SOBRE A FEIRA</span>
-            <h2>Um patrimônio cultural no coração de João Pessoa.</h2>
-            
-            <p>
-                A Feira de Jaguaribe é uma das feiras mais antigas de João Pessoa. 
-                Sendo também conhecida como a "feira de quarta", ela traz consigo uma história cultural riquíssima do bairro.
-            </p>
-            <p>
-                É um ponto de encontro vital para vendedores locais, fortalecendo a 
-                economia da região e a conexão dos moradores com o ambiente. 
-                Preços acessíveis e alta variedade de alimentos chamam atenção e 
-                garantem uma alta quantidade de consumidores toda semana.
-            </p>
+    <div class="descricao_feira">
+        <h3>Desde 1940, o coração pulsante da nossa cultura.</h3>
+        <h3>Venha descobrir o melhor dos produtos regionais e o acolhimento paraibano.</h3>
+    </div>
 
-            <p>
-                Desde 1940, o mercado público é indispensável para o fator social 
-                do bairro. Tendo uma praça ao lado da feira, muitas pessoas se 
-                aproveitam do movimento para estar saindo de casa e assim 
-                podem aproveitar de um ambiente cheio de comidas típicas 
-                paraibanas e música regional.
-            </p>
-
-            <div class="sobre-info">
-                <div class="info-item">
-                    <span class="check-icone">✔</span>
-                    <div>
-                        <strong>Preços Populares</strong>
-                        <p>A famosa 'xepa' no fim do dia..</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <span class="check-icone">✔</span>
-                    <div>
-                        <strong>Gastronomia</strong>
-                        <p>Tapioca, café e muito mais.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="botoes">
+        <a href="{{ url_for('pagina_produtos' ) }}" id="btn_ver_produtos">Ver Produtos</a>
+        <a href="#"id="btn_historia">Conhecer História</a>
     </div>
 </section>
 
