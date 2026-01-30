@@ -4,6 +4,5 @@ id;nome;imagem;preco;vendedor;username_vendedor;descricao
 3;Banana;banana.webp;3.00;joao123;João;Palma de banana
 4;Maça;maca.jpg;3.00;Ryan;ryan123;Maça fresquinha
 5;camisa do flamengo;flamengo.jpg;1599.99;diogo presida;mengao;original e usada pelo arrasca
-6;Uva sem caroço;uva.jpg;5,00;software da silva junior;software>hardware;Uva sem caroços
-7;uva;None;1.00;software da silva junior;software>hardware;uva sem caroço
-8;Morango do Amor;None;1.00;Ryan;ryan;Morango feito com amor
+6;Uva sem caroço;uva.jpg;5,00;petronio;software>hardware;Uva sem caroços
+7;uva;None;1.00;petronio;software>hardware;uva sem caroço

@@ -2,12 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-/* Configurando estilizações padrão da página */
-body {
-  font-family: 'Inter', Arial, sans-serif;
-  line-height: 1.6rem;
-  font-size: 1.6rem;
-}
 
 
 /* Configurações Iniciais */
@@ -18,8 +12,18 @@ body {
     box-sizing: border-box;
 }
 
-/* Variáveis de cores do Projeto e Fonte-Size */
+/* Configurando estilizações padrão da página */
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', Arial, sans-serif;
+    line-height: 1.6rem;
+    font-size: 1.6rem;
+    height: 100%;
+    min-height: 100vh; /* Garante que o corpo ocupe a tela toda */
+}
 
+/* Variáveis de cores do Projeto e Fonte-Size */
 :root{
     font-size: 62.5%;
     --green-dark: #166534;
@@ -28,6 +32,10 @@ body {
     --gray-light: #F3F4F6;
     --white: #ffffff;
     --black: #0a0a0a;
+}
+
+main {
+    flex: 1;
 }
 
 
@@ -578,29 +586,29 @@ h2, h3 {
 }
 
 
-.direitos {
+.direitos_de_privacidade {
     border-top: 1px solid #162341;
     margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
 }
 
-.direitos #termos{
+.direitos_de_privacidade #termos{
     display: flex;
     gap: 2rem;
 }
 
-.direitos #termos a {
+.direitos_de_privacidade #termos a {
     text-decoration: none;
     color: #94A3B8;
 }
 
-.direitos #termos a:hover {
+.direitos_de_privacidade #termos a:hover {
     color: white;
     transition: 0.3s;
 }
 
-.direitos p {
+.direitos_de_privacidade p {
     margin-top: 2rem;
 }
 
@@ -636,14 +644,14 @@ h2, h3 {
         max-width: 80%;
     }
 
-    .direitos {
+    .direitos_de_privacidade {
         flex-direction: column; /* Empilha os direitos autorais */
         gap: 1rem;
         padding-top: 2rem;
         text-align: center;
     }
 
-    .direitos #termos {
+    .direitos_de_privacidade #termos {
         justify-content: center;
     }
 }
@@ -665,6 +673,7 @@ h2, h3 {
     text-align: center;
     line-height: 2rem;
 }
+
 /*Modais */
 .modais {
     display: none; 

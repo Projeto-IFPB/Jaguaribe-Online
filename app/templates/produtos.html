@@ -8,17 +8,17 @@
 <br><br>
 <div class="pesquisa-container">
     
-    <form action="{{ url_for('pagina_produtos' ) }}" method="GET" class="caixa-pesquisa">
+    <form action="{{ url_for('main.pagina_produtos' ) }}" method="GET" class="caixa-pesquisa">
         <input type="text" name="busca" placeholder="O que você procura?" value="{{ request.args.get('busca', '') }}">
         <button type="submit">Buscar</button>
     </form>
     
     <div class="space_cadastro">
         <div class="div_cadastro"> 
-            <a class="cadastrando" href="{{ url_for('cadastro_produtos' ) }}">Cadastrar um produto</a>
+            <a class="cadastrando" href="{{ url_for('main.cadastro_produtos' ) }}">Cadastrar um produto</a>
         </div>
 
-        <form action="{{ url_for('pagina_produtos') }}" method="GET" class="filtro">
+        <form action="{{ url_for('main.pagina_produtos') }}" method="GET" class="filtro">
         <label for="filtro-categoria">Filtrar por:</label>  
         <input type="hidden" name="busca" value="{{ request.args.get('busca', '') }}">
         

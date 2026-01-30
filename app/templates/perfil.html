@@ -7,7 +7,7 @@
 {% block content %}
 <br><br>
 <div class="flex_logout">
-    <a class="css_logout" href="{{ url_for('logout' ) }}">Logout</a>
+    <a class="css_logout" href="{{ url_for('main.logout' ) }}">Logout</a>
 </div>
 
 <h1 class="h1_perfil">Suas configurações de perfil</h1>
@@ -61,11 +61,10 @@
         <h1>Alterar Username</h1>
         <p>Lembre-se: isso mudará seu login e atualizará todos os seus produtos.</p>
         
-        <form action="{{ url_for('alterar_username') }}" method="POST">
+        <form action="{{ url_for('main.alterar_username') }}" method="POST">
             <div>
                 <label for="novo_username">Novo Username:</label>
-                <input type="text" id="novo_username" name="novo_username" 
-                       placeholder="Digite o novo username" required>
+                <input type="text" id="novo_username" name="novo_username" placeholder="Digite o novo username" value="{{current_user.username}}" required>
             </div>
             
             <div class="botoes-modal">
@@ -104,10 +103,10 @@
     <div class="modal_editar_usuario">
         <h1>Alterar Nome</h1>
         
-        <form action="{{ url_for('alterar_nome_vendedor') }}" method="POST">
+        <form action="{{ url_for('main.alterar_nome_vendedor') }}" method="POST">
             <div>
                 <label for="novo_nome">Novo Nome:</label>
-                <input type="text" id="novo_nome" name="novo_nome" placeholder="Digite o novo nome" required>
+                <input type="text" id="novo_nome" name="novo_nome" placeholder="Digite o novo nome" value="{{current_user.nome}}" required>
             </div>
             
             <div class="botoes-modal">
@@ -145,10 +144,10 @@
     <div class="modal_editar_usuario">
         <h1>Alterar Data</h1>
         
-        <form action="{{ url_for('alterar_data_vendedor') }}" method="POST">
+        <form action="{{ url_for('main.alterar_data_vendedor') }}" method="POST">
             <div>
                 <label for="nova_data">Nova Data:</label>
-                <input type="date" id="nova_data" name="nova_data" required>
+                <input type="date" id="nova_data" name="nova_data" value="{{current_user.data}}" required>
             </div>
             
             <div class="botoes-modal">
@@ -186,7 +185,7 @@
     <div class="modal_editar_usuario">
         <h1>Alterar Senha</h1>
         
-        <form action="{{ url_for('alterar_senha') }}" method="POST">
+        <form action="{{ url_for('main.alterar_senha') }}" method="POST">
             <div>
                 <label for="senha_atual">Senha Atual:</label>
                 <input type="password" id="senha_atual" name="senha_atual" required>
@@ -239,7 +238,7 @@
     <div class="modal_editar_usuario">
         <h1>Alterar telefone</h1>
         
-        <form action="{{ url_for('alterar_whatsapp') }}" method="POST">
+        <form action="{{ url_for('main.alterar_whatsapp') }}" method="POST">
             <div>
                 <label for="novo_telefone">Novo telefone:</label>
                 <input type="text" id="novo_telefone" name="novo_telefone" placeholder="Deixe em branco para apagar o número" minlength="11">
@@ -283,7 +282,7 @@
                         <div class="modal_editar_usuario">
                             <h1>Editando: </h1>
                             <p class="nome_produto"><b>{{ produto.nome }}</b></p>
-                            <form action="{{ url_for('editar_produto', id_produto=produto.id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url_for('main.editar_produto', id_produto=produto.id) }}" method="POST" enctype="multipart/form-data">
                                 <div>
                                     <label>Nome do Produto:</label>
                                     <input type="text" name="nome" value="{{ produto.nome }}" required>
@@ -314,7 +313,7 @@
                             
                             <div class="botoes">
                                 <button onclick="FecharModal('modal_excluir_{{ produto.id }}')" class="btn-cancelar-tabela">Cancelar</button>
-                                <form action="{{ url_for('excluir_produto', id_produto=produto.id) }}" method="POST">
+                                <form action="{{ url_for('main.excluir_produto', id_produto=produto.id) }}" method="POST">
                                     <button type="submit" class="btn-confirmar">Excluir</button>
                                 </form>
                             </div>
@@ -360,7 +359,7 @@
                                             
                                             <div class="botoes">
                                                 <button onclick="FecharModal('modal_excluir_{{ usuario.id }}')" class="btn-cancelar-tabela">Cancelar</button>
-                                                <form action="{{ url_for('excluir_vendedor', username=usuario.username) }}" method="POST">
+                                                <form action="{{ url_for('admin.excluir_vendedor', username=usuario.username) }}" method="POST">
                                                     <button type="submit" class="btn-confirmar">Excluir</button>
                                                 </form>
                                             </div>
