@@ -12,7 +12,9 @@ def create_app():
     app.secret_key = os.getenv('SECRET_KEY', 'chave_MasterCard_Nao_tem_preco')
 
     #configuração para upload fotos produtos
-    UPLOAD_FOLDER = 'static/uploads'
+
+    # App.root_path aponta para a pasta app, e segue o caminho app/static/uploads
+    UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     # login maneger
