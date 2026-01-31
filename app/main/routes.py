@@ -77,6 +77,19 @@ def produto_descricao(produto_id):
 @main_bp.route("/cadastro_produtos", methods=["GET","POST"])
 @login_required
 def cadastro_produtos():
+    id_novo = 1
+    if os.path.exists(PRODUTOS):
+        with open(PRODUTOS, 'r', encoding='utf-8') as arq:
+            linhas = arq.readlines()
+            ids_existentes = []
+            for linha in linhas[1:]:
+                dados = linha.strip().split(';')
+                if dados[0]:
+                    ids_existentes.append(int(dados[0]))
+            
+            # Se houver IDs, o novo será o maior + 1
+            if ids_existentes:
+                id_novo = max(ids_existentes) + 1
 
     if request.method == "POST":
         produto = request.form.get("produto")
@@ -89,9 +102,10 @@ def cadastro_produtos():
         nome_imagem = "None"
 
         if file and file.filename != '':
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-            nome_imagem = filename
+            extensao = os.path.splitext(file.filename)[1]
+            imagem = str(id_novo) + "-imagem" + extensao
+            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], imagem))
+            nome_imagem = imagem
 
         if produto and preco and username_vendedor:
             guardar_produtos(produto,nome_imagem,preco,vendedor,username_vendedor,descricao)
