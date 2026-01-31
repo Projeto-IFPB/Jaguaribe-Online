@@ -425,14 +425,14 @@ body {
 /* Estilizando botão de logout */
 .css_logout{
     display: inline-block;
-    background-color: #1976d2;
+    background-color: rgba(220, 53, 69, 0.5);
+    border-color: rgba(224, 50, 65, 0.5);;
     color: var(--white);
     font-weight: bolder;
     text-decoration: none;
-    border: 2px solid #1565c0;
     border-radius: 0.8rem;
-    padding: 1.2rem 2.4rem;
-    width: 20.0rem;
+    padding: 0.8rem 0.8rem;
+    width: 8.0rem;
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
@@ -441,8 +441,8 @@ body {
 }
 
 .css_logout:hover {
-    background-color: #2196f3;
-    border-color: #1976d2;
+    background-color: #DC3545;
+    border: 2px solid #d02e3e;
     transform: translateY(-3px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
@@ -450,8 +450,8 @@ body {
 .css_logout:active {
     background-color: #0d47a1;
     border-color: #0d47a1;
-  transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .flex_logout{
