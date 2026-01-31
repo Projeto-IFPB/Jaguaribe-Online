@@ -90,4 +90,5 @@ main p a:hover {
 
 h2{
     margin-bottom: 1.2rem;
+    color: var(--green-mid);
 }
