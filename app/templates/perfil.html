@@ -60,7 +60,11 @@
 </div>
 
 <div id="modal_username" class="modais" style="display: none;">
-    <div class="modal_editar_usuario">
+    {% if session.get('perfil') != 'admin' %}
+        <div class="modal_editar_usuario">
+    {% else %}
+        <div class="modal_editar_admin">
+    {% endif %}
         <h1>Alterar Username</h1>
         <p>Lembre-se: isso mudará seu login e atualizará todos os seus produtos.</p>
         
@@ -103,7 +107,11 @@
 </div>
 
 <div id="modal_nome" class="modais" style="display: none;">
-    <div class="modal_editar_usuario">
+    {% if session.get('perfil') != 'admin' %}
+        <div class="modal_editar_usuario">
+    {% else %}
+        <div class="modal_editar_admin">
+    {% endif %}
         <h1>Alterar Nome</h1>
         
         <form action="{{ url_for('main.alterar_nome_vendedor') }}" method="POST">
@@ -144,7 +152,11 @@
 </div>
 
 <div id="modal_data" class="modais" style="display: none;">
-    <div class="modal_editar_usuario">
+    {% if session.get('perfil') != 'admin' %}
+        <div class="modal_editar_usuario">
+    {% else %}
+        <div class="modal_editar_admin">
+    {% endif %}
         <h1>Alterar Data</h1>
         
         <form action="{{ url_for('main.alterar_data_vendedor') }}" method="POST">
@@ -185,7 +197,11 @@
 </div>
 
 <div id="modal_senha" class="modais" style="display: none;">
-    <div class="modal_editar_usuario">
+    {% if session.get('perfil') != 'admin' %}
+        <div class="modal_editar_usuario">
+    {% else %}
+        <div class="modal_editar_admin">
+    {% endif %}
         <h1>Alterar Senha</h1>
         
         <form action="{{ url_for('main.alterar_senha') }}" method="POST">
@@ -238,7 +254,11 @@
     </div>
 </div>
 <div id="modal_telefone" class="modais" style="display: none;">
-    <div class="modal_editar_usuario">
+    {% if session.get('perfil') != 'admin' %}
+        <div class="modal_editar_usuario">
+    {% else %}
+        <div class="modal_editar_admin">
+    {% endif %}
         <h1>Alterar telefone</h1>
         
         <form action="{{ url_for('main.alterar_whatsapp') }}" method="POST">
