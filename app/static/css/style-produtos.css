@@ -296,3 +296,11 @@ body {
 .btn-whatsapp i {
     font-size: 1.4rem;
 }
+
+/* Deixando página de produtos responsiva */
+@media (max-width: 600px) {
+  .caixa-pesquisa{
+    display: flex;
+    flex-direction: column;
+  }
+}
