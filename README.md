@@ -59,3 +59,14 @@ http://127.0.0.1:5000
 
 ## Status do projeto
 Projeto em desenvolvimento - (Sprint 1)
+
+## Arquitetura do Sistema
+![Arquitetura do Sistema](https://github.com/user-attachments/assets/4cc3f229-3c6c-4abb-a552-7974312e552a)
+
+
+## Diagrama de Casos de Uso
+![Casos de Uso](https://github.com/user-attachments/assets/26b0ace1-f838-484e-ba8c-d45b049bff04)
+
+
+
+
