@@ -446,6 +446,11 @@ body {
   .flex_logout{
     justify-content: center;
   }
+
+  .botoes-modal button {
+    margin-bottom: 1.0rem;    
+  }
+
 }
 
 .modal_editar_usuario form, .modal_editar_admin form {

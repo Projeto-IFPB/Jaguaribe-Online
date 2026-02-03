@@ -276,6 +276,7 @@ header.rolagem .navbar-inicio .barra{
 .button-login:hover , .button-perfil:hover{
     width: 100%;
 }
+
 .navbar-inicio .navbar-links{
     background:linear-gradient(to right, #047857, #064E3B);
     width: 100vw;
@@ -830,5 +831,97 @@ h2, h3 {
     .f-anos {
         right: 0;
         bottom: -1rem;
+    }
+}
+
+/* Estilização da session de visualização de produtos */
+
+.secao-encontre-aqui {
+    padding: 4rem 1rem;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.container {
+    max-width: 120.0rem;
+    margin: 0 auto;
+}
+
+.titulo-destaque {
+    font-size: 3.5rem;
+    color: #1a7a40; 
+    margin-bottom: 0.5rem;
+}
+
+.subtitulo_secao {
+    color: #666;
+    margin-bottom: 3rem;
+    font-size: 1.8rem;
+}
+
+.grid-categorias {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 2.0rem; 
+}
+
+.card-categoria {
+    position: relative; 
+    height: 30.0rem; 
+    border-radius: 2.0rem; 
+    overflow: hidden; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    cursor: pointer;
+}
+
+.card-categoria img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.5s ease; 
+}
+
+.card-categoria:hover img {
+    transform: scale(1.1);
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: #fff;
+    padding: 3.0rem 2.0rem 2.0rem 2.0rem; 
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.card-overlay h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-overlay p {
+    margin: 0;
+    font-size: 1.5rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* --- Media Queries do Visualizador de produtos --- */
+
+@media (max-width: 768px) {
+    .grid-categorias {
+        grid-template-columns: 1fr; 
+    }
+
+    .card-categoria {
+        height: 25.0rem;
+    }
+
+    .titulo-destaque {
+        font-size: 2rem;
     }
 }

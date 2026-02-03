@@ -184,11 +184,7 @@ body {
     font-weight: bolder;
     background-color: #1a7a40;
     border-radius: 2.0rem;
-}
-
-.div_cadastro{
-    margin-bottom: 1.0rem;
-    margin-right: 1.0rem;
+    text-align: center;
 }
 
 .cadastrando:hover{
@@ -295,4 +291,25 @@ body {
 
 .btn-whatsapp i {
     font-size: 1.4rem;
+}
+
+/* Deixando página de produtos responsiva */
+@media (max-width: 600px) {
+  .caixa-pesquisa{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.space_cadastro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.cadastrando{
+    width: 30.0rem;
+  }
 }
