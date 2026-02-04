@@ -7,6 +7,8 @@ import os
 from werkzeug.security import check_password_hash,generate_password_hash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.utils import secure_filename
+from flask import jsonify
+
 
 # Caminhos dos arquivos CSV
 USUARIOS = "data/usuarios.csv"
@@ -68,8 +70,9 @@ def excluir_vendedor(username):
     flash(f'O usuário "{username}" e todos os seus produtos foram removidos com sucesso.', 'successo')
     return redirect(url_for('main.pagina_perfil')) # Redireciona de volta para a lista
 
-@admin_bp.route('/vendedor/<username>')
+# Rota para carregar produtos do usuário sendo adm
+
+@admin_bp.route('/vendedor/<username>/produtos')
 def ver_produtos_vendedor(username):
     lista_produtos = carregar_produtos_usuario(username)
-    
-    return render_template('produtos_vendedor.html', produtos=lista_produtos, vendedor=username)
+    return jsonify(lista_produtos)

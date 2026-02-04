@@ -599,3 +599,98 @@ body {
 .modal_editar_usuario textarea, .modal_editar_admin textarea{
     resize: vertical;
 }
+
+/* Estilizando modal de produtos */
+
+#modal_produtos {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.6);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+#modal_produtos .modal_conteudo {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 1.2rem;
+
+    width: 90%;
+    max-width: 80.0rem;
+
+    max-height: 80vh;
+    overflow-y: auto;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilizando tabela do modal de produtos */
+
+.tabela-ver-produtos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.tabela-ver-produtos thead {
+    background-color: #166534; 
+    color: white;
+}
+
+.tabela-ver-produtos th {
+    padding: 1.2rem;
+    text-align: center;
+}
+
+.tabela-ver-produtos td {
+    padding: 1.2rem;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+.tabela-ver-produtos tbody tr:nth-child(even) {
+    background-color: #f3f4f6;
+}
+
+.tabela-ver-produtos tbody tr:hover {
+    background-color: #e6f4ea;
+}
+
+/* Estilizando botão de fechar do modal de produtos */
+
+.btn-fechar-modal {
+    margin-top: 2.0rem;
+    padding: 1.4rem 2.8rem;
+
+    background-color: #166534;
+    color: white;
+
+    border: none;
+    border-radius: 0.8rem;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-fechar-modal:hover {
+    background-color: #1a7a40;
+    transform: translateY(-1px);
+}
+
+
+.btn-fechar-modal:active {
+    transform: translateY(0);
+}
+
+
+
