@@ -21,6 +21,30 @@ function FecharModal(idModal) {
     }
 }
 
+// Função para pegar os produtos do usuário e usar no modal
+
+function abrirProdutos(username) {
+    fetch(`/vendedor/${username}/produtos`)
+        .then(response => response.json())
+        .then(produtos => {
+            const tabela = document.getElementById("corpo-tabela-produtos");
+            tabela.innerHTML = "";
+
+            produtos.forEach(produto => {
+                tabela.innerHTML += `
+                    <tr>
+                        <td>${produto.nome}</td>
+                        <td>R$ ${produto.preco}</td>
+                        <td>${produto.descricao}</td>
+                    </tr>
+                `;
+            });
+
+            AbrirModal("modal_produtos");
+        });
+}
+
+
 // Fechar se clicar fora da caixa branca
 window.onclick = function(event) {
     if (event.target.className === 'modais') {

@@ -98,3 +98,17 @@ def buscar_whatsapp(username_vendedor):
                 return whatsapp if whatsapp and whatsapp.strip() != "" else 'None'
     
     return 'None'
+
+def carregar_produtos_usuario(username):
+    todos_produtos = ler_produtos_card()
+    produtos_filtrados = []
+
+    for produto in todos_produtos:
+        # Usamos .get() para evitar erro caso a chave 'usernamer' não exista
+        vendedor_no_csv = produto.get('username_vendedor')
+
+        # Verificação robusta: remove espaços e ignora maiúsculas/minúsculas
+        if vendedor_no_csv.strip().lower() == username.strip().lower():
+            produtos_filtrados.append(produto)
+            
+    return produtos_filtrados

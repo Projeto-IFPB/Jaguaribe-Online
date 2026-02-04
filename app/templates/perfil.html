@@ -372,7 +372,33 @@
                         
                         <td class="coluna-acoes">
                             <div class="acoes">
-                                <button class="botao-ver">Produtos</button>
+                                <!-- Modal de produtos -->
+                                <button 
+                                    class="botao-ver"
+                                    onclick="abrirProdutos('{{ usuario.username }}')">
+                                    Produtos
+                                </button>
+                                <div id="modal_produtos" class="modais">
+                                    <div class="modal_conteudo">
+                                        <h2>Produtos</h2>
+
+                                        <table class="tabela-ver-produtos">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>Preço</th>
+                                                    <th>Descrição</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="corpo-tabela-produtos">
+                                                <!-- JS vai preencher -->
+                                            </tbody>
+                                        </table>
+
+                                        <button class="btn-fechar-modal" onclick="FecharModal('modal_produtos')">Fechar</button>
+                                    </div>
+                                </div>
+                                <!-- Fim do modal de produtos -->
                                 <button class="btn-excluir" onclick="AbrirModal('modal_excluir_{{ usuario.id }}')">Excluir</button>
                                 <!-- Modal de Exclusão de Usuário -->
                                 <div id="modal_excluir_{{ usuario.id }}" class="modais">
