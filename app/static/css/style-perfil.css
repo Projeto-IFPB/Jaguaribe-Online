@@ -154,7 +154,7 @@ body {
 
 /*Modais de Edição ------------*/
 
-.modal_editar_usuario h1{
+.modal_editar_usuario h1, .modal_editar_admin h1{
     margin-bottom: 0.5rem;
 }
 .nome_produto {
@@ -164,7 +164,7 @@ body {
     text-align: center;
 }
 
-.modal_editar_usuario {
+.modal_editar_usuario, .modal_editar_admin {
     background-color: white;
     padding: 2.0rem;
     border-radius: 15px;
@@ -175,7 +175,7 @@ body {
     overflow-y: auto;
 }
 
-.modal_editar_usuario input, .modal_editar_usuario textarea {
+.modal_editar_usuario input, .modal_editar_usuario textarea, .modal_editar_admin input, .modal_editar_admin textarea {
     width: 100%;
     padding: 1.0rem;
     margin: 1.5rem 0;
@@ -183,39 +183,9 @@ body {
     border-radius: 8px;
 }
 
-.btn-salvar { 
-    background-color: white; 
-    color: #28a745; 
-    border: 2px solid #28a745; 
-    padding: 10px 20px; 
-    border-radius: 5px; 
-    cursor: pointer; 
-}
-.btn-cancelar { 
-    background-color: white; 
-    color: #dc3545; 
-    border: 2px solid #dc3545; 
-    padding: 10px 20px; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    margin-left: 10px; 
-}
-.btn-salvar:hover {
-    background: #28a745;
-    color: white;
-    border: 2px solid #064006
-}
-.btn-cancelar:hover{
-    background: #dc3545;
-    color: white;
-    border: 2px solid #6c1413;
-}
-
-
 .painel-admin * {
     box-sizing: border-box;
 }
-
 .painel-admin {
     font-family: 'Inter', sans-serif;
     max-width: 80%;
@@ -425,14 +395,14 @@ body {
 /* Estilizando botão de logout */
 .css_logout{
     display: inline-block;
-    background-color: #1976d2;
+    background-color: rgba(220, 53, 69, 0.9);
+    border-color: rgba(224, 50, 65, 0.5);;
     color: var(--white);
     font-weight: bolder;
     text-decoration: none;
-    border: 2px solid #1565c0;
     border-radius: 0.8rem;
-    padding: 1.2rem 2.4rem;
-    width: 20.0rem;
+    padding: 0.8rem 0.8rem;
+    width: 8.0rem;
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
@@ -441,8 +411,8 @@ body {
 }
 
 .css_logout:hover {
-    background-color: #2196f3;
-    border-color: #1976d2;
+    background-color: #DC3545;
+    border: 2px solid #d02e3e;
     transform: translateY(-3px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
@@ -450,8 +420,8 @@ body {
 .css_logout:active {
     background-color: #0d47a1;
     border-color: #0d47a1;
-  transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .flex_logout{
@@ -476,9 +446,14 @@ body {
   .flex_logout{
     justify-content: center;
   }
+
+  .botoes-modal button {
+    margin-bottom: 1.0rem;    
+  }
+
 }
 
-.modal_editar_usuario form {
+.modal_editar_usuario form, .modal_editar_admin form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -488,6 +463,7 @@ body {
 }
 
 .modal_editar_usuario input[type="text"],
+.modal_editar_usuario input[type="password"],
 .modal_editar_usuario input[type="file"],
 .modal_editar_usuario textarea {
   border: 2px solid #39ff14;
@@ -501,15 +477,38 @@ body {
 }
 
 .modal_editar_usuario input[type="text"]:focus,
+.modal_editar_usuario input[type="password"]:focus,
 .modal_editar_usuario input[type="file"]:focus,
 .modal_editar_usuario textarea:focus {
   outline: none;
   background-color: rgba(57, 255, 20, 0.15); /* verde clarinho mais visível */
   box-shadow: 0 0 8px #39ff14;
 }
+.modal_editar_admin input[type="text"],
+.modal_editar_admin input[type="password"],
+.modal_editar_admin input[type="file"],
+.modal_editar_admin textarea{
+  border: 2px solid #0d6efd;
+  border-radius: 0.6rem;
+  padding: 1.0rem;
+  font-size: 1.4rem;
+  background-color: rgba(20, 106, 255, 0.15); /* verde clarinho e transparente */
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal_editar_admin input[type="text"]:focus,
+.modal_editar_admin input[type="password"]:focus,
+.modal_editar_admin input[type="file"]:focus,
+.modal_editar_admin textarea:focus {
+  outline: none;
+  background-color: rgba(20, 106, 255, 0.15); /* verde clarinho mais visível */
+  box-shadow: 0 0 8px #0d6efd;
+}
 
 /* Botões */
-.modal_editar_usuario button {
+.modal_editar_usuario .btn-salvar {
   background-color: #2e7d32; /* verde folha */
   color: var(--white);
   font-weight: bolder;
@@ -521,6 +520,31 @@ body {
   font-size: 1.4rem;
   margin-right: 1.0rem;
 }
+.modal_editar_admin .btn-salvar {
+  background-color: #0d6efd; /* verde folha */
+  color: var(--white);
+  font-weight: bolder;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 1.0rem 1.8rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.2s ease;
+  font-size: 1.4rem;
+  margin-right: 1.0rem;
+}
+.modal_editar_usuario .btn-cancelar,.modal_editar_admin .btn-cancelar {
+  background-color: #dc3545; /* verde folha */
+  color: var(--white);
+  font-weight: bolder;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 1.0rem 1.8rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.2s ease;
+  font-size: 1.4rem;
+  margin-right: 1.0rem;
+}
+
 
 /* Para Chrome, Edge e Safari */
 .modal_editar_usuario input[type="file"]::file-selector-button {
@@ -538,15 +562,135 @@ body {
   background-color: #388e3c;
   transform: translateY(-2px);
 }
+.modal_editar_admin input[type="file"]::file-selector-button {
+  background-color: #2e7d32; /* verde folha */
+  color: var(--white);
+  font-weight: bolder;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal_editar_admin input[type="file"]::file-selector-button:hover {
+  background-color: #388e3c;
+  transform: translateY(-2px);
+}
 
 /* Hover geral */
-.modal_editar_usuario button:hover {
+.modal_editar_usuario .btn-salvar:hover {
   background-color: #388e3c; /* verde mais claro */
+  transform: translateY(-3px); /* leve pulo */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.modal_editar_admin .btn-salvar:hover {
+  background-color: blue; /* verde mais claro */
+  transform: translateY(-3px); /* leve pulo */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.modal_editar_usuario .btn-cancelar:hover,.modal_editar_admin .btn-cancelar:hover {
+  background-color: red; /* verde mais claro */
   transform: translateY(-3px); /* leve pulo */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* Evitando bug do textarea */
-.modal_editar_usuario textarea{
+.modal_editar_usuario textarea, .modal_editar_admin textarea{
     resize: vertical;
 }
+
+/* Estilizando modal de produtos */
+
+#modal_produtos {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.6);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+#modal_produtos .modal_conteudo {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 1.2rem;
+
+    width: 90%;
+    max-width: 80.0rem;
+
+    max-height: 80vh;
+    overflow-y: auto;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilizando tabela do modal de produtos */
+
+.tabela-ver-produtos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.tabela-ver-produtos thead {
+    background-color: #166534; 
+    color: white;
+}
+
+.tabela-ver-produtos th {
+    padding: 1.2rem;
+    text-align: center;
+}
+
+.tabela-ver-produtos td {
+    padding: 1.2rem;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+.tabela-ver-produtos tbody tr:nth-child(even) {
+    background-color: #f3f4f6;
+}
+
+.tabela-ver-produtos tbody tr:hover {
+    background-color: #e6f4ea;
+}
+
+/* Estilizando botão de fechar do modal de produtos */
+
+.btn-fechar-modal {
+    margin-top: 2.0rem;
+    padding: 1.4rem 2.8rem;
+
+    background-color: #166534;
+    color: white;
+
+    border: none;
+    border-radius: 0.8rem;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-fechar-modal:hover {
+    background-color: #1a7a40;
+    transform: translateY(-1px);
+}
+
+
+.btn-fechar-modal:active {
+    transform: translateY(0);
+}
+
+
+

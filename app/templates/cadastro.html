@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} cadastro {% endblock %}
+{% block title %} Cadastro de Usuário {% endblock %}
 
 {% block css %} <link rel="stylesheet" href="/static/css/cadastro_usuario.css"> {% endblock %}
 
@@ -36,6 +36,6 @@
             <input type="password" id="confirmar" name="confirmar" required> <br><br>
             <button type="submit">Registrar</button>
             </form>
-            <p>Já tem uma conta? <a href="{{ url_for('pagina_login') }}">Faça login aqui</a></p>
+            <p>Já tem uma conta? <a href="{{ url_for('main.pagina_login') }}">Faça login aqui</a></p>
     </div>
 {% endblock %}

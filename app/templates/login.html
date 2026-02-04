@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} pagina login {% endblock %}
+{% block title %} Página de Login {% endblock %}
 
 {% block css %} <link rel="stylesheet" href="/static/css/login_usuario.css"> {% endblock %}
 
@@ -19,12 +19,12 @@
     <div class="login_flex">
       <form method="post">
         <label for="username">Usuário:</label>
-        <input type="text" id="username" name="username" required><br><br>
+        <input type="text" id="username" name="username" placeholder="Digite seu username" required><br><br>
         <label for="password">Senha:</label>
-        <input type="password" id="password" name="senha" required><br><br>
+        <input type="password" id="password" name="senha" placeholder="Digite sua senha" required><br><br>
         <button type="submit">Entrar</button>
       </form>
     </div>
 
-    <p>Não tem uma conta? <a href="{{ url_for('cadastro') }}">Cadastre-se aqui</a></p>
+    <p>Não tem uma conta? <a href="{{ url_for('main.cadastro') }}">Cadastre-se aqui</a></p>
 {% endblock %}

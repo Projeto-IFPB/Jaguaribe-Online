@@ -2,12 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-/* Configurando estilizações padrão da página */
-body {
-  font-family: 'Inter', Arial, sans-serif;
-  line-height: 1.6rem;
-  font-size: 1.6rem;
-}
 
 
 /* Configurações Iniciais */
@@ -18,8 +12,18 @@ body {
     box-sizing: border-box;
 }
 
-/* Variáveis de cores do Projeto e Fonte-Size */
+/* Configurando estilizações padrão da página */
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', Arial, sans-serif;
+    line-height: 1.6rem;
+    font-size: 1.6rem;
+    height: 100%;
+    min-height: 100vh; /* Garante que o corpo ocupe a tela toda */
+}
 
+/* Variáveis de cores do Projeto e Fonte-Size */
 :root{
     font-size: 62.5%;
     --green-dark: #166534;
@@ -28,6 +32,10 @@ body {
     --gray-light: #F3F4F6;
     --white: #ffffff;
     --black: #0a0a0a;
+}
+
+main {
+    flex: 1;
 }
 
 
@@ -268,6 +276,7 @@ header.rolagem .navbar-inicio .barra{
 .button-login:hover , .button-perfil:hover{
     width: 100%;
 }
+
 .navbar-inicio .navbar-links{
     background:linear-gradient(to right, #047857, #064E3B);
     width: 100vw;
@@ -626,29 +635,29 @@ h2, h3 {
 }
 
 
-.direitos {
+.direitos_de_privacidade {
     border-top: 1px solid #162341;
     margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
 }
 
-.direitos #termos{
+.direitos_de_privacidade #termos{
     display: flex;
     gap: 2rem;
 }
 
-.direitos #termos a {
+.direitos_de_privacidade #termos a {
     text-decoration: none;
     color: #94A3B8;
 }
 
-.direitos #termos a:hover {
+.direitos_de_privacidade #termos a:hover {
     color: white;
     transition: 0.3s;
 }
 
-.direitos p {
+.direitos_de_privacidade p {
     margin-top: 2rem;
 }
 
@@ -684,14 +693,14 @@ h2, h3 {
         max-width: 80%;
     }
 
-    .direitos {
+    .direitos_de_privacidade {
         flex-direction: column; /* Empilha os direitos autorais */
         gap: 1rem;
         padding-top: 2rem;
         text-align: center;
     }
 
-    .direitos #termos {
+    .direitos_de_privacidade #termos {
         justify-content: center;
     }
 }
@@ -713,6 +722,7 @@ h2, h3 {
     text-align: center;
     line-height: 2rem;
 }
+
 /*Modais */
 .modais {
     display: none; 
@@ -726,4 +736,240 @@ h2, h3 {
     align-items: center;
     padding: 0; 
     margin: 0;
+}
+
+.sobre-feira80 {
+    padding: 5rem 1rem;
+    background-color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+.sobre-conteudo {
+    max-width: 75rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+
+.sobre-imagem {
+    flex: 1;
+    position: relative; /* para o f-anos flutuar */
+}
+
+.sobre-imagem img {
+    width: 100%;
+    height: 300%;       
+    
+    object-fit: cover;
+    border-radius: 2.0rem; 
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.15);
+    transform: rotate(-2.5deg);
+}
+
+.f-anos {
+    position: absolute;
+    bottom: -1.4rem;
+    right: 2rem;
+    background-color: white;
+    padding: 1.8rem 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 1.0rem;
+    min-width: max-content;
+}
+
+
+.f-anos .numero80 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #28a745;
+    line-height: 1;
+}
+
+.f-anos .texto80 {
+    font-size: 0.95rem;
+    color: #666;
+    font-weight: 700;
+    text-align: left;
+    line-height: 1.2;
+    text-transform: uppercase;
+    
+}
+
+
+.sobre-tudo {
+    flex: 1;
+}
+
+.sobre-tudo .destaque-verde {
+    color: #28a745;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.sobre-tudo h2 {
+    font-size: 3.2rem;
+    line-height: 1.2;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    font-family: serif;
+}
+
+.sobre-tudo p {
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+
+.sobre-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.check-icone {
+    background-color: #caf6d8;
+    color: #28a745;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.info-item strong {
+    display: block;
+    color: #333;
+    margin-bottom: 0.2rem;
+}
+
+.info-item p {
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+
+@media (max-width: 768px) {
+    .sobre-conteudo {
+        flex-direction: column;
+        gap: 3rem;
+        
+    }
+    
+    .f-anos {
+        right: 0;
+        bottom: -1rem;
+    }
+}
+
+/* Estilização da session de visualização de produtos */
+
+.secao-encontre-aqui {
+    padding: 4rem 1rem;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.container {
+    max-width: 120.0rem;
+    margin: 0 auto;
+}
+
+.titulo-destaque {
+    font-size: 3.5rem;
+    color: #1a7a40; 
+    margin-bottom: 0.5rem;
+}
+
+.subtitulo_secao {
+    color: #666;
+    margin-bottom: 3rem;
+    font-size: 1.8rem;
+}
+
+.grid-categorias {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 2.0rem; 
+}
+
+.card-categoria {
+    position: relative; 
+    height: 30.0rem; 
+    border-radius: 2.0rem; 
+    overflow: hidden; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    cursor: pointer;
+}
+
+.card-categoria img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.5s ease; 
+}
+
+.card-categoria:hover img {
+    transform: scale(1.1);
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: #fff;
+    padding: 3.0rem 2.0rem 2.0rem 2.0rem; 
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.card-overlay h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-overlay p {
+    margin: 0;
+    font-size: 1.5rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* --- Media Queries do Visualizador de produtos --- */
+
+@media (max-width: 768px) {
+    .grid-categorias {
+        grid-template-columns: 1fr; 
+    }
+
+    .card-categoria {
+        height: 25.0rem;
+    }
+
+    .titulo-destaque {
+        font-size: 2rem;
+    }
 }
