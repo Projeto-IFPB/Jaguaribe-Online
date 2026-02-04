@@ -372,7 +372,7 @@
                         
                         <td class="coluna-acoes">
                             <div class="acoes">
-                                <button class="botao-ver">Produtos</button>
+                                <button class="botao-ver"><a href="{{ url_for('admin.ver_produtos_vendedor', username=usuario.username ) }}">Produtos</a></button>
                                 <button class="btn-excluir" onclick="AbrirModal('modal_excluir_{{ usuario.id }}')">Excluir</button>
                                 <!-- Modal de Exclusão de Usuário -->
                                 <div id="modal_excluir_{{ usuario.id }}" class="modais">
