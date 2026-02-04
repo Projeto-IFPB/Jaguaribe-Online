@@ -31,7 +31,7 @@ input, textarea {
     box-sizing: border-box; 
 }
 
-button {
+.cadastrar {
     margin-top: 20px;
     padding: 10px;
     width: 100%;

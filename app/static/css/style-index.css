@@ -103,6 +103,7 @@ header.rolagem .navbar-inicio .button-login::after,header.rolagem .navbar-inicio
     list-style: none;
 }
 
+
 .navbar-links li a {
     color: var(--white);
     text-decoration: none;
