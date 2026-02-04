@@ -15,35 +15,6 @@
 
 <h1 class="h1_perfil">Suas configurações de perfil</h1>
 
-{% with messages = get_flashed_messages(category_filter=['successo'],with_categories=true) %}
-{% if messages %}
-{% for category, message in messages %}
-<div style="color: green; text-align: center;">
-    {{ message }}
-</div>
-{% endfor %}
-{% endif %}
-{% endwith %}
-
-<!-- Mensagem que aparece se o admin tentar excluir a sua própria conta -->
-{% with messages = get_flashed_messages(category_filter=['dashboard_erro'],with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }}" style="text-align: center; color: red;">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-
-{% with messages = get_flashed_messages(category_filter=['erro_username'],with_categories=true) %}
-{% if messages %}
-{% for category, message in messages %}
-<div style="color: red;">
-    {{ message }}
-</div>
-{% endfor %}
-{% endif %}
-{% endwith %}
-
 <div class="perfil-info">
     <div class="perfil_flex">
         <p><strong>Username atual:</strong> {{ current_user.username }}</p>
@@ -81,15 +52,6 @@
         </form>
     </div>
 </div>
-{% with messages = get_flashed_messages(category_filter=['erro_nome'],with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-        <div style="color: red;">
-            {{ message }}
-        </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
 
 <div class="perfil-info">
     <div class="perfil_flex">
@@ -127,15 +89,7 @@
         </form>
     </div>
 </div>
-{% with messages = get_flashed_messages(category_filter=['erro_data'],with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-        <div style="color: red;">
-            {{ message }}
-        </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
+
 <div class="perfil-info">
     <div class="perfil_flex">
         <p><strong>Data de Nascimento:</strong> {{ current_user.data.split('-')[2] }}/{{ current_user.data.split('-')[1] }}/{{ current_user.data.split('-')[0] }}</p>
@@ -172,15 +126,7 @@
         </form>
     </div>
 </div>
-{% with messages = get_flashed_messages(category_filter=['erro_senha'],with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-        <div style="color: red;">
-            {{ message }}
-        </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
+
 <div class="perfil-info">
     <div class="perfil_flex">
         <p><strong>Senha:</strong>**************</p>
@@ -226,15 +172,6 @@
     </div>
 </div>
 
-{% with messages = get_flashed_messages(category_filter=['erro_telefone'],with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-        <div style="color: red;">
-            {{ message }}
-        </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
 <div class="perfil-info">
     <div class="perfil_flex">
         {% if current_user.whatsapp == "None" %}
