@@ -46,6 +46,19 @@
 
 </header>
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+        <div class="flash-message {{ category }}">
+          {{ message }}
+          <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
 <main class="content2">
     {% block content %}{% endblock %}
 </main>

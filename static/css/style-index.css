@@ -284,6 +284,54 @@ header.rolagem .navbar-inicio .navbar-links{
 
 }
 
+/* Mensagens Flask */
+.flash-container {
+    padding: 20px;
+}
+
+.flash-message {
+    margin-top: 3.5rem;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    position: relative;
+    font-family: sans-serif;
+}
+
+/* Estilo específico para a categoria 'success' (Verde) */
+.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.danger {
+    color: #991b1b; 
+    background-color: #fef2f2;
+    border-color: #fecaca;
+}
+
+.danger .close-btn {
+    color: #721c24;
+}
+
+.close-btn {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: #155724;
+    opacity: 0.5;
+}
+
+.close-btn:hover {
+    opacity: 1;
+}
+
 /* Primeiro section ------------------------------------------*/
 
 .inicio_pagina_feira {
