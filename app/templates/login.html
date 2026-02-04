@@ -6,15 +6,6 @@
 
 {% block content %}
     <h2>Login</h2>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <div style="color: {{ 'green' if category == 'success' else 'red' }};">
-            {{ message }}
-          </div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
     
     <div class="login_flex">
       <form method="post">

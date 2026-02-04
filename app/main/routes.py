@@ -70,7 +70,7 @@ def produto_descricao(produto_id):
         return render_template("produto_descricao.html", produto=produto_selecionado)
     
     # Se o produto não for encontrado
-    flash("Produto não encontrado.")
+    flash("Produto não encontrado.", "danger")
     return redirect(url_for('main.pagina_produtos'))
 
 
@@ -110,7 +110,7 @@ def cadastro_produtos():
         if produto and preco and username_vendedor:
             guardar_produtos(produto,nome_imagem,preco,vendedor,username_vendedor,descricao)
 
-        flash("Produto cadastrado com sucesso")
+        flash("Produto cadastrado com sucesso", "success")
         return redirect(url_for('main.pagina_produtos'))
     
     produtos = ler_produtos()
@@ -131,11 +131,11 @@ def cadastro():
             for linha in linhas[1:]:
                 dados = linha.strip().split(';')
                 if dados[0].strip().lower() == username.strip().lower():
-                    flash('Este nome de usuário já está em uso. Escolha outro.')
+                    flash('Este nome de usuário já está em uso. Escolha outro.', 'danger')
                     return redirect(url_for('main.cadastro'))
 
         if senha != confirmar:
-            flash('As senhas não coincidem!')
+            flash('As senhas não coincidem!', 'danger')
             return redirect(url_for('cadastro'))
 
         password_hash = generate_password_hash(senha, method='pbkdf2:sha256')
@@ -176,7 +176,7 @@ def pagina_login():
                             session['perfil'] = 'usuario'
                         return redirect(url_for('main.pagina_perfil'))
         
-        flash('Usuário ou senha inválidos')
+        flash('Usuário ou senha inválidos', 'danger')
     return render_template("login.html")
 
 @main_bp.route('/perfil')
@@ -235,7 +235,7 @@ def editar_produto(id_produto):
                 if dados[0] == str(id_produto):
                     # Verificação de segurança: só o dono edita
                     if dados[5] != current_user.username:
-                        flash("Acesso negado!", "error_editar_produtos")
+                        flash("Acesso negado!", "danger")
                         return redirect(url_for('pagina_perfil'))
                     produto_atual = linha
     # 2. Processar a atualização (Quando o formulário é enviado)
@@ -275,7 +275,7 @@ def alterar_username():
     campos_usuarios =['username','nome','data','whatsapp','senha']
 
     if novo_username == username_antigo:
-        flash("Digite um novo username diferente do atual.", "erro_username")
+        flash("Digite um novo username diferente do atual.", "danger")
         return redirect(url_for('main.pagina_perfil'))
 
 
@@ -284,7 +284,7 @@ def alterar_username():
         for linha in linhas[1:]:
             usuario = linha.strip().split(';')
             if usuario[0] == novo_username:
-                flash("Este username já está em uso por outro usuário!", "erro_username")
+                flash("Este username já está em uso por outro usuário!", "danger")
                 return redirect(url_for('main.pagina_perfil'))
 
     linhas_produtos = []
@@ -335,7 +335,7 @@ def alterar_username():
 
     login_user(current_user)
     
-    flash("Username alterado com sucesso em todo o sistema!", "successo")
+    flash("Username alterado com sucesso em todo o sistema!", "success")
     return redirect(url_for('main.pagina_perfil'))
 
 @main_bp.route('/alterar_nome_vendedor', methods=['POST'])
@@ -349,7 +349,7 @@ def alterar_nome_vendedor():
 
     
     if novo_nome == nome_antigo:
-        flash("O novo nome deve ser diferente do atual.", "erro_nome")
+        flash("O novo nome deve ser diferente do atual.", "danger")
         return redirect(url_for('main.pagina_perfil'))
     
     linhas_produtos = []
@@ -384,7 +384,7 @@ def alterar_nome_vendedor():
             arq.write(i +'\n')
 
     current_user.nome_completo = novo_nome 
-    flash("Nome de vendedor atualizado com sucesso!", "successo")
+    flash("Nome de vendedor atualizado com sucesso!", "success")
     return redirect(url_for('main.pagina_perfil'))
 
 @main_bp.route('/alterar_data_vendedor', methods=['POST'])
@@ -399,7 +399,7 @@ def alterar_data_vendedor():
             dados = linha.strip().split(';')
             if dados[0] == current_user.username:
                 if dados[2] == nova_data:
-                    flash("A nova data deve ser diferente da atual.", "erro_data")
+                    flash("A nova data deve ser diferente da atual.", "danger")
                     return redirect(url_for('main.pagina_perfil'))
 
     linhas_usuarios = []
@@ -417,7 +417,7 @@ def alterar_data_vendedor():
         for i in linhas_usuarios:
             arq.write(i +'\n')
 
-    flash("Data de Nascimento atualizada com sucesso!", "successo")
+    flash("Data de Nascimento atualizada com sucesso!", "success")
     return redirect(url_for('main.pagina_perfil'))
 
 @main_bp.route('/alterar_senha', methods=['POST'])
@@ -429,15 +429,15 @@ def alterar_senha():
     campos_usuarios =['username','nome','data','whatsapp','senha']
 
     if not check_password_hash(current_user.senha, senha_atual):
-        flash("A senha atual está incorreta!", "erro_senha")
+        flash("A senha atual está incorreta!", "danger")
         return redirect(url_for('main.pagina_perfil'))
 
     if check_password_hash(current_user.senha, nova_senha):
-        flash("A nova senha não pode ser igual à atual!", "erro_senha")
+        flash("A nova senha não pode ser igual à atual!", "danger")
         return redirect(url_for('main.pagina_perfil'))
 
     if nova_senha != confirmar_senha:
-        flash("As novas senhas não coincidem!", "erro_senha")
+        flash("As novas senhas não coincidem!", "danger")
         return redirect(url_for('main.pagina_perfil'))
 
     novo_hash = generate_password_hash(nova_senha, method='pbkdf2:sha256')
@@ -459,7 +459,7 @@ def alterar_senha():
 
     current_user.senha = novo_hash
     
-    flash("Senha alterada com sucesso!", "successo") 
+    flash("Senha alterada com sucesso!", "success") 
     return redirect(url_for('main.pagina_perfil'))
 
 @main_bp.route('/alterar_whatsapp', methods=['POST'])
@@ -480,7 +480,7 @@ def alterar_whatsapp():
             dados = linha.strip().split(';')
             if dados[0] == current_user.username:
                 if dados[3] == novo_whatsapp:
-                    flash("O novo número deve ser diferente da atual.", "erro_telefone")
+                    flash("O novo número deve ser diferente da atual.", "danger")
                     return redirect(url_for('main.pagina_perfil'))
     
    
@@ -501,7 +501,7 @@ def alterar_whatsapp():
         for i in linhas_usuarios:
             arq.write(i +'\n')
 
-    flash("Número de telefone alterado com sucesso atualizada com sucesso!", "successo")
+    flash("Número de telefone alterado com sucesso atualizada com sucesso!", "success")
     return redirect(url_for('main.pagina_perfil'))
 
 @main_bp.route('/logout')
@@ -509,5 +509,5 @@ def alterar_whatsapp():
 def logout():
     logout_user()
     session.pop('perfil', None)
-    flash('Você foi desconectado com sucesso.')
+    flash('Você foi desconectado com sucesso.', 'success')
     return redirect(url_for('main.pagina_login'))
