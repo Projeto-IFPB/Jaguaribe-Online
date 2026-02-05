@@ -12,6 +12,7 @@ Os alunos responsáveis por esse projeto são: Antony Conceição, Diogo Silva, 
 ## Tecnologias utilizadas
 - HTML5
 - CSS3
+- CSV
 - JavaScript
 - Python
 - Flask
