@@ -248,10 +248,12 @@ def editar_produto(id_produto):
                                 # Tratamento da Imagem
                                 file = request.files.get('imagem')
                                 if file and file.filename != '':
-                                    filename = secure_filename(file.filename)
-                                    file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-                                    dados[2] = filename # Atualiza o nome do arquivo no CSV
-                            linha = ';'.join(dados)
+                                    extensao = os.path.splitext(file.filename)[1]
+                                    imagem = dados[0] + "-imagem" + extensao
+                                    file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], imagem))
+                                    nome_imagem = imagem
+                                    dados[2] = nome_imagem 
+                            linha = ';'.join(dados) + "\n"
                 linhas_atualizadas.append(linha)
 
     if not produto_atual:
