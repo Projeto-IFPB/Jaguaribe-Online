@@ -19,25 +19,37 @@ Os alunos responsáveis por esse projeto são: Antony Conceição, Diogo Silva, 
 
 ---
 
-## Como executar o projeto
+## Estrutura do projeto
 
-1- Crie e ative o ambiente virtual
-python -m venv venv
-source venv/Scripts/activate      #Para o Git Bash
-
-2- Instale as dependências
-pip install -r requirements.txt
-
-3- Execute a aplicação
-python app.py
-
-4- Acesse no navegador
-http://127.0.0.1:5000
+<img width="596" height="442" alt="image" src="https://github.com/user-attachments/assets/34b9d832-4496-4d13-a8b3-4a9c036620bb" />
 
 ---
 
-## Status do projeto
-Projeto finalizado - (Sprint 2)
+## Como executar o projeto
+
+**1- Crie o ambiente virtual**
+
+python -m venv venv
+
+**2- Ative o Ambiente Virtual**
+
+source venv/Scripts/activate      #Para o Git Bash
+
+venv\Scripts\activate             #Para o PowerShell
+
+**3- Instale as dependências**
+
+pip install -r requirements.txt
+
+**4- Execute a aplicação**
+
+python app.py
+
+**5- Acesse no navegador**
+
+http://127.0.0.1:5000
+
+---
 
 ## Arquitetura do Sistema
 ![Arquitetura do Sistema](https://github.com/user-attachments/assets/4cc3f229-3c6c-4abb-a552-7974312e552a)
