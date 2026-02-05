@@ -12,6 +12,7 @@ Os alunos responsáveis por esse projeto são: Antony Conceição, Diogo Silva, 
 ## Tecnologias utilizadas
 - HTML5
 - CSS3
+- JavaScript
 - Python
 - Flask
 - Git e GitHub
@@ -20,23 +21,27 @@ Os alunos responsáveis por esse projeto são: Antony Conceição, Diogo Silva, 
 
 ## Estrutura do projeto
 Projeto_IFPB
-├── app/                 # Arquivos de lógica da aplicação Flask
+├── app/                  # Pasta que armazena os módulos do sistema
+    ├── admin/
+        └── __init__.py  #Criação 
+        └── routes.py    # Rotas de administrador
+    ├── main/
+        └── __init__.py  
+        └── routes.py    #Rotas principais
+    ├── templates/       # Pasta que armazena todos os templates html
+    ├── static/          # Pasta que armazena toda parte estática do sistema
+        ├── css/
+        ├── images/
+        ├── js/
+        ├── uploads/
+        └── __init__.py
+        └── functions.py
+        └── models.py
 ├── data/                # Armazenamento de dados do sistema
 ├── app.py               # Arquivo principal da aplicação Flask
-├── templates/           # Arquivos HTML
-│   ├── base.html        # Template base do site
-│   ├── index.html       # Página inicial
-├── static/              # Arquivos estáticos
-│   └── css/
-│       └── style-index.css    # Estilização do site
-│    └── js/
-│        └── script-index.js    # Interatividade básica do site
-│    └── images/         # Lugar para guardar imagens do site
-├── .gitignore           # Área para evitar o venv no github
+├── .gitignore           # Área para evitar que alguns arquivos vá para o github
 ├── README.md            # Documentação principal do projeto
-│
-
-(Usaremos ainda o data/ para persistência futura)
+├── requirements.txt     # Dependências do projeto
 
 ---
 
@@ -47,10 +52,10 @@ python -m venv venv
 source venv/Scripts/activate      #Para o Git Bash
 
 2- Instale as dependências
-pip install flask
+pip install -r requirements.txt
 
 3- Execute a aplicação
-flask run
+python app.py
 
 4- Acesse no navegador
 http://127.0.0.1:5000
@@ -58,7 +63,7 @@ http://127.0.0.1:5000
 ---
 
 ## Status do projeto
-Projeto em desenvolvimento - (Sprint 1)
+Projeto finalizado - (Sprint 2)
 
 ## Arquitetura do Sistema
 ![Arquitetura do Sistema](https://github.com/user-attachments/assets/4cc3f229-3c6c-4abb-a552-7974312e552a)
