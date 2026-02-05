@@ -219,7 +219,6 @@ body {
 }
 .descricao{
     margin-top: 2.0rem;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -261,7 +260,7 @@ body {
 
 .descricao h2{
     margin-top: 3.0rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.6rem;
 }
 
 .img_dc{
@@ -355,4 +354,12 @@ h2, h3 {
 
 .direitos_de_privacidade #termos a:hover {
     color: white;
+}
+
+.modal_desc{
+    color: #166534;
+}
+
+.descricao p{
+    color: #0a0a0a;
 }
