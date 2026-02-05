@@ -20,50 +20,36 @@ Os alunos responsáveis por esse projeto são: Antony Conceição, Diogo Silva, 
 ---
 
 ## Estrutura do projeto
-Projeto_IFPB
-├── app/                  # Pasta que armazena os módulos do sistema
-    ├── admin/
-        └── __init__.py  #Criação 
-        └── routes.py    # Rotas de administrador
-    ├── main/
-        └── __init__.py  
-        └── routes.py    #Rotas principais
-    ├── templates/       # Pasta que armazena todos os templates html
-    ├── static/          # Pasta que armazena toda parte estática do sistema
-        ├── css/
-        ├── images/
-        ├── js/
-        ├── uploads/
-        └── __init__.py
-        └── functions.py
-        └── models.py
-├── data/                # Armazenamento de dados do sistema
-├── app.py               # Arquivo principal da aplicação Flask
-├── .gitignore           # Área para evitar que alguns arquivos vá para o github
-├── README.md            # Documentação principal do projeto
-├── requirements.txt     # Dependências do projeto
+
+<img width="596" height="442" alt="image" src="https://github.com/user-attachments/assets/34b9d832-4496-4d13-a8b3-4a9c036620bb" />
 
 ---
 
 ## Como executar o projeto
 
-1- Crie e ative o ambiente virtual
+**1- Crie o ambiente virtual**
+
 python -m venv venv
+
+**2- Ative o Ambiente Virtual**
+
 source venv/Scripts/activate      #Para o Git Bash
 
-2- Instale as dependências
+venv\Scripts\activate             #Para o PowerShell
+
+**3- Instale as dependências**
+
 pip install -r requirements.txt
 
-3- Execute a aplicação
+**4- Execute a aplicação**
+
 python app.py
 
-4- Acesse no navegador
+**5- Acesse no navegador**
+
 http://127.0.0.1:5000
 
 ---
-
-## Status do projeto
-Projeto finalizado - (Sprint 2)
 
 ## Arquitetura do Sistema
 ![Arquitetura do Sistema](https://github.com/user-attachments/assets/4cc3f229-3c6c-4abb-a552-7974312e552a)
