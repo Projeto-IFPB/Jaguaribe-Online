@@ -65,9 +65,9 @@
                                         <i class="bi bi-whatsapp"></i> Conversar com Vendedor
                                     </a>
                                 {% else %}
-                                    <p style="color: gray; font-size: 0.9rem;">Vendedor Não Informou Numero.</p>
+                                    <p style="color: rgb(0, 0, 0); font-size: 1.8rem;">Vendedor Não Informou Número.</p>
                                 {% endif %}                             
-                                <h2>Descrição</h2>
+                                <h2 class="modal_desc">Descrição</h2>
                                 <p>{{ produto.descricao }}</p>
                                 <button type="button" class="voltar" onclick="FecharModal('modal-saiba-mais-{{ produto.id }}')">Voltar</button>
                             </div>
