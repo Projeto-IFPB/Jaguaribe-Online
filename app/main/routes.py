@@ -236,7 +236,7 @@ def editar_produto(id_produto):
                     # Verificação de segurança: só o dono edita
                     if dados[5] != current_user.username:
                         flash("Acesso negado!", "danger")
-                        return redirect(url_for('pagina_perfil'))
+                        return redirect(url_for('main.pagina_perfil'))
                     produto_atual = linha
     # 2. Processar a atualização (Quando o formulário é enviado)
                     if request.method == 'POST':
@@ -264,7 +264,7 @@ def editar_produto(id_produto):
         for i in linhas_atualizadas:
             arq.write(i)
     # Se for GET, mostra o formulário preenchido
-    return render_template('editar_produto.html', produto=produto_atual)
+    return redirect(url_for('main.pagina_perfil'))
 
 @main_bp.route('/alterar_username', methods=['POST'])
 @login_required
