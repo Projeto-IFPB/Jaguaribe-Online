@@ -103,6 +103,7 @@ header.rolagem .navbar-inicio .button-login::after,header.rolagem .navbar-inicio
     list-style: none;
 }
 
+
 .navbar-links li a {
     color: var(--white);
     text-decoration: none;
@@ -114,6 +115,7 @@ header.rolagem .navbar-inicio .button-login::after,header.rolagem .navbar-inicio
 
 .navbar-links li a:hover {
     background-color: var(--green-dark);
+    border-radius: 10px;
 }
 
 /* Container do Botão de Login */
@@ -293,10 +295,58 @@ header.rolagem .navbar-inicio .navbar-links{
 
 }
 
+/* Mensagens Flask */
+.flash-container {
+    padding: 20px;
+}
+
+.flash-message {
+    margin-top: 3.5rem;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    position: relative;
+    font-family: sans-serif;
+}
+
+/* Estilo específico para a categoria 'success' (Verde) */
+.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.danger {
+    color: #991b1b; 
+    background-color: #fef2f2;
+    border-color: #fecaca;
+}
+
+.danger .close-btn {
+    color: #721c24;
+}
+
+.close-btn {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: #155724;
+    opacity: 0.5;
+}
+
+.close-btn:hover {
+    opacity: 1;
+}
+
 /* Primeiro section ------------------------------------------*/
 
 .inicio_pagina_feira {
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%), url(/static/images/imagem-fundo_pagina-inicial.jpg);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%), url(/../static/images/imagem_pagina_principal.jpg);
     /* Garante que a imagem cubra todo o espaço e não se repita */
     background-size: cover;
     background-position: center;
@@ -391,7 +441,7 @@ header.rolagem .navbar-inicio .navbar-links{
         height: auto; /* Permite que a seção cresça conforme o conteúdo */
         padding: 8rem 2rem;
         /* Muda o degradê para vir de baixo, facilitando a leitura em telas verticais */
-        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%), url(/static/images/imagem-fundo_pagina-inicial.jpg);
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%), url(/../static/images/imagem_pagina_principal.jpg);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -779,7 +829,7 @@ h2, h3 {
     color: #555;
     line-height: 1.4;
     margin-bottom: 1rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 

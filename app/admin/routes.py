@@ -23,11 +23,11 @@ ADMIN = "data/admin.txt"
 def excluir_vendedor(username):
 
     if session.get('perfil') != 'admin':
-        flash("Acesso negado: Você não tem permissão para esta ação.", "dashboard_erro")
+        flash("Acesso negado: Você não tem permissão para esta ação.", "danger")
         return redirect(url_for('main.pagina_perfil'))
     # Evitar que o admin exclua a si próprio por acidente
     if username == current_user.username:
-        flash('Você não pode excluir sua própria conta de administrador por aqui.', 'dashboard_erro')
+        flash('Você não pode excluir sua própria conta de administrador por aqui.', 'danger')
         return redirect(url_for('main.pagina_perfil'))
     
     # --- 2. REMOVER USUÁRIO DO CSV ---
@@ -67,7 +67,7 @@ def excluir_vendedor(username):
             for i in produtos_mantidos:
                 arq.write(i)
 
-    flash(f'O usuário "{username}" e todos os seus produtos foram removidos com sucesso.', 'successo')
+    flash(f'O usuário "{username}" e todos os seus produtos foram removidos com sucesso.', 'success')
     return redirect(url_for('main.pagina_perfil')) # Redireciona de volta para a lista
 
 # Rota para carregar produtos do usuário sendo adm

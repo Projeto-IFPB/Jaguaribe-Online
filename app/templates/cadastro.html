@@ -7,16 +7,6 @@
 {% block content %}
     <div class="sessao-cadastro">
         <h2>Registro de Usuário</h2>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-        <div style="color: {{ 'green' if category == 'success' else 'red' }};">
-            {{ message }}
-        </div>
-        {% endfor %}
-    {% endif %}
-    {% endwith %}
         
             <form method="post">
             <label for="nome">Nome Completo:</label>

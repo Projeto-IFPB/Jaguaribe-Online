@@ -15,35 +15,6 @@
 
 <h1 class="h1_perfil">Suas configurações de perfil</h1>
 
-{% with messages = get_flashed_messages(category_filter=['successo'],with_categories=true) %}
-{% if messages %}
-{% for category, message in messages %}
-<div style="color: green; text-align: center;">
-    {{ message }}
-</div>
-{% endfor %}
-{% endif %}
-{% endwith %}
-
-<!-- Mensagem que aparece se o admin tentar excluir a sua própria conta -->
-{% with messages = get_flashed_messages(category_filter=['dashboard_erro'],with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }}" style="text-align: center; color: red;">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-
-{% with messages = get_flashed_messages(category_filter=['erro_username'],with_categories=true) %}
-{% if messages %}
-{% for category, message in messages %}
-<div style="color: red;">
-    {{ message }}
-</div>
-{% endfor %}
-{% endif %}
-{% endwith %}
-
 <div class="perfil-info">
     <div class="perfil_flex">
         <p><strong>Username atual:</strong> {{ current_user.username }}</p>
@@ -81,15 +52,6 @@
         </form>
     </div>
 </div>
-{% with messages = get_flashed_messages(category_filter=['erro_nome'],with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-        <div style="color: red;">
-            {{ message }}
-        </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
 
 <div class="perfil-info">
     <div class="perfil_flex">
@@ -127,15 +89,7 @@
         </form>
     </div>
 </div>
-{% with messages = get_flashed_messages(category_filter=['erro_data'],with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-        <div style="color: red;">
-            {{ message }}
-        </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
+
 <div class="perfil-info">
     <div class="perfil_flex">
         <p><strong>Data de Nascimento:</strong> {{ current_user.data.split('-')[2] }}/{{ current_user.data.split('-')[1] }}/{{ current_user.data.split('-')[0] }}</p>
@@ -172,15 +126,7 @@
         </form>
     </div>
 </div>
-{% with messages = get_flashed_messages(category_filter=['erro_senha'],with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-        <div style="color: red;">
-            {{ message }}
-        </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
+
 <div class="perfil-info">
     <div class="perfil_flex">
         <p><strong>Senha:</strong>**************</p>
@@ -226,15 +172,6 @@
     </div>
 </div>
 
-{% with messages = get_flashed_messages(category_filter=['erro_telefone'],with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-        <div style="color: red;">
-            {{ message }}
-        </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
 <div class="perfil-info">
     <div class="perfil_flex">
         {% if current_user.whatsapp == "None" %}
@@ -501,4 +438,41 @@
     </div>
 {% endif %}
 
+{% endblock %}
+
+{% block footer %}
+<footer>
+    <div class="grid">
+        <div class="nome_feira">
+            <h2><span>FJ</span> Feira de Jaguaribe</h2>
+            <p>A melhor plataforma para conectar vendedores e consumidores na feira livre mais tradicional de João Pessoa.</p>
+        </div>
+        <div class="links_uteis">
+            <h3>Links Úteis</h3>
+            <ul>
+                <li><a href="">Início</a></li>
+                <li><a href="">Produtos</a></li>
+                <li><a href="">História</a></li>
+                <li><a href="">Contato</a></li>
+            </ul>
+        </div>
+        <div class="informacoes">
+            <h3>Informações</h3>
+            <h4>Endereço:</h4>
+            <address>Jaguaribe, João Pessoa - PB</address>
+
+            <h4>Horário Principal:</h4>
+            <p>Quartas-Feiras, 05h às 14h</p>
+        </div>
+    </div>
+
+    <div class="direitos_de_privacidade">
+        <p>&copy 2025 Feira de Jaguaribe. Todos os direitos reservados.</p>
+        <div id="termos">
+            <p><a href="#">Privacidade</a></p>
+            <p><a href="#">Termos de uso</a></p>
+
+        </div>
+    </div>
+</footer>
 {% endblock %}

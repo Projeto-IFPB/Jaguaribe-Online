@@ -692,5 +692,45 @@ body {
     transform: translateY(0);
 }
 
+/* Estilizando o footer */
+
+footer {
+    background-color: #166534;
+}
+
+footer h2 span {
+    background-color: green;
+}
+
+h4 {
+    color: #c2c8d1;
+}
+
+p , address{
+    color: #c2c8d1;
+}
+
+h2, h3 {
+    color: white;
+}
+
+.links_uteis a, li {
+    color: #c2c8d1;
+}
+
+.links_uteis a:hover {
+    color: white;
+}
+
+.direitos_de_privacidade {
+    border-top: 1px solid #00752d9d;
+}
 
 
+.direitos_de_privacidade #termos a {
+    color: #c2c8d1;
+}
+
+.direitos_de_privacidade #termos a:hover {
+    color: white;
+}
