@@ -26,7 +26,7 @@
     </div>
 </section>
     
-<section class="sobre-feira80">
+<section id="historia" class="sobre-feira80">
     <div class="sobre-conteudo">
         
         <div class="sobre-imagem">
@@ -130,7 +130,7 @@
 {% endblock %}
 
 {% block footer %}
-<footer>
+<footer id="footer">
     <div class="grid">
         <div class="nome_feira">
             <h2><span>FJ</span> Feira de Jaguaribe</h2>
@@ -140,9 +140,9 @@
             <h3>Links Úteis</h3>
             <ul>
                 <li><a href="">Início</a></li>
-                <li><a href="">Produtos</a></li>
-                <li><a href="">História</a></li>
-                <li><a href="">Contato</a></li>
+                <li><a href="{{ url_for('main.pagina_produtos' ) }}">Produtos</a></li>
+                <li><a href="#historia">História</a></li>
+                <li><a href="#footer">Contato</a></li>
             </ul>
         </div>
         <div class="informacoes">
@@ -151,7 +151,7 @@
             <address>Jaguaribe, João Pessoa - PB</address>
 
             <h4>Horário Principal:</h4>
-            <p>Quartas-Feiras, 05h às 14h</p>
+            <p>Quartas-Feiras, 05h às 22h</p>
         </div>
     </div>
 
