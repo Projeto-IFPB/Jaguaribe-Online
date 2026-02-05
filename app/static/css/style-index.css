@@ -346,7 +346,7 @@ header.rolagem .navbar-inicio .navbar-links{
 /* Primeiro section ------------------------------------------*/
 
 .inicio_pagina_feira {
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%), url(/static/images/imagem-fundo_pagina-inicial.jpg);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%), url(/../static/images/imagem_pagina_principal.jpg);
     /* Garante que a imagem cubra todo o espaço e não se repita */
     background-size: cover;
     background-position: center;
@@ -441,7 +441,7 @@ header.rolagem .navbar-inicio .navbar-links{
         height: auto; /* Permite que a seção cresça conforme o conteúdo */
         padding: 8rem 2rem;
         /* Muda o degradê para vir de baixo, facilitando a leitura em telas verticais */
-        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%), url(/static/images/imagem-fundo_pagina-inicial.jpg);
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%), url(/../static/images/imagem_pagina_principal.jpg);
         display: flex;
         flex-direction: column;
         justify-content: center;
