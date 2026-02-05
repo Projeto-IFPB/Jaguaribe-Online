@@ -19,32 +19,6 @@ Os alunos responsáveis por esse projeto são: Antony Conceição, Diogo Silva, 
 
 ---
 
-## Estrutura do projeto
-Projeto_IFPB
-├── app/                  # Pasta que armazena os módulos do sistema
-    ├── admin/
-        └── __init__.py  #Criação 
-        └── routes.py    # Rotas de administrador
-    ├── main/
-        └── __init__.py  
-        └── routes.py    #Rotas principais
-    ├── templates/       # Pasta que armazena todos os templates html
-    ├── static/          # Pasta que armazena toda parte estática do sistema
-        ├── css/
-        ├── images/
-        ├── js/
-        ├── uploads/
-        └── __init__.py
-        └── functions.py
-        └── models.py
-├── data/                # Armazenamento de dados do sistema
-├── app.py               # Arquivo principal da aplicação Flask
-├── .gitignore           # Área para evitar que alguns arquivos vá para o github
-├── README.md            # Documentação principal do projeto
-├── requirements.txt     # Dependências do projeto
-
----
-
 ## Como executar o projeto
 
 1- Crie e ative o ambiente virtual
